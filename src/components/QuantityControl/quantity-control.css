@@ -1,0 +1,48 @@
+.quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 3px solid #A3A0A0;
+    width: max-content;
+    padding: 2%;
+    border-radius: 50px;
+}
+
+.quantity-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.quantity-btn.minus,
+.quantity-btn.plus {
+    background: transparent;
+    color: #432E2A;
+    font-size: 56px;
+    line-height: 0;
+    font-weight: 200;
+}
+
+.quantity-btn.minus:hover,
+.quantity-btn.plus:hover {
+    background: transparent;
+    color: #F93B77;
+}
+
+
+
+.quantity-value {
+    font-size: 34px;
+    font-weight: bold;
+    color: #F93B77;
+    min-width: 40px;
+    text-align: center;
+}

@@ -1,0 +1,26 @@
+.btn-add {
+    width: max-content;
+    padding: 7% 15%;
+    background: #F93B77;
+    color: white;
+    border: none;
+    border-radius: 2vw;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-add:hover {
+    background: transparent;
+    border: 3px solid #F93B77;
+    color: #F93B77;
+}
+
+.btn-add.in-cart {
+    background: #4CAF50;
+    border: none;
+}
+
+.btn-add.in-cart:hover {
+    color: #fff;
+}

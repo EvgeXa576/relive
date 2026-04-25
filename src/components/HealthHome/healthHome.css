@@ -1,0 +1,205 @@
+.healthy{
+    display: flex;
+    flex-direction: row;
+    align-items: top;
+    justify-content: center;
+    gap: 6vw;
+    padding: 15vh 16vw;
+}
+
+.healthy-column{
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+}
+
+.bottle-flowers{
+    width: 100%;
+}
+
+.bottles{
+    margin-top: 2rem;
+    padding: 10px;
+    background-color: #F1E6D3;
+    border-radius: 20px;
+    text-align: end;
+    font-size: 32px;
+    padding: 5% 7%;
+    position: relative;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+
+.bottles::before{
+    position: absolute;
+    content: '';
+    width: 20%;
+    height: 70%;
+    top: 15%;
+    left: -5%;
+    border-radius: 5px;
+    background-color: #82655B;
+}
+.bottles::after{
+    position: absolute;
+    content: '';
+    width: 10%;
+    height: 150%;
+    top: -25%;
+    left: 0;
+    border-radius: 50px;
+    background-color: #D7BFA1;
+}
+
+.bottle-wrapper {
+  position: relative;
+  margin-left: -5%;
+  margin-top: -8%;
+}
+
+.bottle-svg{
+    width: 105%;
+    transform: translate(-10%, -30%);  /* Сдвиг влево */
+}
+
+.bottles-text{
+    display: inline-block;  /* или inline-flex */
+  width: fit-content;     /* ширина по содержимому */
+  max-width: 100%;        /* чтобы не вылезало за пределы родителя */
+  padding: 8px 20px;      /* отступы внутри */
+  border-radius: 40px;    /* скругление */
+  font-size: 32px;        /* у вас уже есть в .bottles, но можно уточнить */
+  font-weight: 500;
+  color: white;
+  
+}
+
+.bottle-text {
+  position: absolute;
+  top: 60%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 0 24px;
+  color: white;
+  font-size: 24px;
+  font-weight: 500;
+  transform: translate(-10%, -110%); 
+}
+
+
+.healthy-title {
+    font-size: 48px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+.text-pink {
+    color: #FF8E7D;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.healthy__text-yellow {
+    position: relative;
+    background-image: url(../../assets/img/healthy__text-yellowBG.svg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    font-style: italic;
+    line-height: 1.5;
+    font-size: 24px;
+    width: 100%;
+    padding: 0px 10%;
+    text-align: left;
+    aspect-ratio: 5 / 3; 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+}
+
+.healthy__text-yellow::after{
+    position: absolute;
+    content: '';
+    width: 30%;
+    aspect-ratio: 1/1;
+    background-image: url(../../assets/img/pinRed.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: -16%;
+    right: -15%;
+}
+
+.text-green {
+    color: #BCD452;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.healthy__text-pink {
+    position: relative;
+    background-image: url(../../assets/img/healthy__text-pinkBG.svg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    font-style: italic;
+    line-height: 1.5;
+    font-size: 24px;
+    width: 100%;
+    padding: 0px 10%;
+    text-align: left;
+    aspect-ratio: 5 / 3; 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+}
+
+.healthy__text-pink::after{
+    position: absolute;
+    content: '';
+    width: 30%;
+    aspect-ratio: 1/1;
+    background-image: url(../../assets/img/pinBlue.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: -16%;
+    right: -15%;
+}
+
+.disclaimer{
+    text-align: center;
+    font-size: 20px;
+}
+
+
+
+.kombucha-img {
+    width: 90%;
+    border-radius: 189px;
+    outline: 5px solid #FFB339;
+    outline-offset: 10px;
+    
+}
+
+.kombucha-group{
+    position: relative;
+}
+.weed{
+    position: absolute;
+    bottom: -10%;
+    right: -10%;
+}
+
+/* .kombucha-img::before { 
+    position: absolute;
+    background-image: url(../../assets/img/weed.svg);
+    content: '';   
+    bottom: 0;
+    right: -50px;
+    width: 50%;
+    height: 10%;
+    z-index: 1000;
+} */

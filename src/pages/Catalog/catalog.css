@@ -1,0 +1,292 @@
+.catalog__hero{
+    background-image: url('../../assets/img/catalog-hero-bg.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    aspect-ratio: 5/3;
+    padding: 10% 0 0 10%;
+}
+
+.catalog__hero-title{
+    font-size: 76px;
+    color: #FA6C06;
+    width: 50%;
+    margin-bottom: 1rem;
+}
+
+.catalog__hero-subtitle{
+    font-size: 46px;
+    color: #643E29;
+    margin-bottom: 1rem;
+}
+
+.catalog__hero-cost{
+    font-size: 36px;
+    color: #B1B1B1;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.catalog__hero-btn{
+    background-color: #FA6C06;
+    padding: 1.5% 3%;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+}
+
+.catalog{
+    margin-top: 5%;
+}
+
+.catalog_products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3vw;
+    padding: 0 5vw 5vw 5vw;
+    margin: 0 auto;
+}
+
+.product-card {
+    background: #fff;
+    border-radius: 3vw;
+    padding: 10% 15%;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(94, 12, 12, 0.3);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.product-card:hover{
+    box-shadow: 0 4px 10px rgba(127, 7, 7, 0.5);
+    transform: translateY(-2%);
+}
+
+
+.product-card img {
+    width: 80%;
+    height: auto;
+    margin-bottom: 10%;
+}
+
+.product-card h2 {
+    font-size: 25px;
+    margin-bottom: 5%;
+    color: #F93B77;
+}
+
+.product-card p {
+    font-size: 20px;
+    color: #432E2A;
+    margin-bottom: 5%;
+}
+
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10%;
+    padding-top: 5%;
+}
+
+.product-info span:first-child {
+    font-size: 18px;
+    color: #432E2A;
+}
+
+.product-info span:last-child {
+    font-size: 22px;
+    font-weight: bold;
+    color: #432E2A;
+}
+
+.catalog_products-title {
+    font-size: 48px;
+    font-weight: bold;
+    color: #FF8E7D;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* Фильтр */
+
+.custom-select {
+    position: relative;
+    min-width: 250px;
+}
+
+.select-btn {
+    width: 100%;
+    background: white;
+    border: 2px solid #F93B77;
+    border-radius: 2vw;
+    padding: 17px 20px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-weight: bold;
+    color: #432E2A;
+}
+
+.select-btn:hover {
+    background: #F93B77;
+    color: white;
+}
+
+.select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid #F93B77;
+    border-radius: 1vw;
+    margin-top: 5px;
+    z-index: 10;
+}
+
+.select-option {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.select-option:hover {
+    background: #F93B77;
+    color: white;
+}
+
+/* Если нет товаров */
+.no-products {
+    text-align: center;
+    padding: 10%;
+    background: #fff;
+    border-radius: 3vw;
+    box-shadow: 0 2px 8px rgba(94, 12, 12, 0.3);
+    margin: 0 5vw 5vw 5vw;
+}
+
+.no-products p {
+    font-size: 24px;
+    color: #432E2A;
+}
+/* Блок фильтров */
+.catalog__filters {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 2vw;
+    margin: 2%;
+    padding: 0 5vw;
+    flex-wrap: wrap;
+}
+
+/* Поиск */
+.catalog__search {
+    position: relative;
+    min-width: 40vw;
+}
+
+.search-input {
+    min-width: 40vw;
+    padding: 17px 40px 17px 20px;
+    border: 2px solid #F93B77;
+    border-radius: 2vw;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    background: white;
+    color: #432E2A;
+}
+
+.search-input:focus {
+    box-shadow: 0 2px 8px rgba(249, 59, 119, 0.3);
+}
+
+
+.search-clear:hover {
+    color: #ff0000;
+}
+
+/* Селект категорий */
+.catalog__filter {
+    min-width: 200px;
+}
+
+.category-select {
+    width: 100%;
+    background: #fff;
+    border: 2px solid #F93B77;
+    border-radius: 2vw;
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #432E2A;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.category-select:hover {
+    background: #F93B77;
+    color: white;
+}
+
+.category-select option {
+    background: white;
+    color: #432E2A;
+    padding: 12px;
+    font-size: 16px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Выбранный option */
+.category-select option:checked {
+    background: #F93B77;
+    color: white;
+}
+
+
+
+/* Для Firefox */
+.category-select option:focus {
+    background: #F93B77;
+    color: white;
+}
+
+
+
+/* Информация о результатах поиска */
+.search-results-info {
+    padding: 0 5vw;
+    margin-bottom: 2%;
+    color: #432E2A;
+    font-size: 16px;
+}
+
+.search-results-info p {
+    margin: 0;
+}
+
+/* Кнопка сброса фильтров */
+.reset-filters {
+    background: #F93B77;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 2vw;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.reset-filters:hover {
+    background: transparent;
+    border: 2px solid #F93B77;
+    color: #F93B77;
+}
+

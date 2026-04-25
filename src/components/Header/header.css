@@ -1,0 +1,17 @@
+
+.header-wrap {
+    display: flex;
+    flex-direction: row;
+    padding: 3% 3% 0 3%;
+    justify-content: space-between;
+}
+
+.header-link {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 24px;
+    justify-content: center;
+    align-items: center;
+    color: #432E2A;
+    text-transform: uppercase;
+}
