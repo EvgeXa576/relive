@@ -10,7 +10,123 @@ import heroStars from '../../assets/img/aboutHeroStars.svg'
 import formDecor from '../../assets/img/about-form-decor.svg'
 
 import './about.css'
+import {useState} from "react";
 const About = () => {
+
+    const [status, setStatus] = useState('');
+    const [formData, setFormData] = useState({ name: '', tel: '+7 ' });
+    const [errors, setErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+
+    const formatPhoneNumber = (value) => {
+        // Оставляем только цифры
+        const digits = value.replace(/\D/g, '');
+
+        // Если пользователь всё стер, возвращаем базу
+        if (digits.length === 0) return '+7 ';
+
+        // Если первая цифра 8 или 7 — мы её пропускаем, так как +7 уже есть
+        // Если пользователь начал вводить с 9, берем как есть
+        const mainDigits = (digits[0] === '7' || digits[0] === '8')
+            ? digits.slice(1)
+            : digits;
+
+        let result = '+7 ';
+
+        if (mainDigits.length > 0) {
+            result += '(' + mainDigits.substring(0, 3);
+        }
+        if (mainDigits.length >= 4) {
+            result += ') ' + mainDigits.substring(3, 6);
+        }
+        if (mainDigits.length >= 7) {
+            result += '-' + mainDigits.substring(6, 8);
+        }
+        if (mainDigits.length >= 9) {
+            result += '-' + mainDigits.substring(8, 10);
+        }
+
+        return result.slice(0, 18); // Ограничиваем длину маски
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        if (name === 'tel') {
+            const formattedValue = formatPhoneNumber(value);
+            setFormData(prev => ({ ...prev, [name]: formattedValue }));
+        } else if (name === 'name') {
+            // Очистка имени от цифр прямо при вводе
+            const onlyChars = value.replace(/[0-9]/g, '');
+            setFormData(prev => ({ ...prev, [name]: onlyChars }));
+        } else {
+            setFormData(prev => ({ ...prev, [name]: value }));
+        }
+
+        // Сбрасываем ошибку поля при изменении
+        if (errors[name]) {
+            setErrors(prev => ({ ...prev, [name]: null }));
+        }
+    };
+
+    const validate = () => {
+        let tempErrors = {};
+
+        // Валидация имени
+        const nameValue = (formData.name || "").trim();
+        if (!nameValue) {
+            tempErrors.name = "Пожалуйста, введите ваше имя";
+        } else if (nameValue.length < 2) {
+            tempErrors.name = "Имя слишком короткое";
+        } else if (/[!@#$%^&*(),.?":{}|<>]/.test(nameValue)) {
+            tempErrors.name = "Имя содержит недопустимые символы";
+        }
+
+        // Валидация телефона (должно быть ровно 11 цифр: 7 + 10 цифр номера)
+        const digits = (formData.tel || "").replace(/\D/g, '');
+        if (digits.length < 11) {
+            tempErrors.tel = "Введите полный номер телефона";
+        }
+
+        setErrors(tempErrors); // Используем прямую установку, чтобы не ждать стейта
+        return Object.keys(tempErrors).length === 0;
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!validate()) return; // Стоп, если есть ошибки
+
+        setIsSubmitting(true);
+        setStatus('Отправка...');
+
+        try {
+            const data = new FormData();
+            data.append('name', formData.name);
+            data.append('phone', formData.tel); // в PHP мы ловим 'phone'
+
+            const response = await fetch('http://localhost:8000/send.php?XDEBUG_SESSION_START=PHPSTORM', {
+                method: 'POST',
+                body: data,
+            });
+
+            const result = await response.json();
+
+            if (result.status === 'success') {
+                setStatus('Заявка успешно отправлена!');
+                setFormData({ name: '', tel: '' }); // Очистка полей
+            } else {
+                setStatus('Ошибка: ' + result.message);
+            }
+        } catch (error) {
+            setStatus('Произошла ошибка при отправке.');
+            console.error(error);
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+
     return (
         <>
             <section className="about__hero">
@@ -155,11 +271,44 @@ const About = () => {
                 
                 <div className="form__contacts-main">
                     <img src={formDecor} alt="decorate" className='form__contacts-img'/>
-                    <form action="#" className="form__contacts">
+                    <form onSubmit={handleSubmit} className="form__contacts">
                         <h2 className="form__contacts-title">БУДЕМ НА СВЯЗИ</h2>
-                        <input className='form__contacts-input' type="text" name="name" id="name" placeholder='ФИО'/>
-                        <input className='form__contacts-input' type="tel" name="tel" id="tel" placeholder='Телефон'/>
-                        <button type="submit" className='form__contacts-btn'>ОСТАВИТЬ ЗАЯВКУ</button>
+
+                        <div className="input-group">
+                            <input
+                                className={`form__contacts-input ${errors.name ? 'input-error' : ''}`}
+                                type="text"
+                                name="name"
+                                id="name"
+                                placeholder='ФИО'
+                                value={formData.name}
+                                onChange={handleChange}
+                            />
+                            {errors.name && <span className="error-message">{errors.name}</span>}
+                        </div>
+
+                        <div className="input-group">
+                            <input
+                                className={`form__contacts-input ${errors.tel ? 'input-error' : ''}`}
+                                type="tel"
+                                name="tel"
+                                id="tel"
+                                placeholder='Телефон'
+                                value={formData.tel}
+                                onChange={handleChange}
+                            />
+                            {errors.tel && <span className="error-message">{errors.tel}</span>}
+                        </div>
+
+                        <button
+                            type="submit"
+                            className='form__contacts-btn'
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? 'ОТПРАВЛЯЕМ...' : 'ОСТАВИТЬ ЗАЯВКУ'}
+                        </button>
+                        {/*#FIXME: сюда тоже надо стили написать*/}
+                        <p className="form__status">{status}</p>
                     </form>
                 </div>
             </section>

@@ -188,3 +188,20 @@
 .form__contacts-img{
     width: 40vw;
 }
+
+/*#FIXME: поправь стили(они возникают при ошибке данных в форме*/
+
+.input-error {
+    border-color: #ff4d4d !important;
+}
+.error-message {
+    color: #ff4d4d;
+    font-size: 12px;
+    display: block;
+    margin-top: -10px; /* подтянуть к инпуту */
+    margin-bottom: 10px;
+}
+.form__contacts-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
