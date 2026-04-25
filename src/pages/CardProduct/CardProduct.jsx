@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import products from '../../assets/products';
 import './card_product.css'
 import AddToCart from '../../components/AddToCart/AddToCart';
@@ -9,8 +9,12 @@ function CardProduct() {
     const [activeTab, setActiveTab] = useState('composition');
     const location = useLocation();
     const { id } = useParams();
+    const productFromState = location.state?.product;
 
-    const product = location.state?.product;
+    // 2. Если данных в state нет (например, обновили страницу F5),
+    // ищем товар в общем массиве данных по ID
+    // #TODO: это можешь удалить чисто чтоб посомтерла добавил, я тут сделал проверку по id из адрессной строки что бы если мы напрямую стучались по ссылке то что то показывалось, до этого был просто белый экран
+    const product = productFromState || products.find(p => p.id === parseInt(id));
 
     if (!product) {
         return;

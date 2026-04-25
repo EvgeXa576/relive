@@ -8,32 +8,41 @@ import Catalog from './pages/Catalog/Catalog';
 import CardProduct from './pages/CardProduct/CardProduct';
 import { CartProvider } from './context/CartContext';
 import Cart from './pages/Cart/Cart';
+import ScrollToTop from "./hooks/ScrollToTop.jsx";
+import { useLocation, matchPath } from 'react-router-dom';
+
+function AppContent() {
+    const location = useLocation();
+
+    // Проверяем, совпадает ли текущий путь с паттерном /product/:id
+    const isProductPage = matchPath("/product/:id", location.pathname);
+
+    return (
+        <>
+            <Header />
+            <ScrollToTop />
+            <Routes>
+                <Route index element={<HomePage />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/partners" element={<Partners />} />
+                <Route path="/catalog" element={<Catalog />} />
+                <Route path="/product/:id" element={<CardProduct />} />
+                <Route path="/cart" element={<Cart />} />
+            </Routes>
+
+            {/* Рендерим Footer только если мы НЕ на странице продукта */}
+            {!isProductPage && <Footer />}
+        </>
+    );
+}
 
 
 function App() {
-
-
-  return (
-    <>
-    <CartProvider>
-     <Header/>
-    
-    
-     <Routes>
-      <Route index element={<HomePage />} />
-      <Route path="/about" element={<About/>} />
-      <Route path="/partners" element={<Partners/>} />
-      <Route path="/catalog" element={<Catalog/>} />
-       <Route path="/product/:id" element={<CardProduct />} />
-       <Route path="/cart" element={<Cart/>} />
-      
-      {/* Маршрут для 404 страницы. path="*" сработает, если ни один из путей не совпал */}
-      {/* <Route path="*" element={<NotFound />} /> */}
-    </Routes> 
-    <Footer/>
-    </CartProvider>
-    </>
-  )
+    return (
+        <CartProvider>
+            <AppContent />
+        </CartProvider>
+    );
 }
 
 export default App

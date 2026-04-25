@@ -3,6 +3,7 @@ import flowersBottle from '../../assets/img/flowers-bottle.svg'
 import kombucha from '../../assets/img/kombucha.png'
 import weed from '../../assets/img/weed.svg'
 import { useState } from 'react';
+import React from "react";
 
 const HealthHome = () => {
     const bottlesItems = [
@@ -39,32 +40,32 @@ const HealthHome = () => {
                 <h3 className="healthy-title"><span className="text-pink">Комбуча</span> - выбор здоровых</h3>
                 <p className="healthy__text-yellow">Это натуральный ферментированный напиток на основе культуры чайного гриба, который получается в результате уксуснокислого брожения чая и сахара под действием живых бактерий и дрожжей. </p>
 
-                {bottlesItems.map((bottlesItems, index) => {
+                {bottlesItems.map((item, index) => { // Переименовал переменную для ясности: item вместо bottlesItems
                     const isOpen = activeIndex === index;
                     return (
-                        <>
+                        <React.Fragment key={index}> {/* КЛЮЧ ТЕПЕРЬ ЗДЕСЬ */}
                             <div
-                                key={index}
                                 className="bottles"
-                                onClick={() => setActiveIndex(isOpen ? null : index)
-                                }>
-                                <p className='bottles-text' style={{background: bottlesItems.color}}>{bottlesItems.title}</p>
+                                onClick={() => setActiveIndex(isOpen ? null : index)}
+                            >
+                                <p className='bottles-text' style={{ background: item.color }}>
+                                    {item.title}
+                                </p>
                             </div>
+
                             {isOpen && (
                                 <div className="bottle-wrapper">
-                                    <svg className='bottle-svg' viewBox="0 0 557 190" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M91.8083 91.5C51.8083 106 32.3083 61.3333 36.3083 43V0C7.90827 34 -3.25421 71.5 0.808283 104C8.30828 164 102.808 195 93.8083 186L91.8083 91.5Z" fill={bottlesItems.color} />
-                                        <rect x="55.3086" y="89.5" width="501" height="100" rx="50" fill={bottlesItems.color} />
+                                    <svg className='bottle-svg' viewBox="0 0 557 190" fill="none">
+                                        <path d="M91.8083 91.5C51.8083 106 32.3083 61.3333 36.3083 43V0C7.90827 34 -3.25421 71.5 0.808283 104C8.30828 164 102.808 195 93.8083 186L91.8083 91.5Z" fill={item.color} />
+                                        <rect x="55.3086" y="89.5" width="501" height="100" rx="50" fill={item.color} />
                                     </svg>
                                     <div className="bottle-text">
-                                        {bottlesItems.text}
+                                        {item.text}
                                     </div>
                                 </div>
-
-                            )
-                            }
-                        </>
-                    )
+                            )}
+                        </React.Fragment>
+                    );
                 })}
             </div>
             <div className="healthy-column">
