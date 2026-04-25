@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import products from '../../assets/products';
 import './card_product.css'
 import AddToCart from '../../components/AddToCart/AddToCart';
@@ -11,7 +11,12 @@ function CardProduct() {
     const { id } = useParams();
     const productFromState = location.state?.product;
 
-    // 2. Если данных в state нет (например, обновили страницу F5),
+    const navigate = useNavigate();
+
+    const goBack = () => {
+        navigate(-1);
+    };
+
     // ищем товар в общем массиве данных по ID
     // #TODO: это можешь удалить чисто чтоб посомтерла добавил, я тут сделал проверку по id из адрессной строки что бы если мы напрямую стучались по ссылке то что то показывалось, до этого был просто белый экран
     const product = productFromState || products.find(p => p.id === parseInt(id));
@@ -22,6 +27,13 @@ function CardProduct() {
 
     return (
         <div className="product__page">
+            {/*#FIXME: надо добавить стили*/}
+            <button onClick={goBack} className="btn-back">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                Назад
+            </button>
             <div className="product__page-top">
                 <div className="product__page-img">
                     <img src={product?.img} alt={product?.name} />

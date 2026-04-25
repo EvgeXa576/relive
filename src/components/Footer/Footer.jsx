@@ -1,24 +1,34 @@
-import './footer.css'
+import { NavLink } from 'react-router-dom';
+import './footer.css';
+
 const Footer = () => {
     return (
         <footer className="footer">
             <div className="footer-wrap">
                 <div className="footer-list">
                     <h2 className="footer-title">RELIVE</h2>
-                    <a className="footer-link" href="main.html">Главная</a>
-                    <a className="footer-link" href="catalog.html">Каталог</a>
-                    <a className="footer-link" href="about.html">О нас</a>
-                    <a className="footer-link" href="partners.html">Партнеры</a>
-                    <a className="footer-link" href="cart.html">Корзина</a>
+                    {/* Заменяем <a> на NavLink и исправляем пути */}
+                    <NavLink className="footer-link" to="/">Главная</NavLink>
+                    <NavLink className="footer-link" to="/catalog">Каталог</NavLink>
+                    <NavLink className="footer-link" to="/about">О нас</NavLink>
+                    <NavLink className="footer-link" to="/partners">Партнеры</NavLink>
+                    <NavLink className="footer-link" to="/cart">Корзина</NavLink>
                 </div>
                 <div className="footer-bottom">
                     <p className="footer__bottom-item">2025 Relive Combucha</p>
-                    <p className="footer__bottom-item">Вопросы: <br /> kombucha@livebrewtea.ru</p>
-                    <p className="footer__bottom-item">Сотрудничество: <br /> 4partner@livebrewtea.ru</p>
+                    <p className="footer__bottom-item">
+                        Вопросы: <br />
+                        <a href="mailto:kombucha@livebrewtea.ru">kombucha@livebrewtea.ru</a>
+                    </p>
+                    <p className="footer__bottom-item">
+                        Сотрудничество: <br />
+                        <a href="mailto:4partner@livebrewtea.ru">4partner@livebrewtea.ru</a>
+                    </p>
                     <p className="footer__bottom-item">ООО "Вкус от природы" <br /> ИНН 6671456280</p>
                 </div>
             </div>
         </footer>
-    )
+    );
 }
-export default Footer
+
+export default Footer;

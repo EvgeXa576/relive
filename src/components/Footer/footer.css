@@ -2,8 +2,8 @@
     height: 100vh;
     width: 100%;
     background-image: url("../../assets/img/footer.svg");
-    background-position: right;
-    background-size: contain;
+    background-position: right bottom;
+    background-size: cover;
     background-repeat: no-repeat;
     position: relative;
 }
@@ -42,7 +42,8 @@
     padding-bottom: 26px;
 }
 
-.footer__bottom-item {
+.footer__bottom-item, .footer__bottom-item a {
+    text-decoration: none;
     color: #FFFCFA; margin-left: 2rem;
     margin-right: 2rem;
     font-size: 20px;
