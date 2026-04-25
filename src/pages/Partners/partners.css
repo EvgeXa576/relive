@@ -103,7 +103,7 @@
 .form__partners-main{
     display: flex;
     flex-direction: row;
-    align-items: top;
+    align-items: start;
     justify-content: center;
     gap: 2vw;
 }

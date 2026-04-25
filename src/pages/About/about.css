@@ -133,7 +133,7 @@
 .form__contacts-main{
     display: flex;
     flex-direction: row;
-    align-items: top;
+    align-items: start;
     justify-content: center;
     gap: 10vw;
     padding: 10vh;
