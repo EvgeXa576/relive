@@ -7,7 +7,6 @@ const Footer = () => {
             <div className="footer-wrap">
                 <div className="footer-list">
                     <h2 className="footer-title">RELIVE</h2>
-                    {/* Заменяем <a> на NavLink и исправляем пути */}
                     <NavLink className="footer-link" to="/">Главная</NavLink>
                     <NavLink className="footer-link" to="/catalog">Каталог</NavLink>
                     <NavLink className="footer-link" to="/about">О нас</NavLink>

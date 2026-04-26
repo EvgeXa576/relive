@@ -6,6 +6,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
+    margin-top: 10%;
 }
 
 .footer-list {
@@ -14,6 +15,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 20%;
+    margin-right: 10%;
 }
 
 .footer-title {

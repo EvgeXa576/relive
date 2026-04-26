@@ -121,7 +121,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5%;
+    gap: 25px;
 
 }
 
@@ -155,19 +155,18 @@
 }
 
 .form__partners-img{
-    width: 25vw;
+    width: 20vw;
 }
 
-/*#FIXME: поправь стили(они возникают при ошибке данных в форме*/
 
 .input-error {
     border-color: #ff4d4d !important;
 }
 .error-message {
     color: #ff4d4d;
-    font-size: 12px;
+    font-size: 17px;
     display: block;
-    margin-top: -10px; /* подтянуть к инпуту */
+    margin-top: 10px; /* подтянуть к инпуту */
     margin-bottom: 10px;
 }
 .form__contacts-btn:disabled {

@@ -36,10 +36,9 @@ const SliderSwiper = () => {
     jang
   ];
 
-  // Разбиваем массив на слайды по 6 картинок
  const slides = [
-    images.slice(0, 6),  // первые 6 картинок
-    images.slice(6, 11), // оставшиеся 5 картинок
+    images.slice(0, 6),  
+    images.slice(6, 11), 
   ];
 
   return (

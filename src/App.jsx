@@ -10,6 +10,7 @@ import { CartProvider } from './context/CartContext';
 import Cart from './pages/Cart/Cart';
 import ScrollToTop from "./hooks/ScrollToTop.jsx";
 import { useLocation, matchPath } from 'react-router-dom';
+import FAQ from './pages/FAQ/FAQ.jsx';
 
 function AppContent() {
     const location = useLocation();
@@ -28,6 +29,7 @@ function AppContent() {
                 <Route path="/catalog" element={<Catalog />} />
                 <Route path="/product/:id" element={<CardProduct />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/faq" element={<FAQ />} />
             </Routes>
 
             {/* Рендерим Footer только если мы НЕ на странице продукта */}

@@ -80,7 +80,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 5rem;
-    gap: 2rem;
+    gap: 7%;
 }
 
 .history-title-wrap {
@@ -133,7 +133,7 @@
 .form__contacts-main{
     display: flex;
     flex-direction: row;
-    align-items: start;
+    align-items: center;
     justify-content: center;
     gap: 10vw;
     padding: 10vh;
@@ -152,7 +152,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5%;
+    gap: 25px;
 
 }
 
@@ -189,19 +189,88 @@
     width: 40vw;
 }
 
-/*#FIXME: поправь стили(они возникают при ошибке данных в форме*/
 
 .input-error {
     border-color: #ff4d4d !important;
 }
 .error-message {
     color: #ff4d4d;
-    font-size: 12px;
+    font-size: 17px;
     display: block;
-    margin-top: -10px; /* подтянуть к инпуту */
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 .form__contacts-btn:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+}
+
+.form__status {
+    font-size: 17px;
+    text-align: center;
+}
+
+
+/* map */
+
+.about__map-title{
+    font-size: 48px;
+    font-weight: bold;
+    color: #FF8E7D;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 2% 0;
+    position: relative;
+}
+
+.about__map-title::after{
+    content: '';
+    position: absolute;
+    background-image: url(../../assets/img/map-stars.svg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 250%;
+    width: 15%;
+    right: 25%;
+    top: -70%;
+}
+
+.about__map-subtitle{
+    font-size: 40px;
+    color: #432E2A;
+    font-weight: 200;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 5%;
+}
+
+.map-container{
+    width: 100%;
+    height: 50vh;
+    position: relative;
+}
+
+.map-container::before{
+    content: '';
+    position: absolute;
+    background-image: url(../../assets/img/map-left.svg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 150%;
+    width: 20%;
+    left: -1%;
+    top: -25%;
+
+}
+
+.map-container::after{
+    content: '';
+    position: absolute;
+    background-image: url(../../assets/img/map-right.svg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 150%;
+    width: 20%;
+    right: -1%;
+    top: -25%;
 }

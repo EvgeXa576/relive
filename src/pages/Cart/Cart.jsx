@@ -1,9 +1,12 @@
 import { useCart } from '../../context/CartContext';
 import products from '../../assets/products';
 import { Link } from 'react-router-dom';
-import './Cart.css';
+import './cart.css';
+import QuantityControl from '../../components/QuantityControl/QuantityControl';
+import { useState } from 'react';
 
 export default function Cart() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const { cart, updateCount, removeFromCart, clearCart } = useCart();
 
     if (cart.length === 0) {
@@ -52,10 +55,8 @@ export default function Cart() {
                         </div>
 
                         <div className="cart-item-controls">
-                            <button onClick={() => updateCount(item.id, item.count - 1)}>-</button>
-                            <span>{item.count}</span>
-                            <button onClick={() => updateCount(item.id, item.count + 1)}>+</button>
-                            <button className="remove-btn" onClick={() => removeFromCart(item.id)}>×</button>
+                            <QuantityControl product={product} />
+                            <button className="remove-btn" onClick={() => removeFromCart(item.id)}>Удалить</button>
                         </div>
                     </div>
                 );
@@ -64,6 +65,52 @@ export default function Cart() {
             <div className="cart-total">
                 <h3>Итого: {total} руб.</h3>
             </div>
+            <button className='cart__order-btn' onClick={() => setIsModalOpen(true)}>Оформить заказ</button>
+
+            {isModalOpen && (
+                <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <button className="modal-close" onClick={() => setIsModalOpen(false)}>x</button>
+
+                        <form className="form__order">
+                            <h2 className="form__order-title">Оформление заказа</h2>
+
+                            <div className="input-group">
+                                <input
+                                    className={`form__order-input`}
+                                    type="text"
+                                    name="name"
+                                    id="name"
+                                    placeholder='ФИО'
+
+                                />
+
+                            </div>
+
+                            <div className="input-group">
+                                <input
+                                    className={`form__order-input`}
+                                    type="tel"
+                                    name="tel"
+                                    id="tel"
+                                    placeholder='Телефон'
+
+                                />
+
+                            </div>
+
+                            <button
+                                type="submit"
+                                className='form__order-btn'
+
+                            >
+                                Отправить
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+            )}
 
 
         </div>

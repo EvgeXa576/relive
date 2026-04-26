@@ -10,8 +10,10 @@ import heroStars from '../../assets/img/aboutHeroStars.svg'
 import formDecor from '../../assets/img/about-form-decor.svg'
 
 import './about.css'
-import {useState} from "react";
+import { useState } from "react";
 const About = () => {
+
+    
 
     const [status, setStatus] = useState('');
     const [formData, setFormData] = useState({ name: '', tel: '+7 ' });
@@ -131,7 +133,7 @@ const About = () => {
         <>
             <section className="about__hero">
                 <div className="about__hero-wrap">
-                    <h1 className="about__hero-title">КОМБУЧА <br /><img src={heroStars} alt="stars" className='abot__hero-stars'/>RELIVE</h1>
+                    <h1 className="about__hero-title">КОМБУЧА <br /><img src={heroStars} alt="stars" className='abot__hero-stars' />RELIVE</h1>
                     <div className='about__hero-line'></div>
                     <h1 className="about__hero-subtitle">Иван <br /> Тюленев</h1>
                 </div>
@@ -143,12 +145,11 @@ const About = () => {
                     <div className="about__history-item">
                         <div className="text-block">
                             <div className="history-title-wrap">
-                                <h4 className="history-title"><span className="about__text-pink">2013-2015</span> | Начало пути</h4>
+                                <h4 className="history-title"><span className="about__text-pink">2013-2015</span> | Начало пути — чайная культура и мастерство</h4>
                             </div>
-                            <h5 className="history-subtitle">Чайная культура и мастерство</h5>
-                            <p className="history-text">Иван Тюленев начал свой путь в мир чайной культуры в 2013 году.</p>
-                            <p className="history-text">Его увлечение традициями китайской чайной церемонии привело к обучению в школе чайного искусства, где он изучал культуру и историю чая, практические принципы и методы заваривания, приготовления и подачи чая. </p>
-                            <p className="history-text">Это увлечение стало основой будущей концепции LIVE BREW.</p>
+                            <p className="history-text">Иван Тюленев — основатель брендов и производства Уральской комбучи — начал свой путь в мир чайной культуры в 2013 году. Увлечение традициями китайской чайной церемонии привело его к обучению в школе чайного искусства «ЧА-И».</p>
+                            <p className="history-text">Здесь он изучал не только историю и философию чая, но и практические аспекты: методы заваривания, подачи и взаимодействия с напитком. </p>
+                            <p className="history-text">Этот период стал фундаментом будущей философии брендов LIVE BREW и ReLive — внимательного отношения к продукту, уважения к сырью и стремления к подлинному вкусу.</p>
                         </div>
                         <div className="image-block">
                             <img src={ninjaDragon} alt="tea-ninja" />
@@ -161,27 +162,26 @@ const About = () => {
                         </div>
                         <div className="text-block">
                             <div className="history-title-wrap">
-                                <h4 className="history-title"><span className="about__text-pink">2015-2019</span> | Чайный бизнес</h4>
+                                <h4 className="history-title"><span className="about__text-pink">2015-2019</span> | Первые шаги в создании чайных напитков</h4>
                             </div>
-                            <h5 className="history-subtitle">Первые шаги</h5>
-                            <p className="history-text">В 2015 году Иван со своим другом единомышленником Алексеем открыли первый чайный бар на Урале – SAMOVAR TEA-BAR.</p>
+                            <p className="history-text">В 2015 году Иван вместе с единомышленником Алексеем открывает первый чайный бар на Урале — SAMOVAR TEA-BAR.</p>
                             <p className="history-text">
-                                Именно в то время и было положено начало будущей идеологии создания живых, натуральных напитков, что так же отразилось в названии компании «Вкус от природы», а логотип и фирменный стиль впоследствии был унаследован и использован в будущем бренде LIVE BREW – чашечка и цветок.</p>
-                            <p className="history-text">В чайном баре Иван проводил всё своё время, организовывая чайные церемонии и увлекая гостей и посетителей рассказами о чае и чайной культуре. </p>
-                            <p className="history-text">Параллельно он проводил многочисленные эксперименты по созданию напитков на основе чая, включая холодные чаи по методике COLD BREW (настаивание чая в холодной воде), придумывал уникальные вкусовые сочетания с использованием натуральных трав, цветов и специй.</p>
-                            <p className="history-text">Этот опыт стал решающим в его дальнейшем развитии, как создателя уникальных вкусовых сочетаний.</p>
+                                Именно здесь формируется идеология будущего продукта: создание живых, натуральных напитков. В этот же период появляется производственная компания «Вкус от природы», которая существует по сей день и является основой производства Уральской комбучи.</p>
+                            <p className="history-text">В чайном баре Иван проводил большую часть времени, организуя чайные церемонии и погружая гостей в культуру чая. Параллельно шли эксперименты: холодные чаи по технологии cold brew, авторские сочетания с травами, цветами и специями. </p>
+                            <p className="history-text">Этот опыт стал ключевым этапом в формировании вкусов будущей комбучи.
+                            </p>
+
                         </div>
                     </div>
 
                     <div className="about__history-item">
                         <div className="text-block">
                             <div className="history-title-wrap">
-                                <h4 className="history-title"><span className="about__text-pink">2016</span> | Комбуча Live Brew</h4>
+                                <h4 className="history-title"><span className="about__text-pink">2016</span> | Рождение комбучи LIVE BREW</h4>
                             </div>
-                            <h5 className="history-subtitle">Рождение</h5>
-                            <p className="history-text">Летом 2016 года в рамках того же чайного бара Иван открыл для себя напиток комбуча. Он глубоко изучил его историю, технологию, биохимию и органолептику, что вдохновило его на создание первых образцов комбучи LIVE BREW.</p>
-                            <p className="history-text">7 августа 2016 (дату впоследствии стали считать датой основания бренда) первая комбуча LIVE BREW была впервые представлена на городском фестивале еды «Гастроном», где за считанные часы была полностью раскуплена и получила восторженные отзывы. </p>
-                            <p className="history-text">Это стало отправной точкой в развитии концепции Живого Чая – напитка в котором вкус, цвет и аромат достигаются исключительно за счёт безалкогольного брожения культуры чайного гриба и натуральных компонентов: ягод, фруктов, трав, цветов и специй.</p>
+                            <p className="history-text">Летом 2016 года команда открывает для себя комбучу. Глубокое изучение её истории, биохимии и органолептики вдохновляет на создание первых образцов LIVE BREW.</p>
+                            <p className="history-text">7 августа 2016 года — дата, ставшая точкой отсчёта бренда — уральская комбуча впервые представлена на городском фестивале еды «Гастроном». Весь объём был распродан за считанные часы, получив яркий отклик гостей. </p>
+                            <p className="history-text">Так родилась концепция «Живого чая» — напитка, в котором вкус, аромат и цвет формируются естественным путём брожения чайного гриба в сочетании с ягодами, фруктами, травами и специями.</p>
                         </div>
                         <div className="image-block">
                             <img src={reliveLotus} alt="lotus" />
@@ -194,11 +194,13 @@ const About = () => {
                         </div>
                         <div className="text-block">
                             <div className="history-title-wrap">
-                                <h4 className="history-title"><span className="about__text-pink">2017</span> | Бренд Live Brew</h4>
+                                <h4 className="history-title"><span className="about__text-pink">2017</span> | Первое производство</h4>
                             </div>
-                            <h5 className="history-subtitle">Рождение</h5>
-                            <p className="history-text">В 2017 году Иван с партнером основывает и регистрирует первый уральский бренд комбучи LIVE BREW и открывает небольшое производство площадью всего около 20 м². </p>
-                            <p className="history-text">В этом компактном цехе одновременно ферментировались, разливались и хранились первые партии уральской комбучи – всего 4-5 вкусов. Именно в этот период начались первые поставки в заведения, магазины здорового питания и кафе Екатеринбурга.</p>
+                            <p className="history-text">В 2017 году регистрируется бренд LIVE BREW и запускается первое производство площадью около 20 м². </p>
+                            <p className="history-text">В этом компактном пространстве происходили все процессы — от ферментации до розлива. Ассортимент насчитывал 4–5 вкусов.
+                            </p>
+                            <p className="history-text">Именно в этот период начинаются первые поставки в кофейни, магазины здорового питания и гастрономические проекты Екатеринбурга.
+                            </p>
                         </div>
 
                     </div>
@@ -206,14 +208,12 @@ const About = () => {
                     <div className="about__history-item">
                         <div className="text-block">
                             <div className="history-title-wrap">
-                                <h4 className="history-title"><span className="about__text-pink">2018-2020</span> | Линейка вкусов</h4>
+                                <h4 className="history-title"><span className="about__text-pink">2018-2020</span> | Рост и поиск вкусов</h4>
                             </div>
-                            <h5 className="history-subtitle">Производство</h5>
-                            <p className="history-text">В последующие годы производство продолжает расти, а ассортимент увеличивается до 12 вкусов. </p>
-                            <p className="history-text">Некоторые сочетания приходили Ивану буквально во сне, например, жасмин + груша + виноград («Just mine Dreamings»). </p>
-                            <p className="history-text">Среди успешных экспериментов появились комбуча-кофе и охмеленная безалкогольная комбуча, которые и по сей день остаются популярными.</p>
-                            <p className="history-text">
-                                Небольшие объёмы производства позволяли сохранять гибкость, но ограничивали темпы роста. Иван не только лично участвовал во всех этапах производства, но и активно продвигал бренд, участвуя в фестивалях и ярмарках, где продолжал знакомить с напитком собирать отзывы и в последствии совершенствовать напиток.</p>
+                            <p className="history-text">Производство постепенно расширяется, а ассортимент увеличивается до 12 вкусов. Некоторые сочетания рождались интуитивно — порой буквально во сне у основателя компании.</p>
+                            <p className="history-text">Одним из таких примеров стало сочетание жасмина, груши и винограда, которое впоследствии стало одним из узнаваемых вкусов особой серии комбучи-брюта.
+</p>
+                            
                         </div>
                         <div className="image-block">
                             <img src={pears} alt="flavours" />
@@ -226,24 +226,22 @@ const About = () => {
                         </div>
                         <div className="text-block">
                             <div className="history-title-wrap">
-                                <h4 className="history-title"><span className="about__text-pink">2020-2022</span> | Обучение команды</h4>
+                                <h4 className="history-title"><span className="about__text-pink">2020-2022</span> | Систематизация и развитие</h4>
                             </div>
-                            <h5 className="history-subtitle">Производство</h5>
-                            <p className="history-text">В этот период произошло первое значительное расширение производственных площадей и первая модернизация оборудования. </p>
-                            <p className="history-text">Иван передавал базовые знания и философию бренда своей первой команде, линейка вкусов к тому времени возросла до 23-х, а география точечных поставок расширялась по всей стране от Омска до Калининграда. </p>
-                            <p className="history-text">Появились новые экспериментальные и сезонные вкусы, а также комбуча-брюты, созданные методом естественной выдержки и созревания.</p>
+                            <p className="history-text">Компания выходит на новый этап: расширяются производственные площади, совершенствуются технологии и рецептуры.</p>
+                            <p className="history-text">Ассортимент достигает 23 вкусов, а география поставок охватывает всю страну — от Омска до Калининграда.</p>
+                            <p className="history-text">Появляются сезонные позиции и комбуча-брюты, созданные методом естественной выдержки в бутылке. Параллельно команда системно передаёт знания и философию бренда новым сотрудникам.</p>
                         </div>
                     </div>
 
                     <div className="about__history-item">
                         <div className="text-block">
                             <div className="history-title-wrap">
-                                <h4 className="history-title"><span className="about__text-pink">2022-2024</span> | Модернизация</h4>
+                                <h4 className="history-title"><span className="about__text-pink">2022-2024</span> | Масштабирование и вызовы</h4>
                             </div>
-                            <h5 className="history-subtitle">Наращивание объемов и высокое качество продукта</h5>
-                            <p className="history-text">Бренд активно наращивал мощности, внедряя усовершенствованные технологии, оптимизируя рецептуры и стандартизируя производственные процессы. </p>
-                            <p className="history-text">Одним из ключевых направлений стало увеличение сроков годности напитков без ущерба для натурального состава и философии бренда. </p>
-                            <p className="history-text">В 2024 году компания сталкивается с новыми вызовами и полностью меняет состав руководящего и партнерского звена, нацеленное на дальнейший рост компании и модернизацию производства.</p>
+                            <p className="history-text">Бренд активно наращивает объёмы, внедряя новые технологии и стандартизируя процессы.</p>
+                            <p className="history-text">Одной из ключевых задач становится увеличение сроков годности при сохранении натуральности и качества продукта.</p>
+                            <p className="history-text">В 2024 году компания сталкивается с существенными изменениями в структуре управления. При этом основатель и главный идеолог бренда, Иван Тюленев, сохраняет ключевую роль, обеспечивая преемственность философии, подхода к продукту и стабильное качество.</p>
                         </div>
                         <div className="image-block">
                             <img src={cherryCar} alt="modernization" />
@@ -256,21 +254,37 @@ const About = () => {
                         </div>
                         <div className="text-block">
                             <div className="history-title-wrap">
-                                <h4 className="history-title"><span className="about__text-pink">2022-2024</span> | Рождение Relive</h4>
+                                <h4 className="history-title"><span className="about__text-pink">2022-2024</span> | Новый этап и рождение ReLive</h4>
                             </div>
-                            <h5 className="history-subtitle">Новое это просто хорошо забытое старое</h5>
-                            <p className="history-text">В 2025 году компания движется к новым вершинам: автоматизация производства, обновление рецептур и улучшение вкусов. </p>
-                            <p className="history-text">Среди прочих планов на годовой повестке – запуск спортивно-обогащённой линейки, а так же поточного производства натурального комбуча-брюта. </p>
-                            <p className="history-text">Иван Тюленев остаётся верен идеологии Комбучи живого чая и продолжает развивать бренд LIVE BREW, а также запускает новый бренд RELIVE, не идя на компромиссы, но сохраняя всё лучшее, что было создано за эти годы.</p>
+                            <p className="history-text">В 2025 году компания проходит масштабное технологическое обновление и переезжает на новую производственную площадку, кратно увеличивая мощности.</p>
+                            <p className="history-text">Происходит стратегическое разделение брендов:
+ReLive становится основным брендом для линейки до 500 мл, а LIVE BREW — флагманом премиальной выдержанной комбучи, лимитированных серий и коллабораций.
+</p>
+                            <p className="history-text">Этот шаг позволяет точнее работать с продуктом и аудиторией, сохраняя глубину и характер каждого направления.</p>
                         </div>
 
+                    </div>
+
+                    <div className="about__history-item">
+                        <div className="text-block">
+                            <div className="history-title-wrap">
+                                <h4 className="history-title"><span className="about__text-pink">2026</span> | Новая волна развития
+</h4>
+                            </div>
+                            <p className="history-text">Компания продолжает модернизацию производства, внедряя элементы автоматизации и улучшая рецептуры.</p>
+                            <p className="history-text">Ведётся разработка функциональных и спортивных линеек, а также запуск поточного производства комбуча-брюта.</p>
+                            <p className="history-text">Основатели остаются верны идеологии «Живого чая» — развивая бренды LIVE BREW и ReLive без компромиссов, сохраняя всё лучшее, что было создано за годы пути.</p>
+                        </div>
+                        <div className="image-block">
+                            <img src={cherryCar} alt="modernization" />
+                        </div>
                     </div>
                 </div>
             </section>
             <section className="form__contacts-section">
-                
+
                 <div className="form__contacts-main">
-                    <img src={formDecor} alt="decorate" className='form__contacts-img'/>
+                    <img src={formDecor} alt="decorate" className='form__contacts-img' />
                     <form onSubmit={handleSubmit} className="form__contacts">
                         <h2 className="form__contacts-title">БУДЕМ НА СВЯЗИ</h2>
 
@@ -307,9 +321,23 @@ const About = () => {
                         >
                             {isSubmitting ? 'ОТПРАВЛЯЕМ...' : 'ОСТАВИТЬ ЗАЯВКУ'}
                         </button>
-                        {/*#FIXME: сюда тоже надо стили написать*/}
                         <p className="form__status">{status}</p>
                     </form>
+                </div>
+            </section>
+            <section className="about__map-section">
+                <h1 className="about__map-title">ГДЕ МЫ?</h1>
+                <h3 className='about__map-subtitle'>RELIVE В ЕКАТЕРИНБУРГЕ</h3>
+
+                <div className='map-container'>
+                    <iframe
+                        src="https://yandex.ru/map-widget/v1/?from=api-maps&ll=60.599683%2C56.827787&origin=jsapi_2_1_79&pt=60.59945%2C56.828352~60.597748%2C56.82732~60.60094%2C56.828982~60.591892%2C56.833897~60.614245%2C56.829767~60.594462%2C56.836897~60.617849%2C56.831336~60.609495%2C56.839601~60.610455%2C56.840591~60.624662%2C56.821064&utm_source=jsapi&z=11"
+                        width="100%"
+                        height="100%"
+                        frameBorder="0"
+                        allowFullScreen={true}
+
+                    ></iframe>
                 </div>
             </section>
 

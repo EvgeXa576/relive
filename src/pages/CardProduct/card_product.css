@@ -1,5 +1,5 @@
 .product__page{
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 .product__page-top{
@@ -108,4 +108,19 @@
 .tabs__content ul{
     list-style-position: inside;
     padding-left: 0;
+}
+
+.btn-back{
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 25px;
+    cursor: pointer;
+}
+.btn-back svg {
+    width: 10%; 
+    height: auto; 
 }

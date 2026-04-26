@@ -1,4 +1,5 @@
 import './homePage.css'
+import products from '../../assets/products'
 import bottle from '../../assets/img/bottle.png'
 import heartShine from '../../assets/img/heartShine.svg'
 import pinkHeart from '../../assets/img/pink-heart.svg'
@@ -25,6 +26,8 @@ import Slide4 from '../../assets/img/SliderHome4.webp'
 import Slide5 from '../../assets/img/SliderHome5.JPG'
 import Slide6 from '../../assets/img/SliderHome6.jpg'
 import HealthHome from '../../components/HealthHome/HealthHome'
+import { Link } from 'react-router-dom'
+import AddToCart from '../../components/AddToCart/AddToCart'
 
 
 const HomePage = () => {
@@ -36,6 +39,8 @@ const HomePage = () => {
         { id: 5, url: Slide5, alt: 'Слайд 5' },
         { id: 6, url: Slide6, alt: 'Слайд 6' },
     ];
+
+    const hits=products.slice(0, 3)
     return (
         <>
             <section className="hero">
@@ -99,6 +104,29 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
+            <div className="home-hits">
+                <div className="hits-title">БЕСТСЕЛЛЕРЫ</div>
+                 <div className="hits">
+                    {hits.map(product => (
+                        <div key={product.id} className="hits-card">
+                            <Link
+                                to={`/product/${product.id}`}
+                                state={{ product }}
+                                style={{ textDecoration: 'none', color: 'inherit' }}
+                            >
+                                <img src={product.img} alt={product.name} />
+                                <h2>{product.name}</h2>
+                                <p>{product.taste}</p>
+                                <div className="hits-info">
+                                    <span>{product.volume} мл</span>
+                                    <span>{product.cost} руб.</span>
+                                </div>
+                            </Link>
+                            <AddToCart product={product} />
+                        </div>
+                    ))}
+                </div>
+            </div>
 
             <section className="slider">
                 <div className="slider-wrap">
@@ -119,7 +147,6 @@ const HomePage = () => {
                     ))}</SliderHome>
                 </div>
             </section>
-            <SliderHome />
         </>
     )
 }

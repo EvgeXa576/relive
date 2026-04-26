@@ -32,6 +32,11 @@
     width: 100%;
 }
 
+.bottles:hover{
+    filter: brightness(1.07);
+    transform: translateX(10px)
+}
+
 
 .bottles::before{
     position: absolute;
