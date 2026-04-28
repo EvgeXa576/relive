@@ -102,8 +102,9 @@ function Catalog() {
                                 to={`/product/${product.id}`}
                                 state={{ product }}
                                 style={{ textDecoration: 'none', color: 'inherit' }}
-                            >
-                                <img src={product.img} alt={product.name} />
+                            >   <div className="img-wrapper">
+                                    <img src={product.img} alt={product.name} />
+                                </div>
                                 <h2>{product.name}</h2>
                                 <p>{product.taste}</p>
                                 <div className="product-info">
