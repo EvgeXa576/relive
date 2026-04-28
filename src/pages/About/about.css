@@ -1,69 +1,90 @@
-/* about hero */
-.about__hero-wrap{
+/* --- ГЛОБАЛЬНЫЕ ПРАВКИ ДЛЯ 1920px --- */
+
+/* Ограничиваем контентную часть для страниц с широкими экранами */
+.about__hero-wrap,
+.about__history,
+.form__contacts-main,
+.about__map-title,
+.about__map-subtitle {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+/* --- ГЕРОЙСКАЯ СЕКЦИЯ --- */
+
+.about__hero-wrap {
     position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 2rem;
+    padding-top: 50px;
 }
 
-.about__hero-wrap::before{
+/* Декоративные цветы за текстом */
+.about__hero-wrap::before {
     position: absolute;
     content: '';
-    width: 30vw;
-    height: 30vw;
-    top: -60%;
+    width: clamp(300px, 30vw, 450px);
+    height: clamp(300px, 30vw, 450px);
+    top: -40%;
     right: 0%;
     background-image: url(../../assets/img/about-flower-green.svg);
-    background-size: cover; 
+    background-size: contain;
     background-repeat: no-repeat;
-    background-position: center;
     z-index: -5;
 }
 
-.about__hero-wrap::after{
+.about__hero-wrap::after {
     position: absolute;
     content: '';
-    width: 20vw;
-    height: 20vw;
-    bottom: 60%;
+    width: clamp(200px, 20vw, 300px);
+    height: clamp(200px, 20vw, 300px);
+    bottom: 40%;
     right: 15%;
     background-image: url(../../assets/img/about-flower-pink.svg);
-    background-size: cover; 
+    background-size: contain;
     background-repeat: no-repeat;
-    background-position: center;
     z-index: -7;
 }
 
-.about__hero-title{
-    font-size: 96px;
+.about__hero-title {
+    font-size: clamp(60px, 6.5vw, 96px);
     color: #FF8E7D;
     text-align: right;
     text-transform: uppercase;
+    line-height: 0.9;
 }
 
-.abot__hero-stars{
-    height: 96px;
+.about__hero-stars {
+    height: clamp(60px, 6vw, 96px);
 }
 
-.about__hero-line{
+.about__hero-line {
     width: 3px;
     height: 196px;
     background-color: #000;
-
+    flex-shrink: 0;
 }
 
-.about__hero-subtitle{
-    font-size: 96px;
+.about__hero-subtitle {
+    font-size: clamp(60px, 6.5vw, 96px);
     font-weight: 300;
 }
 
-.about__hero-text{
-    font-size: 32px;
+.about__hero-text {
+    font-size: clamp(20px, 2vw, 32px);
     text-align: center;
+    margin: 0 auto;
     margin-top: 2%;
+    max-width: 1000px;
 }
+
+/* --- ИСТОРИЯ (БЛОКИ ТЕКСТА) --- */
 
 .about__history {
     display: flex;
@@ -72,6 +93,7 @@
     align-items: center;
     color: #432E2A;
     font-family: Inter, sans-serif;
+    margin-bottom: 100px;
 }
 
 .about__history-item {
@@ -79,14 +101,15 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: 5rem;
+    margin-top: clamp(3rem, 5vw, 5rem);
     gap: 7%;
+    width: 100%;
 }
 
 .history-title-wrap {
     text-transform: uppercase;
     font-weight: normal;
-    font-size: 32px;
+    font-size: clamp(24px, 2.5vw, 32px);
 }
 
 .about__text-pink {
@@ -95,182 +118,175 @@
 }
 
 .history-subtitle {
-    font-size: 24px;
+    font-size: clamp(18px, 2vw, 24px);
     text-transform: uppercase;
     margin-top: 1rem;
 }
 
 .history-text {
-    font-size: 24px;
+    font-size: clamp(18px, 1.8vw, 24px);
     padding-top: 41px;
     font-weight: 500;
+    line-height: 1.4;
 }
 
 .text-block {
-    width: 30%;
+    width: 45%; /* Увеличил, чтобы на 1920 текст не был слишком узким */
 }
 
-.image-block{
-    width: 30%;
+.image-block {
+    width: 35%;
     display: flex;
     justify-content: center;
     align-items: end;
-    
 }
 
-/* form */
+.image-block img {
+    max-width: 100%;
+    height: auto;
+}
 
-.form__contacts-section{
+/* --- ФОРМА КОНТАКТОВ --- */
+
+.form__contacts-section {
+    /* Чтобы фон на 1920 не обрывался, используем cover */
     background-image: url(../../assets/img/about-form-bg.svg);
     background-repeat: no-repeat;
-    background-position: right;
-    background-size: 100% 100%;
-    aspect-ratio: 5/4; 
+
+    background-size: cover;
     text-align: center;
-    padding: 10vh 0;
+    padding: 100px 0;
+    width: 100%;
 }
 
-.form__contacts-main{
+.form__contacts-main {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 10vw;
-    padding: 10vh;
+    gap: 5vw; /* Уменьшил разрыв для 1920 */
 }
 
-.form__contacts-title{
+.form__contacts-title {
     color: #FF8E7D;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 48px;
+    font-size: clamp(32px, 3.5vw, 48px);
     text-align: center;
+    margin-bottom: 20px;
 }
 
-.form__contacts{
+.form__contacts {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 25px;
-
+    width: 100%;
+    max-width: 500px;
 }
 
-.form__contacts-input{
-    padding: 5% 10%;
+.form__contacts-input {
+    padding: 20px 30px;
     border-radius: 50px;
     border: #87DF1C solid 4px;
-    font-size: 26px;
-    width: 30vw;
+    font-size: clamp(18px, 1.5vw, 26px);
+    width: 100%;
     font-weight: 600;
     background: rgba(255, 255, 255, 0.5);
+    box-sizing: border-box;
 }
 
-.form__contacts-input:focus,
-.form__contacts-input:active{
-    border: #F93B77 solid 4px;
-    color: #F93B77;
-    
-}
-
-.form__contacts-btn{
-    padding: 5% 10%;
+.form__contacts-btn {
+    padding: 20px 40px;
     border-radius: 50px;
     background-color: #F93B77;
-    font-size: 26px;
-    width: 23vw;
+    font-size: clamp(18px, 1.5vw, 26px);
+    width: 100%;
+    max-width: 400px;
     border: none;
     outline: none;
     font-weight: 600;
     color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s;
 }
 
-.form__contacts-img{
-    width: 40vw;
+.form__contacts-btn:hover {
+    transform: scale(1.02);
 }
 
-
-.input-error {
-    border-color: #ff4d4d !important;
-}
-.error-message {
-    color: #ff4d4d;
-    font-size: 17px;
-    display: block;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-.form__contacts-btn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+.form__contacts-img {
+    width: 35vw;
+    max-width: 500px;
 }
 
-.form__status {
-    font-size: 17px;
-    text-align: center;
-}
+/* --- КАРТА --- */
 
-
-/* map */
-
-.about__map-title{
-    font-size: 48px;
+.about__map-title {
+    font-size: clamp(32px, 3.5vw, 48px);
     font-weight: bold;
     color: #FF8E7D;
     text-align: center;
     text-transform: uppercase;
-    margin: 2% 0;
+    margin: 4% 0 1%;
     position: relative;
 }
 
-.about__map-title::after{
+.about__map-title::after {
     content: '';
     position: absolute;
     background-image: url(../../assets/img/map-stars.svg);
     background-repeat: no-repeat;
-    background-size: 100% 100%;
-    height: 250%;
-    width: 15%;
-    right: 25%;
-    top: -70%;
+    background-size: contain;
+    height: 200%;
+    width: 10%;
+    right: 20%;
+    top: -50%;
 }
 
-.about__map-subtitle{
-    font-size: 40px;
+.about__map-subtitle {
+    font-size: clamp(24px, 2.5vw, 40px);
     color: #432E2A;
     font-weight: 200;
     text-align: center;
     text-transform: uppercase;
-    margin-bottom: 5%;
+    margin-bottom: 50px;
 }
 
-.map-container{
+.map-container {
     width: 100%;
-    height: 50vh;
+    height: 60vh;
     position: relative;
+    overflow: hidden; /* Чтобы декоративные элементы не создавали скролл */
 }
 
-.map-container::before{
+/* Декор карты по бокам */
+.map-container::before {
     content: '';
     position: absolute;
     background-image: url(../../assets/img/map-left.svg);
     background-repeat: no-repeat;
-    background-size: 100% 100%;
-    height: 150%;
-    width: 20%;
-    left: -1%;
-    top: -25%;
-
+    background-size: contain;
+    height: 100%;
+    width: 15%;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    pointer-events: none;
 }
 
-.map-container::after{
+.map-container::after {
     content: '';
     position: absolute;
     background-image: url(../../assets/img/map-right.svg);
     background-repeat: no-repeat;
-    background-size: 100% 100%;
-    height: 150%;
-    width: 20%;
-    right: -1%;
-    top: -25%;
+    background-size: contain;
+    background-position: right;
+    height: 100%;
+    width: 15%;
+    right: 0;
+    top: 0;
+    z-index: 2;
+    pointer-events: none;
 }

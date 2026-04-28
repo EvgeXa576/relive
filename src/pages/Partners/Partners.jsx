@@ -22,7 +22,7 @@ const Partners = () => {
 
     // 2. Состояние ошибок и процесса отправки
     const [errors, setErrors] = useState({});
-    const [setIsSubmitting] = useState(false);
+    const [isSub, setIsSubmitting] = useState(false);
     const [status, setStatus] = useState('');
 
     // 3. Маска для телефона

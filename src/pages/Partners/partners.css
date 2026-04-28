@@ -1,22 +1,40 @@
-.partners__hero{
-    position: relative;
+/* --- ГЛОБАЛЬНЫЕ ПРАВКИ ДЛЯ 1920px --- */
+
+/* Ограничиваем контентную часть, чтобы на 1920px всё не разъехалось */
+.partners__hero-wrap,
+.partners__slider,
+.form__partners-section {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 40px; /* Отступы по бокам для безопасности */
+    box-sizing: border-box;
 }
 
-.partners__hero::before{
+/* --- ВАШИ ОРИГИНАЛЬНЫЕ СТИЛИ С АДАПТИВОМ --- */
+
+.partners__hero {
+    position: relative;
+    padding-top: 50px;
+}
+
+.partners__hero::before {
     position: absolute;
     content: url(../../assets/img/dotted-grass.svg);
-    left: 20%;
-    bottom: -20%;
+    left: 15%; /* Чуть сместил внутрь для 1920 */
+    bottom: -15%;
+    z-index: -1;
 }
 
-.partners__hero::after{
+.partners__hero::after {
     position: absolute;
     content: url(../../assets/img/grass.svg);
-    right: 20%;
-    bottom: -25%;
+    right: 15%;
+    bottom: -20%;
+    z-index: -1;
 }
 
-.partners__hero-wrap{
+.partners__hero-wrap {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -24,152 +42,169 @@
     gap: 2rem;
 }
 
-
-
-.partners__hero-title{
-    font-size: 96px;
+.partners__hero-title {
+    /* Используем clamp, чтобы шрифт не был огромным на 1920 */
+    font-size: clamp(60px, 6.5vw, 96px);
     color: #FF8E7D;
     text-align: right;
     text-transform: uppercase;
+    line-height: 0.9;
 }
 
-.partners__hero-small{
+.partners__hero-small {
     color: #B1B1B1;
-    font-size: 36px;
+    font-size: clamp(24px, 2.5vw, 36px);
     font-weight: bold;
     text-align: right;
 }
 
-
-
-.partners__hero-line{
+.partners__hero-line {
     width: 3px;
     height: 236px;
     background-color: #000;
-
+    flex-shrink: 0; /* Чтобы линия не сжималась */
 }
 
-.partners__hero-subtitle{
+.partners__hero-subtitle {
     color: #BCD452;
-    font-size: 74px;
+    font-size: clamp(48px, 5vw, 74px);
     text-transform: uppercase;
     font-weight: bold;
     position: relative;
 }
 
-.partners__hero-subtitle::after{
+.partners__hero-subtitle::after {
     position: absolute;
     content: url(../../assets/img/heartShine.svg);
-    right: 0%;
+    right: -10%;
     bottom: 0%;
 }
 
-.partners__hero-text{
-    font-size: 32px;
+.partners__hero-text {
+    font-size: clamp(20px, 2vw, 32px);
     text-align: center;
     margin-top: 2%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
-
 
 /* partnersSlider */
 
-.partners__slider{
-    margin-top: 15%;
+.partners__slider {
+    margin-top: 10%;
 }
 
-.partners__slider-title{
+.partners__slider-title {
     color: #FF8E7D;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 48px;
+    font-size: clamp(32px, 3.5vw, 48px);
     text-align: center;
-
 }
 
-.partners__slider-text{
+.partners__slider-text {
     text-align: center;
-    font-size: 32px;
+    font-size: clamp(20px, 2vw, 32px);
     margin-top: 2rem;
 }
 
-/* form */
+/* --- FORM PARTNERS --- */
 
-.form__partners-section{
-    
+.form__partners-section {
     text-align: center;
-    margin: 10% 0;
+    margin: 4% auto;
 }
 
-.form__partners-main{
+.form__partners-main {
     display: flex;
     flex-direction: row;
-    align-items: start;
+    align-items: center; /* Центрируем по вертикали */
     justify-content: center;
-    gap: 2vw;
+    gap: 40px; /* Фиксированный зазор на больших экранах лучше */
 }
 
-.form__partners-title{
+.form__partners-title {
     color: #FF8E7D;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 48px;
+    font-size: clamp(32px, 3.5vw, 48px);
     text-align: center;
+    margin-bottom: 40px;
 }
 
-.form__partners{
+.form__partners {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 25px;
-
+    gap: 20px;
+    width: 100%;
+    max-width: 500px; /* Ограничиваем ширину инпутов */
 }
 
-.form__partners-input{
-    padding: 5% 10%;
+.form__partners-input {
+    padding: 18px 30px;
     border-radius: 50px;
     border: #87DF1C solid 4px;
-    font-size: 26px;
-    width: 30vw;
+    font-size: 22px;
+    width: 100%; /* Занимает всю ширину контейнера .form__partners */
     font-weight: 600;
     background: rgba(255, 255, 255, 0.5);
+    box-sizing: border-box;
+    transition: border-color 0.3s;
 }
 
 .form__partners-input:focus,
-.form__partners-input:active{
+.form__partners-input:active {
     border: #F93B77 solid 4px;
     color: #F93B77;
-    
+    outline: none;
 }
 
-.form__partners-btn{
-    padding: 5% 10%;
+.form__partners-btn {
+    padding: 18px 40px;
     border-radius: 50px;
     background-color: #F93B77;
-    font-size: 26px;
-    width: 23vw;
+    font-size: 24px;
+    width: 100%;
+    max-width: 400px;
     border: none;
     outline: none;
     font-weight: 600;
     color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-.form__partners-img{
-    width: 20vw;
+.form__partners-btn:hover {
+    background-color: #e62e66;
+    transform: translateY(-2px);
 }
 
+.form__partners-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
 
+.form__partners-img {
+    width: 25vw;
+    max-width: 400px; /* Чтобы не была огромной на 1920 */
+    height: auto;
+}
+
+/* Ошибки валидации */
 .input-error {
     border-color: #ff4d4d !important;
 }
+
 .error-message {
     color: #ff4d4d;
-    font-size: 17px;
+    font-size: 16px;
     display: block;
-    margin-top: 10px; /* подтянуть к инпуту */
+    margin-top: -10px;
     margin-bottom: 10px;
-}
-.form__contacts-btn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+    text-align: left;
+    width: 100%;
+    padding-left: 25px;
 }

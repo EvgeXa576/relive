@@ -1,126 +1,161 @@
-.product__page{
-    margin-top: 2%;
+/* --- ОСНОВНОЙ КОНТЕЙНЕР СТРАНИЦЫ --- */
+.product__page {
+    margin-top: 40px;
+    max-width: 1440px; /* Ограничиваем контентную область */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 40px;
+    box-sizing: border-box;
 }
 
-.product__page-top{
+/* --- ВЕРХНЯЯ ЧАСТЬ (ФОТО + ГЛАВНАЯ ИНФО) --- */
+.product__page-top {
     display: flex;
+    margin: 0 auto;
     flex-direction: row;
-    align-items: top;
+    align-items: flex-start;
     justify-content: center;
-    gap: 10%;
-}
-.product__page-img{
-    width: 20%;
+    gap: 80px; /* Фиксированный отступ между фото и текстом */
 }
 
-.product__page-img img{
+.product__page-img {
     width: 100%;
+    max-width: 400px; /* Ограничиваем рост изображения бутылки */
+    flex-shrink: 0;
 }
 
-.product__page-info{
+.product__page-img img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.product__page-info {
     display: flex;
+    width: fit-content;
     flex-direction: column;
-    align-items: top;
-    justify-content: left;
-    gap: 2%;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+    flex-grow: 1;
 }
 
-.product__page-info-title{
-    font-size: 48px;
+.product__page-info-title {
+    font-size: clamp(32px, 4vw, 48px); /* Адаптивный, но контролируемый заголовок */
     color: #F93B77;
+    line-height: 1.2;
+    margin: 0;
 }
 
-.product__page-info-cost{
+.product__page-info-cost {
     color: #432E2A;
-    font-size: 40px;
+    font-size: clamp(30px, 3vw, 40px);
     font-weight: bold;
-    
 }
 
-.product__page-info-volume{
+.product__page-info-volume {
     color: #F93B77;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: bold;
-    padding: 2% 3%;
+    padding: 10px 25px;
     border: 3px solid #F93B77;
     width: max-content;
-    border-radius: 5px;
+    border-radius: 12px;
 }
 
-.product__page-info-components h2{
+.product__page-info-components h2 {
     color: #432E2A;
-    font-size: 30px;
-}
-.product__page-info-components li{
     font-size: 28px;
-    margin-top: 1%;
-
+    margin-bottom: 15px;
 }
 
-.product__page-info-components {
-    list-style-position: inside;
-    padding-left: 0;
+.product__page-info-components li {
+    font-size: 22px;
+    margin-top: 8px;
+    color: #432E2A;
 }
 
-/* tabs */
+/* --- ТАБЫ (ВКЛАДКИ) --- */
 
-.tabs__headers{
+.tabs__headers {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 10%;
-    margin: 3% 0;
+    gap: 60px;
+    margin: 60px 0 30px 0;
+    border-bottom: 2px solid rgba(0,0,0,0.05);
+    padding-bottom: 20px;
 }
-.tabs__headers button{
-    font-size: 30px;
+
+.tabs__headers button {
+    font-size: 24px;
     color: #432E2A;
     background: transparent;
     border: none;
     outline: none;
     cursor: pointer;
+    font-weight: 500;
+    transition: color 0.3s;
 }
 
-
-.tabs__headers button.active{
-
+.tabs__headers button.active {
     color: #F93B77;
-
+    position: relative;
 }
 
+/* Линия под активным табом */
+.tabs__headers button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -22px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #F93B77;
+    border-radius: 2px;
+}
 
-.tabs__content{
-    margin: 5% 25vw;
+.tabs__content {
+    /* Вместо 25vw ставим фиксированный max-width для читабельности текста */
+    max-width: 800px;
+    margin: 40px auto 100px auto;
+    text-align: left;
 }
 
 .tabs__content span,
 .tabs__content p,
 .tabs__content li {
-    font-size: 30px;
-    line-height: 1.5;
+    font-size: 20px;
+    line-height: 1.6;
+    color: #432E2A;
 }
 
 .tabs__content h3 {
-    font-size: 35px;
-    line-height: 1.5;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #F93B77;
 }
 
-.tabs__content ul{
-    list-style-position: inside;
-    padding-left: 0;
-}
-
-.btn-back{
+/* Кнопка "Назад" */
+.btn-back {
     background: transparent;
     border: none;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    font-size: 25px;
+    gap: 12px;
+    font-size: 20px;
     cursor: pointer;
+    color: #B1B1B1;
+    margin-bottom: 30px;
+    transition: color 0.3s;
 }
+
+.btn-back:hover {
+    color: #F93B77;
+}
+
 .btn-back svg {
-    width: 10%; 
-    height: auto; 
+    width: 24px;
+    height: auto;
 }

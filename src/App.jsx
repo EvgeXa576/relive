@@ -17,6 +17,7 @@ function AppContent() {
 
     // Проверяем, совпадает ли текущий путь с паттерном /product/:id
     const isProductPage = matchPath("/product/:id", location.pathname);
+    const isCartPage = matchPath("/cart", location.pathname);
 
     return (
         <>
@@ -33,7 +34,7 @@ function AppContent() {
             </Routes>
 
             {/* Рендерим Footer только если мы НЕ на странице продукта */}
-            {!isProductPage && <Footer />}
+            {(!isProductPage && !isCartPage) && <Footer />}
         </>
     );
 }
