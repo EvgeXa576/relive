@@ -1,0 +1,87 @@
+.quiz-container {
+    max-width: 1440px;
+    margin: 80px auto;
+    padding: 60px;
+    background: #fff;
+    border-radius: 60px;
+    box-shadow: 0 10px 40px rgba(94, 12, 12, 0.1);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.quiz-progress {
+    height: 8px;
+    background: #87DF1C; /* Зеленый из вашего бренда */
+    border-radius: 4px;
+    margin-bottom: 20px;
+    transition: width 0.4s ease;
+}
+
+.quiz-step-info {
+    color: #B1B1B1;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.quiz-question {
+    font-size: clamp(32px, 4vw, 54px);
+    color: #FF8E7D; /* Розовый из homePage.css */
+    margin: 40px 0;
+    text-transform: uppercase;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.quiz-option-btn {
+    padding: 25px 40px;
+    font-size: 24px;
+    border: 3px solid #F93B77;
+    border-radius: 50px;
+    background: transparent;
+    color: #432E2A;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.quiz-option-btn:hover {
+    background: #F93B77;
+    color: #fff;
+    transform: scale(1.02);
+}
+
+/* Результаты */
+.result-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    animation: fadeIn 0.8s ease;
+}
+
+.result-card img {
+    height: 400px;
+    object-fit: contain;
+}
+
+.result-card h3 {
+    font-size: 48px;
+    color: #F93B77;
+}
+
+.result-card p {
+    font-size: 24px;
+    color: #432E2A;
+    max-width: 500px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

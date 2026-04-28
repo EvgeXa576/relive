@@ -11,6 +11,7 @@ import Cart from './pages/Cart/Cart';
 import ScrollToTop from "./hooks/ScrollToTop.jsx";
 import { useLocation, matchPath } from 'react-router-dom';
 import FAQ from './pages/FAQ/FAQ.jsx';
+import Quiz from "./pages/Quiz/quiz.jsx";
 
 function AppContent() {
     const location = useLocation();
@@ -18,6 +19,7 @@ function AppContent() {
     // Проверяем, совпадает ли текущий путь с паттерном /product/:id
     const isProductPage = matchPath("/product/:id", location.pathname);
     const isCartPage = matchPath("/cart", location.pathname);
+    const isQuizPage = matchPath("/quiz", location.pathname);
 
     return (
         <>
@@ -31,10 +33,11 @@ function AppContent() {
                 <Route path="/product/:id" element={<CardProduct />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/faq" element={<FAQ />} />
+                <Route path="/quiz" element={<Quiz />} />
             </Routes>
 
             {/* Рендерим Footer только если мы НЕ на странице продукта */}
-            {(!isProductPage && !isCartPage) && <Footer />}
+            {(!isProductPage && !isCartPage && !isQuizPage) && <Footer />}
         </>
     );
 }
