@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import products from './../../assets/products.jsx';
 import './quiz.css';
+import AddToCart from '../../components/AddToCart/AddToCart'
 
 const questions = [
     {
@@ -52,7 +54,7 @@ const questions = [
 const resultsMapping = {
     island: {
         id: 1, // Или 6 (500мл)
-        name: "OOLONG ISLAND",
+        name: "OOLONG",
         taste: "Клубника + Базилик",
         desc: "Ты — искатель ярких впечатлений! Тебе идеально подходит смелое сочетание клубники и базилика."
     },
@@ -96,20 +98,61 @@ const QuizPage = () => {
         }
     };
 
+
+
     const getWinner = () => {
-        return Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+        const winnerKey = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+
+        // Мапим ключ из квиза на реальное название из твоего массива products
+        const nameMap = {
+            island: "OOLONG",
+            lavender: "FALL IN LAVENDER",
+            ivan: "FOREVER IVAN 2",
+            green: "OH MY GREEN",
+            earl: "EARL YELLOW"
+        };
+
+        // Находим товар в массиве (берем версию 350мл по умолчанию)
+        return products.find(p => p.name === nameMap[winnerKey] && p.volume === '350');
     };
 
     if (showResult) {
-        const winner = resultsMapping[getWinner()];
+        const product = getWinner();
         return (
             <div className="quiz-container result-fade">
-                <h2>Твой идеальный вкус найден!</h2>
                 <div className="result-card">
-                    <img src={`/assets/img/${winner.img}`} alt={winner.name} />
-                    <h3>{winner.name}</h3>
-                    <p>{winner.desc}</p>
-                    <button className="quiz-btn" onClick={() => window.location.href='/catalog'}>В каталог</button>
+                    <div className="result-header">
+                        <h2>Твой идеальный вкус найден!</h2>
+                        <p className="result-desc">На основе твоих ответов мы подобрали напиток, который идеально дополнит твой день.</p>
+                    </div>
+
+                    <div className="result-main">
+                        <div className="result-img-wrap">
+                            <img src={product.img} alt={product.name} />
+                        </div>
+
+                        <div className="result-info">
+                            <span className="result-tag">{product.category}</span>
+                            <h3 className="result-name">{product.name}</h3>
+                            <p className="result-taste">{product.taste}</p>
+                            <p className="result-price">{product.cost} ₽</p>
+
+                            <div className="result-actions">
+                                <button
+                                    className="add-to-cart-btn"
+                                    onClick={() => addToCart(product)}
+                                >
+                                    Добавить в корзину
+                                </button>
+                                <button
+                                    className="retake-btn"
+                                    onClick={() => window.location.reload()}
+                                >
+                                    Пройти еще раз
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

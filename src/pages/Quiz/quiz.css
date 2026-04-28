@@ -38,7 +38,7 @@
     margin: 0 auto;
 }
 
-.quiz-option-btn {
+.quiz-option-btn, .add-to-cart-btn, .retake-btn {
     padding: 25px 40px;
     font-size: 24px;
     border: 3px solid #F93B77;
@@ -50,7 +50,7 @@
     font-weight: 600;
 }
 
-.quiz-option-btn:hover {
+.quiz-option-btn:hover, .add-to-cart-btn:hover, .retake-btn:hover {
     background: #F93B77;
     color: #fff;
     transform: scale(1.02);
@@ -78,7 +78,7 @@
 .result-card p {
     font-size: 24px;
     color: #432E2A;
-    max-width: 500px;
+
 }
 
 @keyframes fadeIn {
