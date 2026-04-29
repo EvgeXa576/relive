@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import './quiz.css';
 
+// 🔹 Импортируем картинки (пути подставь под свою структуру)
+import OolongImg from '../../assets/img/bottle/OOLONG.jpg';
+import LavenderImg from '../../assets/img/bottle/FOREVER_IVAN.png';
+import IvanImg from '../../assets/img/bottle/FOREVER_IVAN.png';
+import GreenImg from '../../assets/img/bottle/OH_MY_GREEN.jpg';
+import EarlImg from '../../assets/img/bottle/EARL_YELLOW.png';
+
 const questions = [
     {
         title: "Какое утро идеальное для тебя?",
@@ -49,46 +56,66 @@ const questions = [
     }
 ];
 
+// 🔹 Добавили img и исправили ключи под типы из вопросов
 const resultsMapping = {
     island: {
-        id: 1, // Или 6 (500мл)
-        name: "OOLONG ISLAND",
+        id: 17,
+        name: "OOLONG",
         taste: "Клубника + Базилик",
-        desc: "Ты — искатель ярких впечатлений! Тебе идеально подходит смелое сочетание клубники и базилика."
+        desc: "Ты — искатель ярких впечатлений! Тебе идеально подходит смелое сочетание клубники и базилика.",
+        img: OolongImg
     },
     lavender: {
-        id: 2,
-        name: "FALL IN LAVENDER",
-        taste: "Лаванда + Мед",
-        desc: "Время замедлиться. Твой выбор — нежная лаванда для полной гармонии с собой."
+        id: 5,
+        name: "FOREVER IVAN",
+        taste: "Иван-чай + Яблоко",
+        desc: "Время замедлиться. Твой выбор — нежная лаванда для полной гармонии с собой.",
+        img: LavenderImg
     },
     ivan: {
-        id: 3,
-        name: "FOREVER IVAN 2",
+        id: 5,
+        name: "FOREVER IVAN",
         taste: "Иван-чай + Яблоко",
-        desc: "Ты ценишь искренность и традиции. Мягкий вкус яблока и иван-чая — это то, что тебе нужно."
+        desc: "Ты ценишь искренность и традиции. Мягкий вкус яблока и иван-чая — это то, что тебе нужно.",
+        img: IvanImg
     },
     green: {
-        id: 4,
+        id: 15,
         name: "OH MY GREEN",
         taste: "Зеленый чай + Мята",
-        desc: "Заряд чистой энергии! Мята и зеленый чай помогут тебе покорить любые вершины сегодня."
+        desc: "Заряд чистой энергии! Мята и зеленый чай помогут тебе покорить любые вершины сегодня.",
+        img: GreenImg
     },
     earl: {
-        id: 5,
+        id: 3,
         name: "EARL YELLOW",
         taste: "Бергамот + Цитрус",
-        desc: "Твое кредо — стиль и бодрость. Цитрусовая энергия бергамота идеально подчеркнет твой ритм."
+        desc: "Твое кредо — стиль и бодрость. Цитрусовая энергия бергамота идеально подчеркнет твой ритм.",
+        img: EarlImg
     }
 };
 
 const QuizPage = () => {
     const [step, setStep] = useState(0);
-    const [scores, setScores] = useState({ classic: 0, berry: 0, herbal: 0 });
+    
+    // 🔹 Инициализируем scores правильными ключами (как в options.type)
+    const [scores, setScores] = useState({
+        island: 0,
+        lavender: 0,
+        ivan: 0,
+        green: 0,
+        earl: 0
+    });
+    
     const [showResult, setShowResult] = useState(false);
 
     const handleAnswer = (type) => {
-        setScores({ ...scores, [type]: scores[type] + 1 });
+        // 🔹 Безопасное обновление: если ключа нет — начинаем с 0
+        setScores(prev => ({
+            ...prev,
+            [type]: (prev[type] || 0) + 1
+        }));
+        
         if (step + 1 < questions.length) {
             setStep(step + 1);
         } else {
@@ -97,19 +124,30 @@ const QuizPage = () => {
     };
 
     const getWinner = () => {
-        return Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+        // 🔹 Находим тип с максимальным количеством баллов
+        return Object.entries(scores)
+            .sort((a, b) => b[1] - a[1])[0][0];
     };
 
     if (showResult) {
-        const winner = resultsMapping[getWinner()];
+        const winnerKey = getWinner();
+        const winner = resultsMapping[winnerKey];
+        
         return (
             <div className="quiz-container result-fade">
                 <h2>Твой идеальный вкус найден!</h2>
                 <div className="result-card">
-                    <img src={`/assets/img/${winner.img}`} alt={winner.name} />
+                    {/* 🔹 Теперь winner.img определён */}
+                    <img src={winner.img} alt={winner.name} />
                     <h3>{winner.name}</h3>
+                    <p><strong>{winner.taste}</strong></p>
                     <p>{winner.desc}</p>
-                    <button className="quiz-btn" onClick={() => window.location.href='/catalog'}>В каталог</button>
+                    <button 
+                        className="quiz-btn" 
+                        onClick={() => window.location.href='/catalog'}
+                    >
+                        В каталог
+                    </button>
                 </div>
             </div>
         );
@@ -122,7 +160,11 @@ const QuizPage = () => {
             <h2 className="quiz-question">{questions[step].title}</h2>
             <div className="quiz-options">
                 {questions[step].options.map((opt, i) => (
-                    <button key={i} className="quiz-option-btn" onClick={() => handleAnswer(opt.type)}>
+                    <button 
+                        key={i} 
+                        className="quiz-option-btn" 
+                        onClick={() => handleAnswer(opt.type)}
+                    >
                         {opt.text}
                     </button>
                 ))}

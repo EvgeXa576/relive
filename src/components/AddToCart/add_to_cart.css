@@ -14,7 +14,7 @@
     font-size: var(--fs);
     font-weight: bold;
     cursor: pointer;
-    margin: clamp(8px, 1.5vw, 16px) auto; /* авто-центровка, убери auto если нужно выравнивание влево */
+    margin: clamp(8px, 1.5vw, 16px) 0; /* авто-центровка, убери auto если нужно выравнивание влево */
     transition: all 0.25s ease;
     line-height: 1.2;
 }

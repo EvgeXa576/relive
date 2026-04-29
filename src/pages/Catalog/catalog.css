@@ -245,6 +245,121 @@
     margin-top: 1rem;
 }
 
+.quiz-bunner {
+    width: 60%;
+    margin: 2rem auto;
+    padding: 3rem 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #FF8E7D 0%, #FF6B5A 100%);
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(255, 110, 90, 0.3);
+    cursor: pointer;
+}
+
+/* Hover эффект */
+.quiz-bunner:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(255, 110, 90, 0.4);
+}
+
+/* Стили для заголовков */
+.quiz-bunner h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: white;
+    margin: 0 0 0.5rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: -0.5px;
+}
+
+.quiz-bunner h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0 0 1.5rem 0;
+    line-height: 1.4;
+}
+
+/* Стили для кнопки */
+.quiz-bunner button {
+    background: white;
+    color: #FF6B5A;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-bunner button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Декоративный эффект (опционально) */
+.quiz-bunner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.quiz-bunner:hover::before {
+    opacity: 1;
+}
+/* Адаптивность */
+@media (max-width: 768px) {
+    .quiz-bunner {
+        width: 90%;
+        padding: 2rem 1.5rem;
+        margin: 1rem auto;
+    }
+    
+    .quiz-bunner h2 {
+        font-size: 1.5rem;
+    }
+    
+    .quiz-bunner h3 {
+        font-size: 1rem;
+    }
+    
+    .quiz-bunner button {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .quiz-bunner {
+        width: 95%;
+        padding: 1.5rem 1rem;
+    }
+    
+    .quiz-bunner h2 {
+        font-size: 1.25rem;
+    }
+    
+    .quiz-bunner h3 {
+        font-size: 0.9rem;
+    }
+    
+    .quiz-bunner button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
 /* Ноутбук: ≤1439px */
 @media (max-width: 1642px) {
     .product-card {
@@ -258,7 +373,7 @@
         padding: 24px 18px;
     }
     .product-card img {
-        max-width: 100px;
+        max-width: 150px;
         margin-bottom: 14px;
     }
     .product-info {
@@ -269,6 +384,16 @@
    
     margin-bottom: 0px;
     line-height: 0;
+}
+.catalog__hero,
+.catalog_products,
+.catalog__filters,
+.catalog_products-title,
+.search-results-info {
+    max-width: 1240px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
 }
 
 }
