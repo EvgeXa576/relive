@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import SliderHome from '../../components/SliderHome/SliderHome'
 import './catalog.css'
 import useLocalStorage from '../../hooks/useLocalStorage';
@@ -15,21 +15,28 @@ function Catalog() {
     const [searchQuery, setSearchQuery] = useState('');
     const [open, setOpen] = useState(false);
 
-    // Получаем уникальные категории из товаров
+    // Получаем уникальные категории
     const categories = ['все', ...new Set(products.map(product => product.category))];
 
-    // Фильтруем товары по категории и поиску
-    const filteredProducts = products.filter(product => {
-        // Фильтр по категории
-        const categoryMatch = selectedCategory === 'все' || product.category === selectedCategory;
+    // 🔹 Вспомогательные функции для работы с volumes
+    const getMinPrice = (product) => {
+        return Math.min(...product.volumes.map(v => v.cost));
+    };
 
-        // Фильтр по поиску (по названию и вкусу)
-        const searchMatch = searchQuery === '' ||
-            product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            product.taste.toLowerCase().includes(searchQuery.toLowerCase());
+    const getDefaultVolume = (product) => {
+        return product.volumes.find(v => v.size === '350')?.size || product.volumes[0].size;
+    };
 
-        return categoryMatch && searchMatch;
-    });
+    // Фильтрация товаров (мемоизируем, чтобы не пересчитывать при каждом рендере)
+    const filteredProducts = useMemo(() => {
+        return products.filter(product => {
+            const categoryMatch = selectedCategory === 'все' || product.category === selectedCategory;
+            const searchMatch = searchQuery === '' ||
+                product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                product.taste.toLowerCase().includes(searchQuery.toLowerCase());
+            return categoryMatch && searchMatch;
+        });
+    }, [selectedCategory, searchQuery]);
 
     return (
         <>
@@ -37,8 +44,9 @@ function Catalog() {
                 <h1 className="catalog__hero-title">НАБОР ПЕРВООТКРЫВАТЕЛЯ</h1>
                 <h3 className="catalog__hero-subtitle">6 ВКУСОВ В ОДНОЙ КОРОБКЕ</h3>
                 <p className="catalog__hero-cost">1200 руб.</p>
-                <button type="submit" className="catalog__hero-btn">ДОБАВИТЬ</button>
+                <button type="button" className="catalog__hero-btn">ДОБАВИТЬ</button>
             </div>
+
             <SliderHome>
                 <div className="carousel-item">ЧИСТЫЙ НАТУРАЛЬНЫЙ СОСТАВ</div>
                 <div className="carousel-item"><img src={pinkHeart} alt="heart" /></div>
@@ -49,16 +57,18 @@ function Catalog() {
 
             <section className='catalog'>
                 <h1 className="catalog_products-title">Каталог</h1>
-                <Link to='/quiz'>
-                <div className="quiz-bunner">
-                    <h2>Не знаешь что выбрать?</h2>
-                    <h3>Пройди тест и подбери напиток идеально под себя</h3>
-                    <button>Пройти сейчас</button>
-                </div>
-</Link>
+                
+                <Link to='/quiz'
+                style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
+                    <div className="quiz-bunner">
+                        <h2>Не знаешь что выбрать?</h2>
+                        <h3>Пройди тест и подбери напиток идеально под себя</h3>
+                        <span className="quiz-btn">Пройти сейчас</span>
+                    </div>
+                </Link>
+
                 {/* Фильтры */}
                 <div className="catalog__filters">
-                    {/* Поиск */}
                     <div className="catalog__search">
                         <input
                             type="text"
@@ -67,15 +77,10 @@ function Catalog() {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
-
                     </div>
 
-                    {/* Категории */}
                     <div className="custom-select">
-                        <button
-                            className="select-btn"
-                            onClick={() => setOpen(!open)}
-                        >
+                        <button className="select-btn" onClick={() => setOpen(!open)}>
                             {selectedCategory === 'все' ? 'ВСЕ КАТЕГОРИИ' : selectedCategory}
                             <span className="arrow">{open ? '▲' : '▼'}</span>
                         </button>
@@ -99,31 +104,47 @@ function Catalog() {
                     </div>
                 </div>
 
-
-
+                {/* Сетка товаров */}
                 <div className="catalog_products">
-                    {filteredProducts.map(product => (
-                        <div key={product.id} className="product-card">
-                            <Link
-                                to={`/product/${product.id}`}
-                                className="product-card-link"
-                                state={{ product }}
-                                style={{ textDecoration: 'none', color: 'inherit' }}
-                            >
-                                <img src={product.img} alt={product.name} />
-                                <h2>{product.name}</h2>
-                                <p>{product.taste}</p>
-                                <div className="product-info">
-                                    <span>{product.volume} мл</span>
-                                    <span>{product.cost} руб.</span>
-                                </div>
-                            </Link>
-                            <AddToCart product={product} />
-                        </div>
-                    ))}
+                    {filteredProducts.map(product => {
+                        const minPrice = getMinPrice(product);
+                        const defaultVolume = getDefaultVolume(product);
+                        
+                        return (
+                            <div key={product.id} className="product-card">
+                                <Link
+                                    to={`/product/${product.id}`}
+                                    state={{ 
+                                        product, 
+                                        selectedVolume: defaultVolume 
+                                    }}
+                                    className="product-card-link"
+                                    style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
+                                >
+                                    <img src={product.img} alt={product.name} />
+                                    <h2>{product.name}</h2>
+                                    <p>{product.taste}</p>
+                                    
+                                    {/* 🔹 Показываем "от" если есть несколько объёмов */}
+                                    <div className="product-info">
+                                        <span>{defaultVolume} мл</span>
+                                        <span>
+                                            {product.volumes.length > 1 ? `от ${minPrice}` : minPrice} ₽
+                                        </span>
+                                    </div>
+                                </Link>
+                                
+                                {/* 🔹 Передаём defaultVolume в AddToCart */}
+                                <AddToCart 
+                                    product={product} 
+                                    selectedVolume={defaultVolume}
+                                />
+                            </div>
+                        );
+                    })}
                 </div>
 
-                {/* Если нет товаров */}
+                {/* Пустое состояние */}
                 {filteredProducts.length === 0 && (
                     <div className="no-products">
                         <p>Товаров не найдено</p>
@@ -143,4 +164,4 @@ function Catalog() {
     )
 }
 
-export default Catalog
+export default Catalog;

@@ -1,17 +1,28 @@
 import { useCart } from '../../context/CartContext';
 import './add_to_cart.css';
 
-export default function AddToCart({ product }) {
+export default function AddToCart({ product, selectedVolume }) {
     const { cart, addToCart } = useCart();
     
-    // Проверяем, есть ли товар в корзине
-    const isInCart = cart.some(item => item.id === product.id);
+    // 🔹 Если объём не передан — берём первый из доступных
+    const volume = selectedVolume || product.volumes?.[0]?.size || product.volume;
     
-    return(
+    // 🔹 Формируем ключ так же, как в контексте: id_volume
+    const cartKey = `${product.id}_${volume}`;
+    
+    // 🔹 Проверяем наличие по cartKey (а не только по id)
+    const isInCart = cart.some(item => item.cartKey === cartKey);
+    
+    const handleClick = () => {
+        // 🔹 Передаём выбранный объём вторым аргументом
+        addToCart(product, volume);
+    };
+    
+    return (
         <button 
-            type="submit" 
+            type="button" 
             className={`btn-add ${isInCart ? 'in-cart' : ''}`}
-            onClick={() => addToCart(product)}
+            onClick={handleClick}
             disabled={isInCart}
         >
             {isInCart ? 'В КОРЗИНЕ' : 'ДОБАВИТЬ'}

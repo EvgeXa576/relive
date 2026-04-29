@@ -135,6 +135,48 @@
     color: #432E2A;
 }
 
+/* Переключатель объёмов */
+.volume-selector {
+    display: flex;
+    gap: 12px;
+    margin: 16px 0 24px;
+    flex-wrap: wrap;
+}
+
+.volume-btn {
+    padding: 10px 24px;
+    border: 2px solid #F93B77;
+    border-radius: 50px;
+    background: transparent;
+    color: #432E2A;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.volume-btn:hover {
+    background: #F93B77;
+    color: #fff;
+}
+
+.volume-btn.active {
+    background: #F93B77;
+    color: #fff;
+    border-color: #F93B77;
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 768px) {
+    .volume-selector {
+        gap: 8px;
+        justify-content: center;
+    }
+    .volume-btn {
+        padding: 8px 18px;
+        font-size: 14px;
+    }
+}
 /* Кнопка "Назад" */
 .btn-back {
     background: transparent;
