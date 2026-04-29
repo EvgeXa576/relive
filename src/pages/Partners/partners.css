@@ -1,37 +1,40 @@
-/* --- ГЛОБАЛЬНЫЕ ПРАВКИ ДЛЯ 1920px --- */
-
-/* Ограничиваем контентную часть, чтобы на 1920px всё не разъехалось */
+/* --- ГЛОБАЛЬНЫЕ ПРАВКИ --- */
 .partners__hero-wrap,
 .partners__slider,
+/* 🔒 НЕ ТРОГАЕМ */
 .form__partners-section {
     max-width: 1440px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 40px; /* Отступы по бокам для безопасности */
+    margin: 0 auto;
+    padding: 0 clamp(16px, 3vw, 40px);
+    /* Умеренно сжаты */
     box-sizing: border-box;
 }
 
-/* --- ВАШИ ОРИГИНАЛЬНЫЕ СТИЛИ С АДАПТИВОМ --- */
-
+/* --- ГЕРОЙСКАЯ СЕКЦИЯ --- */
 .partners__hero {
     position: relative;
-    padding-top: 50px;
+    padding-top: clamp(24px, 4vw, 50px);
 }
 
 .partners__hero::before {
     position: absolute;
     content: url(../../assets/img/dotted-grass.svg);
-    left: 15%; /* Чуть сместил внутрь для 1920 */
-    bottom: -15%;
+    left: 5%;
+    bottom: -12%;
     z-index: -1;
+    max-width: clamp(120px, 15vw, 250px);
+    /* Контроль размера декора */
+    opacity: 0.9;
 }
 
 .partners__hero::after {
     position: absolute;
     content: url(../../assets/img/grass.svg);
-    right: 15%;
-    bottom: -20%;
+    right: 5%;
+    bottom: -15%;
     z-index: -1;
+    max-width: clamp(100px, 12vw, 200px);
+    opacity: 0.9;
 }
 
 .partners__hero-wrap {
@@ -39,98 +42,116 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: clamp(1rem, 2vw, 2rem);
+    flex-wrap: wrap;
+    /* Перенос на узких экранах */
 }
 
 .partners__hero-title {
-    /* Используем clamp, чтобы шрифт не был огромным на 1920 */
-    font-size: clamp(60px, 6.5vw, 96px);
+    font-size: clamp(28px, 6vw, 56px);
+    /* Было: 60-96px */
     color: #FF8E7D;
     text-align: right;
     text-transform: uppercase;
-    line-height: 0.9;
+    line-height: 1;
+    margin: 0;
 }
 
 .partners__hero-small {
     color: #B1B1B1;
-    font-size: clamp(24px, 2.5vw, 36px);
+    font-size: clamp(14px, 2.5vw, 24px);
+    /* Было: 24-36px */
     font-weight: bold;
     text-align: right;
+    margin: 8px 0 0;
 }
 
 .partners__hero-line {
-    width: 3px;
-    height: 236px;
+    width: clamp(2px, 0.3vw, 3px);
+    height: clamp(100px, 12vw, 236px);
+    /* Было: 236px фикс */
     background-color: #000;
-    flex-shrink: 0; /* Чтобы линия не сжималась */
+    flex-shrink: 0;
+    margin: 0 clamp(8px, 1.5vw, 16px);
 }
 
 .partners__hero-subtitle {
     color: #BCD452;
-    font-size: clamp(48px, 5vw, 74px);
+    font-size: clamp(24px, 5vw, 48px);
+    /* Было: 48-74px */
     text-transform: uppercase;
     font-weight: bold;
     position: relative;
+    line-height: 1.1;
 }
 
 .partners__hero-subtitle::after {
     position: absolute;
     content: url(../../assets/img/heartShine.svg);
-    right: -10%;
-    bottom: 0%;
+    right: -8%;
+    bottom: 5%;
+    transform: scale(0.85);
+    /* Уменьшили сердце */
+    pointer-events: none;
 }
 
 .partners__hero-text {
-    font-size: clamp(20px, 2vw, 32px);
+    font-size: clamp(14px, 1.8vw, 22px);
+    /* Было: 20-32px */
     text-align: center;
-    margin-top: 2%;
+    margin-top: clamp(16px, 2vw, 2%);
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+    line-height: 1.4;
 }
 
-/* partnersSlider */
-
-.partners__slider {
-    margin-top: 10%;
-}
+/* SLIDER */
 
 .partners__slider-title {
     color: #FF8E7D;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: clamp(32px, 3.5vw, 48px);
+    font-size: clamp(24px, 3.5vw, 48px);
+    /* min понижен с 32px → 24px */
     text-align: center;
+    margin-top: 5%;
+    line-height: 1.2;
 }
 
 .partners__slider-text {
     text-align: center;
-    font-size: clamp(20px, 2vw, 32px);
-    margin-top: 2rem;
+    font-size: clamp(16px, 2vw, 28px);
+    /* min понижен с 20px → 16px */
+    margin-top: clamp(12px, 2vw, 32px);
+    line-height: 1.4;
+    padding: 0 clamp(10px, 2vw, 20px);
+    /* Безопасные отступы по бокам */
 }
 
-/* --- FORM PARTNERS --- */
-
+/* --- ФОРМА ПАРТНЁРОВ --- */
 .form__partners-section {
     text-align: center;
-    margin: 4% auto;
+    margin: clamp(24px, 4vw, 4%) auto;
 }
 
 .form__partners-main {
     display: flex;
     flex-direction: row;
-    align-items: center; /* Центрируем по вертикали */
+    align-items: center;
     justify-content: center;
-    gap: 40px; /* Фиксированный зазор на больших экранах лучше */
+    gap: clamp(16px, 3vw, 40px);
+    flex-wrap: wrap;
 }
 
 .form__partners-title {
     color: #FF8E7D;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: clamp(32px, 3.5vw, 48px);
+    font-size: clamp(24px, 3.5vw, 42px);
+    /* Было: 32-48px */
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: clamp(20px, 3vw, 40px);
 }
 
 .form__partners {
@@ -138,17 +159,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: clamp(12px, 2vw, 20px);
     width: 100%;
-    max-width: 500px; /* Ограничиваем ширину инпутов */
+    max-width: 500px;
 }
 
 .form__partners-input {
-    padding: 18px 30px;
+    padding: clamp(12px, 2vw, 18px) clamp(20px, 3vw, 30px);
     border-radius: 50px;
-    border: #87DF1C solid 4px;
-    font-size: 22px;
-    width: 100%; /* Занимает всю ширину контейнера .form__partners */
+    border: #87DF1C solid clamp(3px, 0.4vw, 4px);
+    font-size: clamp(15px, 1.8vw, 20px);
+    /* Было: 22px */
+    width: 100%;
     font-weight: 600;
     background: rgba(255, 255, 255, 0.5);
     box-sizing: border-box;
@@ -163,10 +185,11 @@
 }
 
 .form__partners-btn {
-    padding: 18px 40px;
+    padding: clamp(12px, 2vw, 18px) clamp(24px, 4vw, 40px);
     border-radius: 50px;
     background-color: #F93B77;
-    font-size: 24px;
+    font-size: clamp(15px, 2vw, 22px);
+    /* Было: 24px */
     width: 100%;
     max-width: 400px;
     border: none;
@@ -188,23 +211,278 @@
 }
 
 .form__partners-img {
-    width: 25vw;
-    max-width: 400px; /* Чтобы не была огромной на 1920 */
+    width: clamp(160px, 25vw, 400px);
+    /* Было: 25vw фикс */
+    max-width: 100%;
     height: auto;
 }
 
-/* Ошибки валидации */
 .input-error {
     border-color: #ff4d4d !important;
 }
 
 .error-message {
     color: #ff4d4d;
-    font-size: 16px;
+    font-size: clamp(12px, 1.5vw, 16px);
+    /* Было: 16px */
     display: block;
-    margin-top: -10px;
-    margin-bottom: 10px;
+    margin-top: -4px;
+    margin-bottom: 8px;
     text-align: left;
     width: 100%;
-    padding-left: 25px;
+    padding-left: clamp(15px, 2vw, 25px);
+}
+
+
+/* ========================================
+   💻 НОУТБУК: ≤1440px (ПЛАВНОЕ СЖАТИЕ)
+   ======================================== */
+@media (max-width: 1640px) {
+  
+    /* 🔹 Герой: компактная сетка */
+    .partners__hero-wrap {
+        gap: 1.5rem;
+    }
+    .partners__hero-title {
+        font-size: clamp(24px, 3.5vw, 48px);
+    }
+    .partners__hero-small {
+        font-size: clamp(13px, 1.8vw, 20px);
+        margin-top: 6px;
+    }
+    .partners__hero-line {
+        height: clamp(80px, 8vw, 150px);
+        margin: 0 12px;
+    }
+    .partners__hero-subtitle {
+        font-size: clamp(20px, 3vw, 40px);
+    }
+    .partners__hero-subtitle::after {
+        transform: scale(0.8);
+        right: -13%;
+        top: 30%;
+    }
+    .partners__hero-text {
+        font-size: clamp(14px, 1.6vw, 18px);
+        margin-top: 20px;
+        padding: 0 20px;
+    }
+    .partners__hero::before,
+    .partners__hero::after {
+        max-width: 180px;
+        opacity: 0.85;
+        bottom: -10%;
+    }
+
+    .partners__hero::after{
+        right: 20%;
+    }
+
+    .partners__hero::before{
+        left: 19%;
+    }
+
+
+    /* 🔹 Слайдер: убираем % отступы, делаем стабильными */
+    .partners__slider {
+        margin-top: clamp(40px, 6vw, 70px); /* было 10% */
+    }
+    .partners__slider-title {
+        font-size: clamp(22px, 2.5vw, 36px);
+    }
+    .partners__slider-text {
+        font-size: clamp(15px, 1.5vw, 22px);
+        margin-top: 16px;
+    }
+
+    /* 🔹 Форма: компактная, но удобная */
+    .form__partners-section {
+        margin-top: clamp(40px, 5vw, 60px); /* было 4% */
+    }
+    .form__partners-title {
+        font-size: clamp(22px, 2.5vw, 36px);
+        margin-top: 0;
+        margin-bottom: 24px;
+    }
+    .form__partners-img {
+        width: clamp(140px, 20vw, 320px);
+    }
+    .form__partners {
+        max-width: 450px;
+        gap: 16px;
+    }
+    .form__partners-input {
+        font-size: clamp(14px, 1.6vw, 18px);
+        padding: 14px 24px;
+    }
+    .form__partners-btn {
+        font-size: clamp(14px, 1.6vw, 18px);
+        padding: 14px 28px;
+        max-width: 360px;
+    }
+    .my-swiper {
+    padding-bottom: 10px !important;
+}
+
+.swiper-pagination-bullet{
+    width: 10px;
+}
+}
+/* ========================================
+   📱 АДАПТИВ: ПЛАНШЕТ И ТЕЛЕФОН
+   ======================================== */
+@media (max-width: 1024px) {
+    .partners__hero-wrap {
+        flex-direction: row;
+        gap: 16px;
+    }
+
+    .partners__hero-line {
+        height: 100px;
+    }
+
+    .partners__hero-title,
+    .partners__hero-small {
+        width: 100%;
+        margin: 0;
+    }
+
+    .form__partners-img{
+        display: none;
+    }
+
+
+
+    .form__partners-main {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .partners__slider-title {
+        font-size: clamp(20px, 4vw, 32px);
+        margin-top: 10%;
+    }
+
+    .form__partners-title{
+        margin-top: 8%;
+        margin-bottom: 1%;
+    }
+
+    .input-group{
+        width: 90%;
+    }
+
+    .partners__slider-text {
+        font-size: clamp(15px, 1.8vw, 22px);
+        margin-top: 16px;
+    }
+
+    .partners__hero-subtitle::after {
+        display: none;
+    }
+
+    .partners__hero::after {
+   display: none;
+}
+.partners__hero::before {
+   display: none;
+}
+.my-swiper {
+    padding-bottom: 10px !important;
+}
+
+.swiper-pagination-bullet{
+    width: 10px;
+}
+}
+
+@media (max-width: 768px) {
+    .my-swiper {
+    padding-bottom: 10px !important;
+}
+
+.swiper-pagination-bullet{
+    width: 5px;
+}
+    .form__partners-img {
+        display: none;
+    }
+
+    .partners__hero {
+    padding-top: 0;
+}
+
+    .partners__slider-title {
+        font-size: clamp(20px, 4vw, 32px);
+        margin-top: 10%;
+    }
+
+    .partners__slider-text {
+        font-size: clamp(14px, 2.5vw, 18px);
+        padding: 0 5px;
+        margin-top: 12px;
+    }
+
+    .partners__hero-title {
+        font-size: clamp(24px, 6vw, 40px);
+    }
+
+    .partners__hero-small {
+        font-size: clamp(12px, 2.5vw, 18px);
+    }
+
+    .partners__hero-subtitle {
+        font-size: clamp(20px, 5vw, 36px);
+    }
+
+    .partners__hero-text {
+        font-size: clamp(13px, 2.2vw, 16px);
+    }
+
+    .partners__hero::before,
+    .partners__hero::after {
+        max-width: 100px;
+        opacity: 0.7;
+    }
+
+    .form__partners-title {
+        font-size: clamp(20px, 4vw, 32px);
+    }
+
+    /* 🔹 ЕДИНАЯ ШИРИНА + ЗАЩИТА ОТ ВЫЛЕЗАНИЯ ЗА КРАЯ */
+    .form__partners-input,
+    .form__partners-btn {
+        width: 100%;
+        /* Одинаковая ширина */
+        max-width: 100%;
+        /* Не шире родителя */
+        padding: 12px 16px;
+        /* Чуть компактнее по бокам для мобилок */
+        font-size: 15px;
+        box-sizing: border-box;
+        /* Гарантирует, что padding не увеличит итоговую ширину */
+    }
+
+    .form__partners-btn {
+        width: 60%;
+    }
+
+    /* 🔹 Контейнер формы: не прилипает к краям экрана */
+    .form__partners {
+        padding: 0 8px;
+        /* Безопасный отступ внутри формы */
+        width: 100%;
+    }
+
+    .error-message {
+        font-size: 12px;
+        padding-left: 15px;
+    }
+
+    .partners__hero::after {
+    display: none;
+}
+.partners__hero::before {
+    display: none;
+}
 }

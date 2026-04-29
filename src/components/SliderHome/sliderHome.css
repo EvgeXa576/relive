@@ -81,7 +81,7 @@
 /* ========== СЛАЙДЕР ========== */
 .slider-container {
     overflow: hidden;
-    width: 100%;
+    width: 100vw;
     margin-top: 1rem;
 }
 
