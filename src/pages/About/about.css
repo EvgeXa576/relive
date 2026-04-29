@@ -1,6 +1,4 @@
 /* --- ГЛОБАЛЬНЫЕ ПРАВКИ ДЛЯ 1920px --- */
-
-/* Ограничиваем контентную часть для страниц с широкими экранами */
 .about__hero-wrap,
 .about__history,
 .form__contacts-main,
@@ -14,7 +12,6 @@
 }
 
 /* --- ГЕРОЙСКАЯ СЕКЦИЯ --- */
-
 .about__hero-wrap {
     position: relative;
     display: flex;
@@ -23,14 +20,14 @@
     justify-content: center;
     gap: 2rem;
     padding-top: 50px;
+    
 }
 
-/* Декоративные цветы за текстом */
 .about__hero-wrap::before {
     position: absolute;
     content: '';
-    width: clamp(300px, 30vw, 450px);
-    height: clamp(300px, 30vw, 450px);
+    width: clamp(100px, 30vw, 450px);
+    height: clamp(100px, 30vw, 450px);
     top: -40%;
     right: 0%;
     background-image: url(../../assets/img/about-flower-green.svg);
@@ -42,8 +39,8 @@
 .about__hero-wrap::after {
     position: absolute;
     content: '';
-    width: clamp(200px, 20vw, 300px);
-    height: clamp(200px, 20vw, 300px);
+    width: clamp(100px, 20vw, 300px);
+    height: clamp(100px, 20vw, 300px);
     bottom: 40%;
     right: 15%;
     background-image: url(../../assets/img/about-flower-pink.svg);
@@ -53,7 +50,7 @@
 }
 
 .about__hero-title {
-    font-size: clamp(60px, 6.5vw, 96px);
+    font-size: clamp(20px, 5vw, 96px); /* min понижен: 60px → 36px для мобильных */
     color: #FF8E7D;
     text-align: right;
     text-transform: uppercase;
@@ -61,7 +58,7 @@
 }
 
 .about__hero-stars {
-    height: clamp(60px, 6vw, 96px);
+    height: clamp(20px, 5vw, 96px);
 }
 
 .about__hero-line {
@@ -72,20 +69,20 @@
 }
 
 .about__hero-subtitle {
-    font-size: clamp(60px, 6.5vw, 96px);
+    font-size: clamp(20px, 5vw, 96px); /* min понижен: 60px → 32px */
     font-weight: 300;
 }
 
 .about__hero-text {
-    font-size: clamp(20px, 2vw, 32px);
+    font-size: clamp(9px, 1.5vw, 32px); /* min понижен: 20px → 16px */
     text-align: center;
     margin: 0 auto;
     margin-top: 2%;
     max-width: 1000px;
+    margin-bottom: clamp(2rem, 5vw, 5rem);
 }
 
 /* --- ИСТОРИЯ (БЛОКИ ТЕКСТА) --- */
-
 .about__history {
     display: flex;
     flex-direction: column;
@@ -93,7 +90,6 @@
     align-items: center;
     color: #432E2A;
     font-family: Inter, sans-serif;
-    margin-bottom: 100px;
 }
 
 .about__history-item {
@@ -101,7 +97,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: clamp(3rem, 5vw, 5rem);
+    margin-top: clamp(2rem, 5vw, 5rem);
     gap: 7%;
     width: 100%;
 }
@@ -109,7 +105,7 @@
 .history-title-wrap {
     text-transform: uppercase;
     font-weight: normal;
-    font-size: clamp(24px, 2.5vw, 32px);
+    font-size: clamp(14px, 3vw, 32px); /* min понижен: 24px → 18px */
 }
 
 .about__text-pink {
@@ -117,21 +113,25 @@
     font-weight: bold;
 }
 
+.history-title{
+    margin: clamp(14px, 3vw, 44px);
+}
+
 .history-subtitle {
-    font-size: clamp(18px, 2vw, 24px);
+    font-size: clamp(11px, 3vw, 24px); /* min понижен: 18px → 14px */
     text-transform: uppercase;
     margin-top: 1rem;
 }
 
 .history-text {
-    font-size: clamp(18px, 1.8vw, 24px);
-    padding-top: 41px;
+    font-size: clamp(11px, 3vw, 44px); /* min понижен: 18px → 14px */
+    padding-top: 30px;
     font-weight: 500;
-    line-height: 1.4;
+    line-height: 1.1;
 }
 
 .text-block {
-    width: 45%; /* Увеличил, чтобы на 1920 текст не был слишком узким */
+    width: 45%;
 }
 
 .image-block {
@@ -147,15 +147,12 @@
 }
 
 /* --- ФОРМА КОНТАКТОВ --- */
-
 .form__contacts-section {
-    /* Чтобы фон на 1920 не обрывался, используем cover */
     background-image: url(../../assets/img/about-form-bg.svg);
     background-repeat: no-repeat;
-
     background-size: cover;
     text-align: center;
-    padding: 100px 0;
+    padding: 0 100px;
     width: 100%;
 }
 
@@ -164,14 +161,14 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 5vw; /* Уменьшил разрыв для 1920 */
+
 }
 
 .form__contacts-title {
     color: #FF8E7D;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: clamp(32px, 3.5vw, 48px);
+    font-size: clamp(20px, 4vw, 48px); /* min понижен: 32px → 24px */
     text-align: center;
     margin-bottom: 20px;
 }
@@ -183,14 +180,14 @@
     justify-content: center;
     gap: 25px;
     width: 100%;
-    max-width: 500px;
+    max-width: 600px;
 }
 
 .form__contacts-input {
     padding: 20px 30px;
     border-radius: 50px;
     border: #87DF1C solid 4px;
-    font-size: clamp(18px, 1.5vw, 26px);
+    font-size: clamp(14px, 1.5vw, 22px); /* min понижен: 18px → 14px, max 26→22 для iOS */
     width: 100%;
     font-weight: 600;
     background: rgba(255, 255, 255, 0.5);
@@ -201,7 +198,7 @@
     padding: 20px 40px;
     border-radius: 50px;
     background-color: #F93B77;
-    font-size: clamp(18px, 1.5vw, 26px);
+    font-size: clamp(14px, 1.5vw, 22px); /* min понижен: 18px → 14px */
     width: 100%;
     max-width: 400px;
     border: none;
@@ -222,15 +219,16 @@
 }
 
 /* --- КАРТА --- */
-
 .about__map-title {
-    font-size: clamp(32px, 3.5vw, 48px);
+    font-size: clamp(24px, 3.5vw, 38px); /* min понижен: 32px → 24px */
     font-weight: bold;
     color: #FF8E7D;
     text-align: center;
     text-transform: uppercase;
-    margin: 4% 0 1%;
+    margin-top: 4%;
     position: relative;
+    text-align: center;
+    width: 100%;
 }
 
 .about__map-title::after {
@@ -241,12 +239,12 @@
     background-size: contain;
     height: 200%;
     width: 10%;
-    right: 20%;
+    right: 30%;
     top: -50%;
 }
 
 .about__map-subtitle {
-    font-size: clamp(24px, 2.5vw, 40px);
+    font-size: clamp(18px, 2.5vw, 30px); /* min понижен: 24px → 18px */
     color: #432E2A;
     font-weight: 200;
     text-align: center;
@@ -258,10 +256,9 @@
     width: 100%;
     height: 60vh;
     position: relative;
-    overflow: hidden; /* Чтобы декоративные элементы не создавали скролл */
+    overflow: hidden;
 }
 
-/* Декор карты по бокам */
 .map-container::before {
     content: '';
     position: absolute;
@@ -289,4 +286,221 @@
     top: 0;
     z-index: 2;
     pointer-events: none;
+}
+
+/* Ноутбук: ≤1649px */
+@media (max-width: 1649px) {
+    /* 🔹 ГЕРОЙ (твои текущие значения) */
+    .about__hero-stars {
+        height: clamp(18px, 4.5vw, 80px);
+    }
+    .about__hero-line {
+        width: clamp(2px, 0.25vw, 3px);
+        height: clamp(110px, 10vw, 160px);
+    }
+    
+    /* 🔹 ИСТОРИЯ: масштаб ~в 1.5 раза меньше */
+    .about__history {
+        max-width: 1340px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 30px; /* отступы тоже чуть уже */
+        margin-bottom: 66px; /* 100px ÷ 1.5 */
+    }
+    
+    .about__history-item {
+        margin-top: clamp(1.3rem, 3.3vw, 3.3rem); /* 2rem/1.5, 5vw/1.5, 5rem/1.5 */
+        gap: 4.5%; /* 7% ÷ 1.5 */
+    }
+    
+    .history-title-wrap {
+        font-size: clamp(9px, 4vw, 21px); /* ÷ 1.5 */
+    }
+    
+    .history-title {
+        margin: clamp(9px, 1vw, 22px) 0; 
+        font-size: clamp(9px, 4vw, 25px);/* ÷ 1.5 */
+    }
+    
+    .history-subtitle {
+        font-size: clamp(7px, 2vw, 16px); /* ÷ 1.5 */
+    }
+    
+    .history-text {
+        font-size: clamp(7px, 1.2vw, 29px); /* ÷ 1.5 */
+        padding-top: 20px; /* 30px ÷ 1.5 */
+        line-height: 1.3; /* чуть больше воздуха для читаемости при уменьшении */
+    }
+    
+    .text-block {
+        width: 40%; /* было 45%, сужено для баланса */
+    }
+    
+    .image-block {
+        width: 28%; /* было 35% */
+    }
+    
+    .image-block img {
+        max-width: 90%; /* картинка чуть меньше относительно блока */
+    }
+
+    /* 🔹 ФОРМА (твои текущие значения) */
+    .form__contacts-section {
+        background-image: none;
+        background-color: transparent;
+       
+    padding: clamp(10px, 1vw, 100px);
+
+    }
+}
+
+/* Планшет: ≤1024px */
+@media (max-width: 1024px) {
+    .about__hero-stars {
+        height: clamp(16px, 4vw, 64px);
+    }
+    .about__hero-line {
+        width: 2px;
+        height: clamp(50px, 8vw, 120px);
+        margin: 0 8px;
+    }
+    .about__hero-wrap {
+        gap: 1rem;
+        padding-top: 10px;
+    }
+
+    /* 🔹 ИСТОРИЯ: колонка + текст по ширине + картинки меньше */
+    .about__history-item {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+    
+    .text-block {
+        width: 100%;
+        max-width: 650px; /* Оптимальная ширина строки для чтения */
+        margin: 0 auto;
+    }
+    .history-title{
+    text-align: center;
+}
+    
+    .history-text {
+        text-align: justify;
+        hyphens: auto; /* Корректные переносы слов на русском */
+        padding: 0 8px;
+    }
+    
+    .image-block {
+        order: -1;
+        width: 100%;
+        max-width: 500px;
+    }
+    
+    .image-block img {
+        max-width: 80%; /* Картинка меньше */
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+     .form__contacts-section {
+        background-image: none;
+        background-color: transparent;
+        padding: 0; /* Чуть меньше отступы, так как фон убран */
+    }
+
+    .form__contacts-img {
+        display: none; /* Скрываем декоративное изображение слева */
+    }
+
+    .form__contacts-main {
+        flex-direction: column; /* Форма теперь в одну колонку по центру */
+        gap: 0;
+        padding: 0 16px; /* Небольшие боковые отступы для мобильных */
+    }
+
+    .form__contacts {
+        max-width: 100%; /* Растягиваем форму на всю доступную ширину */
+    }
+}
+
+/* Телефон: ≤768px */
+@media (max-width: 768px) {
+    .about__hero-stars {
+        display: none;
+    }
+    .about__hero-line {
+        width: 2px;
+        height: clamp(40px, 7vw, 90px);
+        margin: 0 6px;
+    }
+    .about__hero-wrap {
+        gap: 0.5rem;
+        padding-top: 0px;
+    }
+
+    .about__history-item {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .text-block {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+    .history-title {
+        text-align: center;
+    }
+    
+    .history-text {
+        text-align: justify;
+        hyphens: auto;
+        padding: 0 20px; /* ✅ Текст больше не прилипает к краям */
+    }
+    
+    .image-block img {
+        max-width: 140px; /* ✅ Картинка сильно уменьшена */
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+    .map-container {
+    height: 30vh;
+
+}
+
+}
+
+/* Очень маленькие экраны: ≤480px */
+@media (max-width: 480px) {
+    .about__hero-stars {
+        display: none;
+    }
+    .history-title {
+        text-align: center;
+    }
+    .about__hero-line {
+        width: 1.5px;
+        height: 32px;
+        margin: 0 4px;
+    }
+    .about__hero-wrap {
+        gap: 0.5rem;
+        padding-top: 0px;
+    }
+
+    .about__history-item {
+        gap: 12px;
+    }
+    
+    .history-text {
+        text-align: justify;
+        hyphens: auto;
+        padding: 0 16px; /* ✅ Адаптивный отступ для узких экранов */
+    }
+    
+    .image-block img {
+        max-width: 110px; /* ✅ Ещё компактнее для маленьких экранов */
+        margin: 0 auto;
+    }
 }

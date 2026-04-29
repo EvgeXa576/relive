@@ -1,5 +1,4 @@
 /* --- ГЛОБАЛЬНЫЕ ПРАВКИ ДЛЯ 1920px --- */
-
 .catalog__hero,
 .catalog_products,
 .catalog__filters,
@@ -12,23 +11,21 @@
 }
 
 /* --- ГЕРОЙСКАЯ СЕКЦИЯ КАТАЛОГА --- */
-
 .catalog__hero {
-    /* Чтобы фон не искажался на 1920px, используем cover */
     background-image: url('../../assets/img/catalog-hero-bg.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    aspect-ratio: 16 / 7; /* Слегка скорректировал для широких экранов */
-    padding: 8% 0 0 8%;
+    aspect-ratio: 13 / 7;
+    padding: 8% 0 0 10%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    border-radius: 0 0 100px 100px; /* Софт-скругление снизу */
+    border-radius: 0 0 100px 100px;
 }
 
 .catalog__hero-title {
-    font-size: clamp(48px, 5vw, 76px);
+    font-size: clamp(20px, 4vw, 76px); /* адаптировано: min 24px */
     color: #FA6C06;
     width: 60%;
     margin-bottom: 1rem;
@@ -36,13 +33,13 @@
 }
 
 .catalog__hero-subtitle {
-    font-size: clamp(28px, 3vw, 46px);
+    font-size: clamp(16px, 2vw, 46px); /* адаптировано: min 18px */
     color: #643E29;
     margin-bottom: 1rem;
 }
 
 .catalog__hero-cost {
-    font-size: clamp(24px, 2.5vw, 36px);
+    font-size: clamp(16px, 2.5vw, 36px); /* адаптировано: min 16px */
     color: #B1B1B1;
     font-weight: bold;
     margin-bottom: 1.5rem;
@@ -53,7 +50,7 @@
     padding: 15px 40px;
     color: white;
     font-weight: bold;
-    font-size: clamp(18px, 1.5vw, 22px);
+    font-size: clamp(14px, 1.5vw, 22px); /* адаптировано: min 14px */
     border-radius: 50px;
     border: none;
     cursor: pointer;
@@ -66,7 +63,6 @@
 }
 
 /* --- ФИЛЬТРЫ И ПОИСК --- */
-
 .custom-select {
     position: relative;
     min-width: 250px;
@@ -81,8 +77,8 @@
     display: flex;
     justify-content: space-between;
     cursor: pointer;
-    font-weight: bold;
     color: #432E2A;
+    font-size: clamp(14px, 1.5vw, 18px); /* добавлено адаптивное */
 }
 
 .select-btn:hover {
@@ -105,6 +101,7 @@
 .select-option {
     padding: 10px 20px;
     cursor: pointer;
+    font-size: clamp(14px, 1.5vw, 16px); /* добавлено адаптивное */
 }
 
 .select-option:hover {
@@ -116,7 +113,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 30px;
+    gap: 3vw;
     margin: 40px auto;
     padding: 0 40px;
     flex-wrap: wrap;
@@ -132,8 +129,8 @@
     width: 100%;
     padding: 15px 25px;
     border: 2px solid #F93B77;
-    border-radius: 50px; /* Фиксированный радиус вместо vw */
-    font-size: 18px;
+    border-radius: 50px;
+    font-size: clamp(14px, 1.5vw, 18px); /* было 18px */
     outline: none;
     background: white;
     box-sizing: border-box;
@@ -146,26 +143,24 @@
     border: 2px solid #F93B77;
     border-radius: 50px;
     padding: 15px 25px;
-    font-size: 18px;
+    font-size: clamp(14px, 1.5vw, 18px); /* было 18px */
     color: #432E2A;
     cursor: pointer;
     font-weight: bold;
 }
 
 /* --- СЕТКА ТОВАРОВ --- */
-
 .catalog_products-title {
-    font-size: clamp(32px, 4vw, 48px);
+    font-size: clamp(20px, 4vw, 48px); /* адаптировано: min 20px */
     font-weight: bold;
     color: #FF8E7D;
     text-align: center;
     text-transform: uppercase;
-    margin-bottom: 40px;
+    margin: 6% 0 3% 0;
 }
 
 .catalog_products {
     display: grid;
-    /* На 1920px 4 колонки выглядят отлично, если ограничить общую ширину */
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     padding: 0 40px 80px;
@@ -191,23 +186,23 @@
 
 .product-card img {
     width: 100%;
-    max-width: 200px; /* Ограничиваем бутылочки */
+    max-width: 200px;
     height: auto;
     margin-bottom: 20px;
     object-fit: contain;
 }
 
 .product-card h2 {
-    font-size: clamp(20px, 2vw, 24px);
+    font-size: clamp(16px, 2vw, 24px); /* адаптировано: min 16px */
     margin-bottom: 10px;
     color: #F93B77;
-    min-height: 2.5em; /* Выравнивание заголовков */
+    min-height: 2.5em;
     display: flex;
     align-items: center;
 }
 
 .product-card p {
-    font-size: 18px;
+    font-size: clamp(14px, 1.8vw, 18px); /* было 18px */
     color: #432E2A;
     margin-bottom: 20px;
     line-height: 1.3;
@@ -224,13 +219,12 @@
 }
 
 .product-info span:last-child {
-    font-size: 22px;
+    font-size: clamp(16px, 2vw, 22px); /* было 22px */
     font-weight: bold;
     color: #432E2A;
 }
 
 /* --- ОШИБКИ И ПУСТЫЕ СОСТОЯНИЯ --- */
-
 .no-products {
     grid-column: span 4;
     text-align: center;
@@ -238,4 +232,164 @@
     background: #fff;
     border-radius: 40px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.reset-filters {
+    background: transparent;
+    color: #F93B77;
+    border: 2px solid #F93B77;
+    border-radius: 50px;
+    padding: 10px 24px;
+    font-size: clamp(14px, 1.5vw, 16px);
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+/* Ноутбук: ≤1439px */
+@media (max-width: 1642px) {
+    .product-card {
+        padding: 32px 24px;
+    }
+    .product-card img {
+        max-width: 150px;
+        margin-bottom: 10px;
+    }
+     .product-card {
+        padding: 24px 18px;
+    }
+    .product-card img {
+        max-width: 100px;
+        margin-bottom: 14px;
+    }
+    .product-info {
+   
+    padding-top: 20px;
+}
+.product-card p {
+   
+    margin-bottom: 0px;
+    line-height: 0;
+}
+
+}
+
+/* Планшет: ≤1024px */
+@media (max-width: 1024px) {
+    .catalog_products {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        padding: 0 30px 60px;
+    }
+    .no-products {
+        grid-column: span 3;
+    }
+    .product-card {
+        padding: 24px 18px;
+        border-radius: 25px;
+    }
+    .product-card img {
+        max-width: 140px;
+        margin-bottom: 14px;
+    }
+    .product-info {
+   
+    padding-top: 0px;
+}
+.product-card p {
+   
+    margin-bottom: 10px;
+    line-height: 0;
+}
+.catalog__hero {
+    border-radius: 0 0 30px 30px;
+}
+.catalog__hero-subtitle {
+
+    margin-bottom: 5px;
+}
+.catalog__hero-cost {
+    font-size: clamp(16px, 2.5vw, 36px);
+    margin-bottom: 5px;
+}
+
+.catalog__hero-btn {
+    background-color: #FA6C06;
+    padding: 5px 15px;
+    font-size: clamp(10px, 1.5vw, 18px); /* адаптировано: min 14px */
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+    transition: transform 0.2s;
+}
+}
+
+/* Телефон: ≤768px */
+@media (max-width: 768px) {
+    .catalog_products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        padding: 0 16px 40px;
+    }
+    .no-products {
+        grid-column: span 2;
+    }
+    .catalog__filters {
+        justify-content: center;
+    }
+    /* Уменьшаем карточку */
+    .product-card {
+        padding: 20px 12px;
+        border-radius: 20px;
+    }
+    .product-card img {
+        max-width: 90px;
+        margin-bottom: 2px;
+    }
+    .product-info {
+   
+    padding-top: 0px;
+}
+.product-card p {
+   
+    margin-bottom: 10px;
+    line-height: 1;
+}
+.catalog__hero {
+    border-radius: 0 0 30px 30px;
+}
+.catalog__hero-subtitle {
+
+    margin-bottom: 5px;
+}
+.catalog__hero-cost {
+    font-size: clamp(16px, 2.5vw, 36px);
+    margin-bottom: 5px;
+}
+
+.catalog__hero-btn {
+    background-color: #FA6C06;
+    padding: 5px 15px;
+    font-size: clamp(10px, 1.5vw, 18px); /* адаптировано: min 14px */
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+    transition: transform 0.2s;
+}
+.catalog__filters {
+   
+    margin: 15px auto;
+
+}
+.search-input {
+    padding: 10px 20px;
+    
+}
+.select-btn {
+    
+    padding: 10px 20px;
+    
+}
+
 }

@@ -63,6 +63,11 @@ const HomePage = () => {
                     <div className="carousel-item">НАСТОЯЩИЙ ЖИВОЙ ПРОДУКТ</div>
                     <div className="carousel-item"><img src={greenHeart} alt="heart"/></div>
                     <div className="carousel-item">ИСКЛЮЧИТЕЛЬНО ВЫСОКОЕ КАЧЕСТВО</div>
+                    <div className="carousel-item">ЧИСТЫЙ НАТУРАЛЬНЫЙ СОСТАВ</div>
+                    <div className="carousel-item"><img src={pinkHeart} alt="heart"/></div>
+                    <div className="carousel-item">НАСТОЯЩИЙ ЖИВОЙ ПРОДУКТ</div>
+                    <div className="carousel-item"><img src={greenHeart} alt="heart"/></div>
+                    <div className="carousel-item">ИСКЛЮЧИТЕЛЬНО ВЫСОКОЕ КАЧЕСТВО</div>
 
                 </SliderHome>
             </section>
@@ -131,7 +136,7 @@ const HomePage = () => {
             <section className="slider">
                 <div className="slider-wrap">
                     <div className="title-slider">
-                        <img src={flowersLeaves} alt="leaves" />
+                        <img src={flowersLeaves} alt="leaves" className='title-slide__img'/>
                         <div className="titles">
                             <h2 className="slider-title">Лучший пример - это мы сами</h2>
                             <div className="heart-wrap">
@@ -139,7 +144,7 @@ const HomePage = () => {
                                 <img src={greenHeart} alt="heart" />
                             </div>
                         </div>
-                        <img src={bee} alt="bee" />
+                        <img src={bee} alt="bee" className='title-slide__img'/>
                     </div>
                     <SliderHome>
                     {images.map((img, idx) => (

@@ -9,3 +9,12 @@ body {
     font-family: Inter, sans-serif;
 
 }
+
+/* Разрешаем выделение только на нужных элементах (например, в инпутах) */
+input, textarea, [contenteditable="true"] {
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}

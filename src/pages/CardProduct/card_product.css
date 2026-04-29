@@ -6,38 +6,43 @@
     margin-right: auto;
     padding: 0 40px;
     box-sizing: border-box;
+    
 }
 
 /* --- ВЕРХНЯЯ ЧАСТЬ (ФОТО + ГЛАВНАЯ ИНФО) --- */
 .product__page-top {
     display: flex;
-    margin: 0 auto;
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 80px; /* Фиксированный отступ между фото и текстом */
+    /* Центрируем содержимое по горизонтали */
+    justify-content: center; 
+    /* Выравниваем элементы по верхнему краю или по центру (align-items: center) */
+    align-items: flex-start; 
+    gap: 80px; 
+    margin: 0 auto;
+    width: 100%;
 }
 
 .product__page-img {
-    width: 100%;
-    max-width: 400px; /* Ограничиваем рост изображения бутылки */
-    flex-shrink: 0;
+    /* Убираем лишнее дублирование width */
+    flex: 0 1 450px; /* Позволяем картинке сжиматься, но задаем базовый размер */
+    max-width: 450px; /* Ограничиваем максимальную ширину фото */
 }
 
 .product__page-img img {
     width: 100%;
     height: auto;
+    display: block;
     object-fit: contain;
 }
 
 .product__page-info {
     display: flex;
-    width: fit-content;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     gap: 20px;
-    flex-grow: 1;
+    /* Вместо 30% используем гибкий flex, чтобы текст не слишком сжимался */
+    flex: 0 1 500px; 
 }
 
 .product__page-info-title {

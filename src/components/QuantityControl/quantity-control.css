@@ -2,47 +2,66 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: 3px solid #A3A0A0;
-    width: max-content;
-    padding: 2%;
+    gap: clamp(8px, 2vw, 10px);
+    margin-top: clamp(12px, 2vw, 20px);
+    margin-bottom: clamp(12px, 2vw, 20px);
+    border: clamp(2px, 0.4vw, 3px) solid #A3A0A0;
+    width: fit-content; /* стабильнее, чем max-content */
+    padding: clamp(4px, 1vw, 9px);
     border-radius: 50px;
+    box-sizing: border-box;
 }
 
 .quantity-btn {
-    width: 40px;
-    height: 40px;
+    width: clamp(36px, 5vw, 44px);
+    height: clamp(26px, 3vw, 34px);
     border-radius: 50%;
     border: none;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.quantity-btn.minus,
-.quantity-btn.plus {
     background: transparent;
     color: #432E2A;
-    font-size: 56px;
-    line-height: 0;
-    font-weight: 200;
+    font-size: clamp(24px, 4vw, 36px); /* масштабируется пропорционально кнопке */
+    line-height: 1;
+    font-weight: 300;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    flex-shrink: 0;
 }
 
-.quantity-btn.minus:hover,
-.quantity-btn.plus:hover {
-    background: transparent;
+.quantity-btn:hover {
     color: #F93B77;
 }
 
-
+.quantity-btn:active {
+    transform: scale(0.92);
+}
 
 .quantity-value {
-    font-size: 34px;
+    font-size: clamp(20px, 3.5vw, 34px);
     font-weight: bold;
     color: #F93B77;
-    min-width: 40px;
+    min-width: clamp(32px, 5vw, 40px);
     text-align: center;
+    line-height: 1;
+    user-select: none; /* Чтобы нельзя было выделить цифру при быстрых кликах */
+}
+
+/* 📱 Мобильная оптимизация (≤480px) */
+@media (max-width: 480px) {
+    .quantity-control {
+        padding: 3px;
+        gap: 6px;
+    }
+    .quantity-btn {
+        width: 36px;
+        height: 26px;
+        font-size: 22px;
+    }
+    .quantity-value {
+        font-size: 18px;
+        min-width: 28px;
+    }
 }

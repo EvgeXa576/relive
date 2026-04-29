@@ -100,6 +100,7 @@ function Catalog() {
                         <div key={product.id} className="product-card">
                             <Link
                                 to={`/product/${product.id}`}
+                                className="product-card-link"
                                 state={{ product }}
                                 style={{ textDecoration: 'none', color: 'inherit' }}
                             >

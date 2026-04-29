@@ -134,7 +134,7 @@ export default function Cart() {
             <h1>Корзина</h1>
             <div className="cart-actions">
                 <button className="clear-cart" onClick={clearCart}>Очистить корзину</button>
-                <Link to="/" className="continue-shopping">Продолжить покупки</Link>
+                <Link to="/catalog" className="continue-shopping">Продолжить покупки</Link>
             </div>
 
             {cart.map(item => {
