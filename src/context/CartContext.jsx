@@ -6,51 +6,33 @@ const CartContext = createContext();
 export function CartProvider({ children }) {
     const [cart, setCart] = useLocalStorage('cart', []);
 
-    // 🔹 Уникальный ключ для товара: id + volume
-    const getCartKey = (product, volume) => `${product.id}_${volume}`;
-
-    const addToCart = useCallback((product, volume = null) => {
+    const addToCart = useCallback((product) => {
         setCart(prevCart => {
-            // Если объём не передан — берём первый из volumes
-            const selectedVolume = volume || product.volumes?.[0]?.size || product.volume;
-            const volumeInfo = product.volumes?.find(v => v.size === selectedVolume) || { size: selectedVolume, cost: product.cost };
-            
-            const cartKey = getCartKey(product, selectedVolume);
-            const existingItem = prevCart.find(item => item.cartKey === cartKey);
+            const existingItem = prevCart.find(item => item.id === product.id);
             
             if (existingItem) {
                 return prevCart.map(item =>
-                    item.cartKey === cartKey
+                    item.id === product.id
                         ? { ...item, count: item.count + 1 }
                         : item
                 );
             }
-            
-            // 🔹 Добавляем новый товар с volume и cost
-            return [...prevCart, {
-                cartKey,
-                id: product.id,
-                name: product.name,
-                img: product.img,
-                volume: selectedVolume,
-                cost: volumeInfo.cost,
-                count: 1
-            }];
+            return [...prevCart, { id: product.id, count: 1 }];
         });
     }, [setCart]);
 
-    const removeFromCart = useCallback((cartKey) => {
-        setCart(prevCart => prevCart.filter(item => item.cartKey !== cartKey));
+    const removeFromCart = useCallback((productId) => {
+        setCart(prevCart => prevCart.filter(item => item.id !== productId));
     }, [setCart]);
 
-    const updateCount = useCallback((cartKey, newCount) => {
+    const updateCount = useCallback((productId, newCount) => {
         if (newCount <= 0) {
-            removeFromCart(cartKey);
+            removeFromCart(productId);
             return;
         }
         setCart(prevCart =>
             prevCart.map(item =>
-                item.cartKey === cartKey
+                item.id === productId
                     ? { ...item, count: newCount }
                     : item
             )
@@ -61,25 +43,13 @@ export function CartProvider({ children }) {
         setCart([]);
     }, [setCart]);
 
-    // 🔹 Вспомогательная функция: получить сумму корзины
-    const getTotal = useCallback(() => {
-        return cart.reduce((sum, item) => sum + item.cost * item.count, 0);
-    }, [cart]);
-
-    // 🔹 Вспомогательная функция: общее количество товаров
-    const getTotalCount = useCallback(() => {
-        return cart.reduce((sum, item) => sum + item.count, 0);
-    }, [cart]);
-
     return (
         <CartContext.Provider value={{ 
             cart, 
             addToCart, 
             removeFromCart, 
             updateCount, 
-            clearCart,
-            getTotal,
-            getTotalCount
+            clearCart 
         }}>
             {children}
         </CartContext.Provider>

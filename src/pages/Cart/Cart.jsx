@@ -1,21 +1,20 @@
-import { useState } from 'react';
 import { useCart } from '../../context/CartContext';
 import products from '../../assets/products';
 import { Link } from 'react-router-dom';
 import './cart.css';
 import QuantityControl from '../../components/QuantityControl/QuantityControl';
+import { useState } from 'react';
 
 export default function Cart() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { cart, clearCart, removeFromCart, getTotal } = useCart();
+    const { cart, clearCart, removeFromCart } = useCart();
 
     // Состояния для формы
     const [formData, setFormData] = useState({ name: '', tel: '+7 ' });
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState({}); // Состояние для хранения ошибок полей
     const [status, setStatus] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    // 🔹 Если корзина пуста
     if (cart.length === 0) {
         return (
             <div className="cart">
@@ -28,8 +27,10 @@ export default function Cart() {
         );
     }
 
-    // 🔹 Итого берём из контекста (там уже правильный подсчёт)
-    const total = getTotal();
+    const total = cart.reduce((sum, item) => {
+        const product = products.find(p => p.id === item.id);
+        return sum + (product?.cost || 0) * item.count;
+    }, 0);
 
     // Маска телефона
     const formatPhone = (value) => {
@@ -49,11 +50,13 @@ export default function Cart() {
         if (name === 'tel') {
             newValue = formatPhone(value);
         } else if (name === 'name') {
+            // Разрешаем вводить только буквы и пробелы
             newValue = value.replace(/[^a-zA-Zа-яА-ЯёЁ\s]/g, '');
         }
 
         setFormData(prev => ({ ...prev, [name]: newValue }));
 
+        // Очищаем ошибку поля при вводе
         if (errors[name]) {
             setErrors(prev => ({ ...prev, [name]: null }));
         }
@@ -61,29 +64,35 @@ export default function Cart() {
 
     const validate = () => {
         const newErrors = {};
+
+        // Проверка ФИО
         if (!formData.name.trim()) {
             newErrors.name = 'Поле ФИО не может быть пустым';
         } else if (formData.name.trim().length < 2) {
             newErrors.name = 'Введите корректное имя';
         }
+
+        // Проверка Телефона
         const phoneDigits = formData.tel.replace(/\D/g, '');
         if (phoneDigits.length < 11) {
             newErrors.tel = 'Введите полный номер телефона';
         }
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (!validate()) return;
 
         setIsSubmitting(true);
         setStatus('Отправка заказа...');
 
-        // 🔹 Формируем список товаров с учётом объёма и цены из корзины
         const orderList = cart.map(item => {
-            return `${item.name} (${item.volume} мл, ${item.count} шт.) — ${item.cost * item.count} руб.`;
+            const p = products.find(prod => prod.id === item.id);
+            return `${p.name} (${item.count} шт.) — ${p.cost * item.count} руб.`;
         }).join('\n');
 
         try {
@@ -93,6 +102,7 @@ export default function Cart() {
             data.append('order', orderList);
             data.append('total', total);
 
+            console.log("Отправляемые данные (объект):", Object.fromEntries(data.entries()));
             const response = await fetch('http://localhost:8000/send_order.php', {
                 method: 'POST',
                 body: data,
@@ -120,48 +130,41 @@ export default function Cart() {
 
     return (
         <div className="cart">
+            {/* ... (код списка товаров без изменений) ... */}
             <h1>Корзина</h1>
-            
             <div className="cart-actions">
                 <button className="clear-cart" onClick={clearCart}>Очистить корзину</button>
                 <Link to="/catalog" className="continue-shopping">Продолжить покупки</Link>
             </div>
 
-            {/* 🔹 Рендер элементов корзины по cartKey */}
-            {cart.map(item => (
-                <div key={item.cartKey} className="cart-item">
-                    <img src={item.img} alt={item.name} />
-                    <div className="cart-item-info">
-                        <h3>{item.name}</h3>
-                        <p>{item.volume} мл</p> {/* 🔹 Показываем объём */}
-                        <p className="price">{item.cost * item.count} ₽</p>
+            {cart.map(item => {
+                const product = products.find(p => p.id === item.id);
+                if (!product) return null;
+                return (
+                    <div key={item.id} className="cart-item">
+                        <img src={product.img} alt={product.name} />
+                        <div className="cart-item-info">
+                            <h3>{product.name}</h3>
+                            <p>{product.taste}</p>
+                            <p className="price">{product.cost} руб.</p>
+                        </div>
+                        <div className="cart-item-controls">
+                            <QuantityControl product={product} />
+                            <button className="remove-btn" onClick={() => removeFromCart(item.id)}>Удалить</button>
+                        </div>
                     </div>
-                    <div className="cart-item-controls">
-                        {/* 🔹 Передаём cartKey и volume в контрол */}
-                        <QuantityControl cartKey={item.cartKey} volume={item.volume} />
-                        <button 
-                            className="remove-btn" 
-                            onClick={() => removeFromCart(item.cartKey)} /* 🔹 Удаляем по cartKey */
-                        >
-                            Удалить
-                        </button>
-                    </div>
-                </div>
-            ))}
+                );
+            })}
 
             <div className="cart-total">
-                <h3>Итого: {total} ₽</h3>
+                <h3>Итого: {total} руб.</h3>
             </div>
-            
-            <button className='cart__order-btn' onClick={() => setIsModalOpen(true)}>
-                Оформить заказ
-            </button>
+            <button className='cart__order-btn' onClick={() => setIsModalOpen(true)}>Оформить заказ</button>
 
-            {/* Модалка оформления */}
             {isModalOpen && (
                 <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <button className="modal-close" onClick={() => setIsModalOpen(false)}>×</button>
+                        <button className="modal-close" onClick={() => setIsModalOpen(false)}>x</button>
                         <form className="form__order" onSubmit={handleSubmit} noValidate>
                             <h2 className="form__order-title">Оформление заказа</h2>
 

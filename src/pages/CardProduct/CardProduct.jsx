@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import products from '../../assets/products';
 import './card_product.css'
@@ -10,27 +10,19 @@ function CardProduct() {
     const location = useLocation();
     const { id } = useParams();
     const productFromState = location.state?.product;
+
     const navigate = useNavigate();
 
-    // 🔹 Ищем товар
+    const goBack = () => {
+        navigate(-1);
+    };
+
+    // ищем товар в общем массиве данных по ID
+    // #TODO: это можешь удалить чисто чтоб посомтерла добавил, я тут сделал проверку по id из адрессной строки что бы если мы напрямую стучались по ссылке то что то показывалось, до этого был просто белый экран
     const product = productFromState || products.find(p => p.id === parseInt(id));
 
-    // 🔹 Стейт для выбранного объёма (по умолчанию 350 или первый в списке)
-    const [selectedVolume, setSelectedVolume] = useState(() => {
-        if (!product) return null;
-        return product.volumes?.find(v => v.size === '350')?.size || product.volumes?.[0]?.size;
-    });
-
-    // 🔹 Текущая цена и объём (мемоизируем, чтобы не пересчитывать при каждом рендере)
-    const currentVolumeInfo = useMemo(() => {
-        if (!product?.volumes) return { size: '', cost: 0 };
-        return product.volumes.find(v => v.size === selectedVolume) || product.volumes[0];
-    }, [product, selectedVolume]);
-
-    const goBack = () => navigate(-1);
-
     if (!product) {
-        return <div className="product__not-found">Товар не найден</div>;
+        return;
     }
 
     return (
@@ -41,83 +33,94 @@ function CardProduct() {
                 </svg>
                 Назад
             </button>
-
             <div className="product__page-top">
                 <div className="product__page-img">
-                    <img src={product.img} alt={product.name} />
+                    <img src={product?.img} alt={product?.name} />
                 </div>
-
                 <div className="product__page-info">
-                    <h1 className='product__page-info-title'>{product.name}</h1>
-                    
-                    {/* 🔹 Цена меняется при переключении объёма */}
-                    <p className='product__page-info-cost'>{currentVolumeInfo.cost} руб.</p>
-                    
-                    {/* 🔹 Переключатель объёмов */}
-                    {product.volumes?.length > 1 && (
-                        <div className="volume-selector">
-                            {product.volumes.map(vol => (
-                                <button
-                                    key={vol.size}
-                                    className={`volume-btn ${selectedVolume === vol.size ? 'active' : ''}`}
-                                    onClick={() => setSelectedVolume(vol.size)}
-                                >
-                                    {vol.size} мл
-                                </button>
-                            ))}
-                        </div>
-                    )}
-                    
-                    {/* Если объём один — показываем просто бейдж */}
-                    {product.volumes?.length === 1 && (
-                        <p className='product__page-info-volume'>{product.volumes[0].size} мл</p>
-                    )}
-
+                    <h1 className='product__page-info-title'>{product?.name}</h1>
+                    <p className='product__page-info-cost'>{product?.cost} руб.</p>
+                    <p className='product__page-info-volume'>{product?.volume} мл</p>
                     <div className="product__page-info-components">
                         <h2>Основные компоненты</h2>
                         <ul>
-                            {product.components?.map((component, index) => (
+                            {product?.components?.map((component, index) => (
                                 <li key={index}>{component}</li>
                             ))}
                         </ul>
                     </div>
-
                     <div className="card-product-btn">
-                        {/* 🔹 Передаём выбранный объём в компоненты */}
-                        <AddToCart product={product} selectedVolume={selectedVolume} />
-                        <QuantityControl product={product} selectedVolume={selectedVolume} />
+                        <AddToCart product={product}/>
+                    <QuantityControl product={product} />
+                    
                     </div>
                 </div>
             </div>
-
-            {/* Вкладки — без изменений */}
             <div className="product__tabs">
                 <div className="tabs__headers">
-                    <button className={`tab__btn ${activeTab === 'composition' ? 'active' : ''}`} onClick={() => setActiveTab('composition')}>СОСТАВ</button>
-                    <button className={`tab__btn ${activeTab === 'nutrition' ? 'active' : ''}`} onClick={() => setActiveTab('nutrition')}>ПИЩЕВАЯ ЦЕННОСТЬ</button>
-                    <button className={`tab__btn ${activeTab === 'other' ? 'active' : ''}`} onClick={() => setActiveTab('other')}>ПРОЧЕЕ</button>
+                    <button 
+                        className={`tab__btn ${activeTab === 'composition' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('composition')}
+                    >
+                        СОСТАВ
+                    </button>
+                    <button 
+                        className={`tab__btn ${activeTab === 'nutrition' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('nutrition')}
+                    >
+                        ПИЩЕВАЯ ЦЕННОСТЬ
+                    </button>
+                    <button 
+                        className={`tab__btn ${activeTab === 'other' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('other')}
+                    >
+                        ПРОЧЕЕ
+                    </button>
                 </div>
                 
                 <div className="tabs__content">
                     {activeTab === 'composition' && (
                         <ul className="composition__list">
-                            {product.structure?.map((item, index) => <li key={index}>{item}</li>)}
+                            {product?.structure?.map((item, index) => (
+                                <li key={index}>{item}</li>
+                            ))}
                         </ul>
                     )}
+                    
                     {activeTab === 'nutrition' && (
-                        <div className="nutrition__content">
+                         <div className="nutrition__content">
                             <h3>Пищевая ценность на 100 мл:</h3>
-                            <div className="nutrition__item"><span className="nutrition__label">Энергетическая ценность:</span><span className="nutrition__value">25 кКал / 105 кДж</span></div>
-                            <div className="nutrition__item"><span className="nutrition__label">Белки:</span><span className="nutrition__value">0,1 г</span></div>
-                            <div className="nutrition__item"><span className="nutrition__label">Жиры:</span><span className="nutrition__value">0 г</span></div>
-                            <div className="nutrition__item"><span className="nutrition__label">Углеводы:</span><span className="nutrition__value">5 г</span></div>
+                            <div className="nutrition__item">
+                                <span className="nutrition__label">Энергетическая ценность:</span>
+                                <span className="nutrition__value">25 кКал / 105 кДж</span>
+                            </div>
+                            <div className="nutrition__item">
+                                <span className="nutrition__label">Белки:</span>
+                                <span className="nutrition__value"> 0,1 г</span>
+                            </div>
+                            <div className="nutrition__item">
+                                <span className="nutrition__label">Жиры:</span>
+                                <span className="nutrition__value"> 0 г</span>
+                            </div>
+                            <div className="nutrition__item">
+                                <span className="nutrition__label">Углеводы:</span>
+                                <span className="nutrition__value"> 5 г</span>
+                            </div>
                         </div>
                     )}
+                    
                     {activeTab === 'other' && (
-                        <div className="other__content">
+                         <div className="other__content">
                             <div className="other__section">
-                                <p className="other__text">Комбуча - это ферментированный, низкокалорийный, непастеризованный живой напиток, приготовленный на основе оригинальных сортов чая и культуры "комбуча" (чайный гриб) с использованием натуральных и экологически чистых ингредиентов - фруктов, ягод, трав, цветов.</p>
-                                <p className="other__text">Каждая бутылочка комбучи ReLive - это чистый крафт-продукт, созданный с любовью и вниманием ко всем мелочам.</p>
+                                <p className="other__text">
+                                    Комбуча - это ферментированный, низкокалорийный, непастеризованный живой напиток, 
+                                    приготовленный на основе оригинальных сортов чая и культуры "комбуча" (чайный гриб) 
+                                    с использованием натуральных и экологически чистых ингредиентов - фруктов, ягод, трав, цветов.
+                                </p>
+                                <p className="other__text">
+                                    Каждая бутылочка комбучи ReLive - это чистый крафт-продукт, созданный с любовью 
+                                    и вниманием ко всем мелочам.
+                                </p>
                                 <div className="other__tags">
                                     <span className="tag">BEST FOR HEALTH</span>
                                     <span className="tag">BEST FOR SPORT</span>
@@ -127,8 +130,12 @@ function CardProduct() {
                                     <span>обмен вещества</span>
                                     <span>жиросжигание</span>
                                 </div>
-                                <p className="other__disclaimer">*Вся информация о полезных свойствах получена из общедоступных источников, на сайте и этикетках носит маркетинговый характер</p>
+                                <p className="other__disclaimer">
+                                    *Вся информация о полезных свойствах получена из общедоступных источников, 
+                                    на сайте и этикетках носит маркетинговый характер
+                                </p>
                             </div>
+
                             <div className="other__section">
                                 <h3>Срок годности и условия хранения:</h3>
                                 <ul className="storage__list">
@@ -145,15 +152,26 @@ function CardProduct() {
                                 <p className="other__note">⚠️ Возможно образование естественного осадка, обусловленное применением натурального сырья</p>
                                 <p className="other__note">⚠️ Открывать аккуратно! Пить охлажденным!</p>
                             </div>
+
                             <div className="other__section">
                                 <h3>Обмен или возврат:</h3>
-                                <p className="other__text">Если вас не устроил вкус или качество нашего напитка, напишите нам и мы легко вернем вам деньги или обменяем на другой вид/вкус напитка!</p>
+                                <p className="other__text">
+                                    Если вас не устроил вкус или качество нашего напитка, напишите нам и мы легко вернем вам деньги 
+                                    или обменяем на другой вид/вкус напитка!
+                                </p>
                             </div>
+
                             <div className="other__section">
                                 <h3>Производитель:</h3>
                                 <p className="other__text">ООО "Вкус от природы"</p>
-                                <p className="other__text">Юридический адрес: 620144, Россия, Свердловская область, город Екатеринбург, улица Куйбышева, дом 10, кв. 105.</p>
-                                <p className="other__text">Адрес производства: 620085, Россия, Свердловская область, город Екатеринбург, улица 8 марта, дом 207а</p>
+                                <p className="other__text">
+                                    Юридический адрес: 620144, Россия, Свердловская область, город Екатеринбург, 
+                                    улица Куйбышева, дом 10, кв. 105.
+                                </p>
+                                <p className="other__text">
+                                    Адрес производства: 620085, Россия, Свердловская область, город Екатеринбург, 
+                                    улица 8 марта, дом 207а
+                                </p>
                                 <p className="other__text">ТУ 11.07.19-001-39907489-2020</p>
                             </div>
                         </div>
@@ -161,7 +179,7 @@ function CardProduct() {
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
-export default CardProduct;
+export default CardProduct

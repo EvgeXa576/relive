@@ -40,14 +40,7 @@ const HomePage = () => {
     // 🔹 Берём первые 3 товара для хитов
     const hits = products.slice(0, 3);
 
-    // 🔹 Вспомогательные функции для работы с volumes
-    const getMinPrice = (product) => {
-        return Math.min(...product.volumes.map(v => v.cost));
-    };
 
-    const getDefaultVolume = (product) => {
-        return product.volumes.find(v => v.size === '350')?.size || product.volumes[0].size;
-    };
 
     return (
         <>
@@ -126,8 +119,7 @@ const HomePage = () => {
                 <div className="hits-title">БЕСТСЕЛЛЕРЫ</div>
                 <div className="hits">
                     {hits.map(product => {
-                        const minPrice = getMinPrice(product);
-                        const defaultVolume = getDefaultVolume(product);
+                        
                         
                         return (
                             <div key={product.id} className="hits-card">
@@ -135,8 +127,7 @@ const HomePage = () => {
                                 style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
                                     to={`/product/${product.id}`}
                                     state={{ 
-                                        product, 
-                                        selectedVolume: defaultVolume 
+                                        product
                                     }}
                                     className="hits-card-link"
                                 >
@@ -144,15 +135,15 @@ const HomePage = () => {
                                     <h2>{product.name}</h2>
                                     <p>{product.taste}</p>
                                     <div className="hits-info">
-                                        <span>{defaultVolume} мл</span>
+                                        <span>{product.volume} мл</span>
                                         <span>
-                                            {product.volumes.length > 1 ? `от ${minPrice}` : minPrice} ₽
+                                            {product.cost} ₽
                                         </span>
                                     </div>
                                 </Link>
                                 <AddToCart 
                                     product={product} 
-                                    selectedVolume={defaultVolume}
+                                   
                                 />
                             </div>
                         );

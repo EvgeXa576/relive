@@ -114,17 +114,17 @@
 }
 
 .history-title{
-    margin: clamp(14px, 3vw, 44px);
+    margin: clamp(11px, 4vw, 64px) 0;
 }
 
 .history-subtitle {
-    font-size: clamp(11px, 3vw, 24px); /* min понижен: 18px → 14px */
+    font-size: clamp(11px, 3vw, 44px); /* min понижен: 18px → 14px */
     text-transform: uppercase;
     margin-top: 1rem;
 }
 
 .history-text {
-    font-size: clamp(11px, 3vw, 44px); /* min понижен: 18px → 14px */
+    font-size: clamp(11px, 3vw, 34px); /* min понижен: 18px → 14px */
     padding-top: 30px;
     font-weight: 500;
     line-height: 1.1;

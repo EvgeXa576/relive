@@ -226,9 +226,12 @@
 }
 
 .hits-card img {
-    width: 70%;
-    max-width: 200px;
+
+    height: 220px;
     margin-bottom: 20px;
+    object-fit: contain;
+    width: 100%;
+    max-width: 200px;
 }
 
 .hits-card h2 {
@@ -260,7 +263,9 @@
 @media (min-width: 1440px) {
     .hits { max-width: 1300px; gap: 35px; }
     .hits-card { padding: 45px 35px; }
-    .hits-card img { max-width: 220px; }
+    .hits-card img { max-width: 140px;
+        margin-bottom: 14px;
+        height: 180px; }
     .hits-card h2 { font-size: 24px; }
     .hits-card p { font-size: 18px; }
 }
@@ -273,6 +278,9 @@
     .hero-subtitle { font-size: clamp(30px, 3vw, 54px); }
     .bottle { max-width: 400px; }
     .title-wrap, .subtitle-wrap { padding-top: 10%; }
+    .hits-card img { max-width: 140px;
+        margin-bottom: 14px;
+        height: 180px; }
 }
 
 /* --- TABLET (768px - 1024px) --- */
@@ -319,6 +327,9 @@
     .relive__bottom-wrap { display: none; }
     .relive { padding: 0; }
     .relive-wrap{ padding: 0 10%; }
+    .hits-card img {  max-width: 140px;
+        margin-bottom: 14px;
+        height: 180px; }
 }
 
 /* --- TABLET PORTRAIT SPECIFIC --- */
@@ -443,7 +454,9 @@
         margin: 0 auto;
         width: 100%;
     }
-    .hits-card img { width: 50%; max-width: 150px; margin-bottom: 15px; }
+    .hits-card img { max-width: 90px;
+        margin-bottom: 2px;
+        height: 140px; }
     .hits-card h2 { font-size: 18px; margin-bottom: 8px; }
     .hits-card p { font-size: 14px; margin-bottom: 10px; }
     .hits-info { font-size: 14px; gap: 15px; justify-content: center; }
@@ -473,7 +486,9 @@
     /* Hits */
     .hits { gap: 15px; padding: 15px 12px; }
     .hits-card { padding: 20px 15px; border-radius: 20px; }
-    .hits-card img { width: 45%; max-width: 120px; margin-bottom: 12px; }
+    .hits-card img {        max-width: 160px;
+        margin-bottom: 2px;
+        height: 220px; }
     .hits-card h2 { font-size: 16px; }
     .hits-card p { font-size: 12px; }
     .hits-info { font-size: 13px; gap: 12px; }
