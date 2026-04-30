@@ -59,7 +59,12 @@ const HomePage = () => {
                     </div>
                     <img src={bottle} alt="bottle" className="bottle" />
                     <div className="subtitle-wrap">
-                        <h2 className="hero-subtitle">Не напиток,<br /> а образ<br /> жизни </h2>
+                        <h2 className="hero-subtitle">{/* Desktop версия */}
+        <span className="subtitle-desktop">
+            Не напиток,<br /> а образ<br /> жизни
+        </span>
+        {/* Mobile версия */}
+        <span className="subtitle-mobile">наш образ жизни</span></h2>
                         <img src={heartShine} alt="heart-shine" className='hero-heart' />
                     </div>
                 </div>

@@ -298,6 +298,9 @@
         width: clamp(2px, 0.25vw, 3px);
         height: clamp(110px, 10vw, 160px);
     }
+    .form__contacts-btn{
+        width: 80%;
+    }
     
     /* 🔹 ИСТОРИЯ: масштаб ~в 1.5 раза меньше */
     .about__history {
@@ -422,12 +425,18 @@
     .form__contacts {
         max-width: 100%; /* Растягиваем форму на всю доступную ширину */
     }
+    .form__contacts-btn{
+        width: 80%;
+    }
 }
 
 /* Телефон: ≤768px */
 @media (max-width: 768px) {
     .about__hero-stars {
         display: none;
+    }
+    .form__contacts-btn{
+        width: 80%;
     }
     .about__hero-line {
         width: 2px;
