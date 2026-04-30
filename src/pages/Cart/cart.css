@@ -1,48 +1,52 @@
+/* ========================================
+   🛒 КОРЗИНА + МОДАЛКА: АДАПТИВНЫЕ ОТСТУПЫ
+   ======================================== */
+
 .cart {
-    margin-top: 5%;
-    padding: 0 5vw;
+    margin-top: clamp(24px, 4vw, 60px);
+    padding: 0 clamp(16px, 4vw, 80px);
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .cart h1 {
-    font-size: 48px;
+    font-size: clamp(18px, 3.5vw, 38px);
     font-weight: bold;
     color: #FF8E7D;
     text-align: center;
     text-transform: uppercase;
-    margin-bottom: 5%;
+    margin-bottom: clamp(20px, 3.5vw, 50px);
 }
 
 .cart-empty {
     text-align: center;
-    padding: 10%;
+    padding: clamp(24px, 5vw, 80px) clamp(16px, 4vw, 40px);
     background: #fff;
-    border-radius: 3vw;
+    border-radius: clamp(16px, 3vw, 40px);
     box-shadow: 0 2px 8px rgba(94, 12, 12, 0.3);
 }
 
 .cart-empty h2 {
-    font-size: 32px;
+    font-size: clamp(24px, 4vw, 32px);
     color: #F93B77;
-    margin-bottom: 5%;
+    margin-bottom: clamp(16px, 3vw, 40px);
 }
 
 .cart-empty p {
-    font-size: 20px;
+    font-size: clamp(16px, 2.5vw, 20px);
     color: #432E2A;
-    margin-bottom: 5%;
+    margin-bottom: clamp(20px, 3vw, 40px);
 }
 
 .cart-empty a {
     display: inline-block;
     background: #F93B77;
     color: white;
-    padding: 12px 30px;
-    border-radius: 3vw;
+    padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 30px);
+    border-radius: clamp(20px, 4vw, 50px);
     text-decoration: none;
-    font-size: 18px;
+    font-size: clamp(15px, 2vw, 18px);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -55,11 +59,11 @@
     background: #ff4444;
     color: white;
     border: none;
-    padding: 12px 24px;
-    border-radius: 2vw;
-    font-size: 18px;
+    padding: clamp(10px, 2vw, 12px) clamp(18px, 3vw, 24px);
+    border-radius: clamp(12px, 2vw, 30px);
+    font-size: clamp(15px, 2vw, 18px);
     cursor: pointer;
-    margin-bottom: 5%;
+    margin-bottom: clamp(20px, 3vw, 50px);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -70,19 +74,20 @@
 
 .cart-item {
     background: #fff;
-    border-radius: 3vw;
-    padding: 5%;
-    margin-bottom: 3%;
+    border-radius: clamp(16px, 3vw, 40px);
+    padding: clamp(16px, 3vw, 40px);
+    margin-bottom: clamp(12px, 2vw, 30px);
     display: flex;
     align-items: center;
-    gap: 5%;
+    gap: clamp(12px, 3vw, 40px);
     box-shadow: 0 2px 8px rgba(94, 12, 12, 0.3);
     transition: transform 0.3s;
 }
 
 .cart-item img {
-    width: 100px;
+    width: clamp(70px, 10vw, 100px);
     height: auto;
+    flex-shrink: 0;
 }
 
 .cart-item-info {
@@ -90,87 +95,88 @@
 }
 
 .cart-item-info h3 {
-    font-size: 25px;
+    font-size: clamp(18px, 3vw, 25px);
     color: #F93B77;
-    margin-bottom: 10px;
+    margin-bottom: clamp(6px, 1vw, 10px);
 }
 
 .cart-item-info p {
-    font-size: 18px;
+    font-size: clamp(15px, 2vw, 18px);
     color: #432E2A;
-    margin-bottom: 5px;
+    margin-bottom: clamp(4px, 0.8vw, 5px);
 }
 
 .cart-item-info .volume {
-    font-size: 16px;
+    font-size: clamp(13px, 1.8vw, 16px);
     color: #666;
 }
 
 .cart-item-info .price {
-    font-size: 22px;
+    font-size: clamp(17px, 2.5vw, 22px);
     font-weight: bold;
     color: #432E2A;
-    margin-top: 10px;
+    margin-top: clamp(6px, 1vw, 10px);
 }
 
 .cart-item-controls {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: clamp(8px, 1.5vw, 10px);
 }
 
 .remove-btn {
-    background: #F93B77;
+    background: #ff4444 !important;
     color: white;
     border: none;
-    border-radius: 15px;
-    padding: 10% 20%;
-    font-size: 20px;
+    border-radius: clamp(10px, 2vw, 15px);
+    padding: clamp(8px, 1.5vw, 10px) clamp(16px, 3vw, 24px);
+    font-size: clamp(16px, 2.2vw, 20px);
     cursor: pointer;
+    transition: box-shadow 0.3s, transform 0.2s;
 }
 
+.remove-btn:hover {
+    box-shadow: 0 4px 10px rgba(255, 68, 68, 0.5) !important;
+    transform: translateY(-1px);
+}
 
 .cart-item-controls span {
-    font-size: 24px;
+    font-size: clamp(18px, 3vw, 24px);
     font-weight: bold;
     color: #432E2A;
     min-width: 40px;
     text-align: center;
 }
 
-.remove-btn {
-    background: #ff4444 !important;
-}
-
-.remove-btn:hover {
-    box-shadow: 0 4px 10px rgba(255, 68, 68, 0.5) !important;
-}
-
 .cart-total {
     background: #fff;
-    border-radius: 3vw;
-    padding: 5%;
-    margin-top: 5%;
+    border-radius: clamp(16px, 3vw, 40px);
+    padding: clamp(16px, 3vw, 40px);
+    margin-top: clamp(20px, 4vw, 60px);
     text-align: right;
     box-shadow: 0 2px 8px rgba(94, 12, 12, 0.3);
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .cart-total h3 {
-    font-size: 32px;
+    font-size: clamp(24px, 4vw, 32px);
     font-weight: bold;
     color: #F93B77;
+    
 }
 
 .continue-shopping {
     display: inline-block;
     background: #F93B77;
     color: white;
-    padding: 12px 30px;
-    border-radius: 3vw;
+    padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 30px);
+    border-radius: clamp(12px, 2vw, 30px);
     text-decoration: none;
-    font-size: 18px;
-    margin-bottom: 5%;
+    font-size: clamp(15px, 2vw, 18px);
+    margin-bottom: clamp(20px, 3vw, 50px);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -183,146 +189,245 @@
     display: flex;
     justify-content: space-around;
     align-items: center !important;
-    margin-bottom: 5%;
+    margin-bottom: clamp(20px, 3vw, 50px);
 }
 
-.cart__order-btn{
+.cart__order-btn {
     display: block;
-    padding: 1% 3%;
+    padding: clamp(10px, 2vw, 14px) clamp(24px, 4vw, 36px);
     border-radius: 50px;
     background-color: #F93B77;
-    font-size: 16px;
+    font-size: clamp(14px, 1.8vw, 16px);
     outline: none;
     font-weight: 600;
     color: #fff;
     border: 3px solid #F93B77;
-    margin: 5% auto 0 auto;
-    
+    margin: clamp(24px, 4vw, 60px) auto 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 5vh;
 }
 
-.cart__order-btn:hover{
-
+.cart__order-btn:hover {
     background-color: transparent;
     color: #F93B77;
     border: 3px solid #F93B77;
-
 }
 
-/* modal */
-
+/* ========================================
+   📦 МОДАЛЬНОЕ ОКНО ЗАКАЗА
+   ======================================== */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .modal-content {
     background: white;
-    padding: 40px;
-    border-radius: 20px;
+    padding: clamp(24px, 5vw, 40px);
+    border-radius: clamp(16px, 3vw, 24px);
     position: relative;
-    width: 90%;
-    max-width: 70%;
+    width: 100%;
+    max-width: clamp(320px, 70vw, 900px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-sizing: border-box;
 }
 
-/* Кнопка закрытия (крестик) */
 .modal-close {
     position: absolute;
-    top: 15px;
-    right: 20px;
+    top: clamp(10px, 2vw, 15px);
+    right: clamp(15px, 3vw, 20px);
     border: none;
-    font-size: 30px;
+    font-size: clamp(24px, 3.5vw, 30px);
     cursor: pointer;
     color: #333;
+    background: transparent;
+    line-height: 1;
 }
 
-.form__order-title{
+.form__order-title {
     color: #FF8E7D;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 48px;
+    font-size: clamp(24px, 5vw, 48px);
     text-align: center;
+    margin-bottom: clamp(16px, 3vw, 30px);
 }
 
-.form__order{
+.form__order {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 25px;
-
+    gap: clamp(16px, 3vw, 25px);
 }
 
-.form__order-input{
-    padding: 5% 10%;
+.form__order-input {
+    padding: clamp(12px, 2vw, 16px) clamp(20px, 4vw, 40px);
     border-radius: 50px;
     border: #87DF1C solid 4px;
-    font-size: 26px;
-    width: 30vw;
+    font-size: clamp(16px, 2.2vw, 26px); /* 16px min блокирует зум на iOS */
+    width: 100%;
+    max-width: clamp(260px, 30vw, 450px);
     font-weight: 600;
     background: rgba(255, 255, 255, 0.5);
+    box-sizing: border-box;
+    outline: none;
 }
 
 .form__order-input:focus,
-.form__order-input:active{
+.form__order-input:active {
     border: #F93B77 solid 4px;
     color: #F93B77;
-    
 }
 
-.form__order-btn{
-    padding: 2% 5%;
+.form__order-btn {
+    padding: clamp(12px, 2vw, 16px) clamp(24px, 4vw, 48px);
     border-radius: 50px;
     background-color: #F93B77;
-    font-size: 26px;
-    width: 23vw;
+    font-size: clamp(16px, 2.2vw, 26px);
+    width: 100%;
+    max-width: clamp(220px, 23vw, 340px);
     border: none;
     outline: none;
     font-weight: 600;
     color: #fff;
-}
-
-.form__order-btn:hover{
-    box-shadow: 0 10px 30px rgba(195, 45, 97, 0.412);
+    cursor: pointer;
+    transition: box-shadow 0.3s;
     
 }
 
-.form__order-img{
-    width: 40vw;
+.form__order-btn:hover {
+    box-shadow: 0 10px 30px rgba(195, 45, 97, 0.412);
 }
 
+.form__order-img {
+    width: clamp(160px, 40vw, 500px);
+    max-width: 100%;
+    height: auto;
+    margin-top: clamp(16px, 3vw, 24px);
+}
 
 .input-error {
     border-color: #ff4d4d !important;
 }
+
 .error-message {
     color: #ff4d4d;
-    font-size: 17px;
+    font-size: clamp(13px, 2vw, 17px);
     display: block;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: clamp(6px, 1vw, 10px);
+    margin-bottom: clamp(6px, 1vw, 10px);
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
 }
+
 .form__order-btn:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
 
 .form__status {
-    font-size: 17px;
+    font-size: clamp(13px, 2vw, 17px);
     text-align: center;
+    margin-top: 10px;
 }
 
 .modal-total {
     font-weight: bold;
-    font-size: 18px;
+    font-size: clamp(15px, 2vw, 18px);
     text-align: right;
-    margin: 10px 0;
+    margin: clamp(8px, 1.5vw, 10px) 0;
+}
+
+/* ========================================
+   📱 АДАПТИВ: НОУТБУК / ПЛАНШЕТ / ТЕЛЕФОН
+   ======================================== */
+
+/* ========================================
+   📱 АДАПТИВ: НОУТБУК / ПЛАНШЕТ / ТЕЛЕФОН
+   ======================================== */
+
+/* Ноутбук: ≤1669px */
+@media (max-width: 1669px) {
+    .cart { padding: 0 30px; margin-top: 40px; }
+    .cart-item { padding: 20px 50px; gap: 20px; max-width: 80%; margin: 40px auto; }
+    
+    /* 🔹 МОДАЛКА: масштаб ~в 2 раза меньше десктопа */
+    .modal-content {
+        max-width: 480px !important; /* Перебиваем clamp */
+        padding: 34px 38px;
+    }
+    .form__order-title { font-size: 22px; margin-bottom: 12px; }
+    
+    .form__order-input {
+        padding: 8px 14px;
+        font-size: 15px;
+        max-width: 220px;
+        border-width: 3px;
+    }
+    .form__order-btn {
+        padding: 8px 14px;
+        font-size: 13px;
+        max-width: 150px;
+    }
+    .form__order-img { width: 140px; margin-top: 8px; }
+    .modal-close { font-size: 20px; top: 8px; right: 10px; }
+    .error-message { font-size: 12px; margin: 4px 0; max-width: 100%; }
+    .form__status { font-size: 12px; margin-top: 4px; }
+}
+
+/* Планшет: ≤1024px */
+@media (max-width: 1024px) {
+    .cart { padding: 0 20px; margin-top: 32px; }
+    .cart h1 { margin-bottom: 24px; }
+    
+    .cart-item { padding: 20px 16px; gap: 16px; align-items: flex-start; }
+    .cart-item img { width: 80px; }
+    .cart-empty { padding: 32px 20px; }
+    
+    .cart-actions { justify-content: center; gap: 16px; }
+    .clear-cart, .continue-shopping { width: 100%; text-align: center; }
+    
+    /* 🔹 МОДАЛКА: ещё компактнее */
+    .modal-content { max-width: 420px !important; padding: 12px 16px; }
+    .form__order-title { font-size: 20px; }
+    .form__order-input, .form__order-btn { max-width: 200px; font-size: 14px; }
+    .form__order-img { width: 120px; }
+}
+
+/* Телефон: ≤768px */
+@media (max-width: 768px) {
+    .cart { padding: 0 12px; margin-top: 24px; }
+    .cart-item {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        padding: 16px 12px;
+        gap: 12px;
+    }
+    .cart-item img { max-width: 120px; margin: 0 auto 4px; }
+    .cart-item-controls { flex-direction: row; justify-content: center; gap: 12px; }
+    .cart-item-info .price { margin-top: 8px; }
+    
+    .cart-total { text-align: center; padding: 16px; margin-top: 24px; }
+    .cart-actions { flex-direction: column; gap: 12px; margin-bottom: 24px; }
+    .clear-cart, .continue-shopping, .cart__order-btn { width: 80%; max-width: 100%; }
+    
+    /* 🔹 МОДАЛКА: мобильная версия */
+    .modal-content { max-width: 95% !important; padding: 12px; }
+    .form__order-input, .form__order-btn { max-width: 100%; font-size: 14px; }
+    .form__order-img { max-width: 180px; }
+    .error-message { max-width: 100%; }
 }

@@ -49,8 +49,11 @@ function CardProduct() {
                             ))}
                         </ul>
                     </div>
+                    <div className="card-product-btn">
+                        <AddToCart product={product}/>
                     <QuantityControl product={product} />
-                    <AddToCart product={product}/>
+                    
+                    </div>
                 </div>
             </div>
             <div className="product__tabs">

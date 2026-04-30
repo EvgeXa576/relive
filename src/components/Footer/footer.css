@@ -1,55 +1,136 @@
+/* --- БАЗОВЫЕ СТИЛИ ФУТЕРА --- */
 .footer {
-    height: 100vh;
     width: 100%;
+    min-height: clamp(350px, 45vh, 100vh); /* На десктопе высокий, на мобилке сжимается */
     background-image: url("../../assets/img/footer.svg");
     background-position: right bottom;
-    background-size: cover;
+    background-size: 100% auto; 
+    aspect-ratio: 10/6.5;
     background-repeat: no-repeat;
     position: relative;
-    margin-top: 10%;
+    padding: clamp(20px, 4vw, 40px);
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
-.footer-list {
-    position: absolute;
-    right: 0;
+.footer-wrap {
+    max-width: 1440px;
+    margin: 0 auto;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    padding-top: clamp(40px, 6vw, 80px); /* Отступ сверху вместо margin */
+}
+
+/* 🔹 Ссылки (верхняя часть) */
+.footer-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Справа, как в оригинале */
+    gap: clamp(16px, 3vw, 26px);
+    margin-right: 5%;
     margin-top: 20%;
-    margin-right: 10%;
 }
 
 .footer-title {
     color: #FFFCFA;
-    font-size: 64px;
+    font-size: clamp(20px, 5vw, 64px);
     font-style: italic;
     font-weight: bolder;
-    padding-bottom: 43px;
-}
-
-.footer-bottom {
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    flex-direction: row;
-    margin: 4rem;
+    margin: 0 0 clamp(20px, 4vw, 43px) 0;
+    line-height: 1.1;
 }
 
 .footer-link {
     text-decoration: none;
     color: #FFFCFA;
-    font-size: 24px;
+    font-size: clamp(11px, 2vw, 24px);
     font-style: italic;
     font-weight: bold;
-
-    padding-bottom: 26px;
+    transition: opacity 0.2s;
 }
 
-.footer__bottom-item, .footer__bottom-item a {
+.footer-link:hover {
+    opacity: 0.8;
+}
+
+/* 🔹 Нижняя часть (контакты, копирайт) */
+.footer-bottom {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: clamp(16px, 3vw, 40px);
+    margin-top: auto; /* Гарантирует прижатие к низу контейнера */
+    padding-top: clamp(20px, 4vw, 40px);
+}
+
+.footer__bottom-item,
+.footer__bottom-item a {
     text-decoration: none;
-    color: #FFFCFA; margin-left: 2rem;
-    margin-right: 2rem;
-    font-size: 20px;
+    color: #FFFCFA;
+    font-size: clamp(9px, 1.4vw, 20px);
     font-style: italic;
     font-weight: bold;
+    margin: 0;
+    line-height: 1.4;
+}
 
+.footer__bottom-item a:hover {
+    text-decoration: underline;
+}
+
+/* ========================================
+   📱 АДАПТИВ: ПЛАНШЕТ И ТЕЛЕФОН
+   ======================================== */
+
+/* Планшет: ≤1024px */
+@media (max-width: 1024px) {
+    .footer-list {
+        align-items: center;
+        text-align: center;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 24px;
+    }
+    .footer__bottom-item {
+        margin: 0;
+    }
+}
+
+/* Телефон: ≤768px */
+@media (max-width: 768px) {
+    .footer {
+        min-height: auto;
+        padding: 32px 16px;
+        background-position: center bottom;
+        background-size: auto 100%; /* Чтобы фон не обрезался на узких экранах */
+    }
+    .footer-wrap {
+        padding-top: 20px;
+    }
+    .footer-list {
+        gap: 14px;
+    }
+    .footer-title {
+        font-size: clamp(32px, 7vw, 48px);
+        margin-bottom: 16px;
+    }
+    .footer-link {
+        font-size: clamp(16px, 3vw, 20px);
+    }
+    .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        padding-top: 20px;
+    }
+    .footer__bottom-item {
+        font-size: 14px;
+    }
 }

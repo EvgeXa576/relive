@@ -1,27 +1,35 @@
 .btn-add {
-    width: max-content;
-    padding: 7% 15%;
+    /* CSS-переменные для точного контроля и компенсации бордера */
+    --pad-y: clamp(10px, 1.8vw, 16px);
+    --pad-x: clamp(20px, 3.5vw, 40px);
+    --radius: clamp(20px, 3vw, 50px);
+    --fs: clamp(14px, 2vw, 20px);
+    
+    width: fit-content; /* стабильнее, чем max-content */
+    padding: var(--pad-y) var(--pad-x);
     background: #F93B77;
     color: white;
     border: none;
-    border-radius: 2vw;
-    font-size: 25px;
+    border-radius: var(--radius);
+    font-size: var(--fs);
     font-weight: bold;
     cursor: pointer;
-    margin: 3%;
+    margin: clamp(8px, 1.5vw, 16px) 0; /* авто-центровка, убери auto если нужно выравнивание влево */
+    transition: all 0.25s ease;
+    line-height: 1.2;
 }
 
 .btn-add:hover {
     background: transparent;
     border: 3px solid #F93B77;
     color: #F93B77;
+    /* Компенсация добавленного бордера: кнопка не будет "дёргаться" */
+    padding: calc(var(--pad-y) - 3px) calc(var(--pad-x) - 3px);
 }
 
 .btn-add.in-cart {
     background: #4CAF50;
     border: none;
+    color: white;
 }
 
-.btn-add.in-cart:hover {
-    color: #fff;
-}

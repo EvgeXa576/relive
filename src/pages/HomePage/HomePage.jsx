@@ -5,8 +5,6 @@ import heartShine from '../../assets/img/heartShine.svg'
 import pinkHeart from '../../assets/img/pink-heart.svg'
 import greenHeart from '../../assets/img/green-heart.svg'
 
-
-
 import clock from '../../assets/img/clock.svg'
 import mountain from '../../assets/img/mountain.png'
 import butterflies from '../../assets/img/butterflies.svg'
@@ -29,7 +27,6 @@ import HealthHome from '../../components/HealthHome/HealthHome'
 import { Link } from 'react-router-dom'
 import AddToCart from '../../components/AddToCart/AddToCart'
 
-
 const HomePage = () => {
     const images = [
         { id: 1, url: Slide1, alt: 'Слайд 1' },
@@ -40,7 +37,11 @@ const HomePage = () => {
         { id: 6, url: Slide6, alt: 'Слайд 6' },
     ];
 
-    const hits=products.slice(0, 3)
+    // 🔹 Берём первые 3 товара для хитов
+    const hits = products.slice(0, 3);
+
+
+
     return (
         <>
             <section className="hero">
@@ -51,19 +52,27 @@ const HomePage = () => {
                     </div>
                     <img src={bottle} alt="bottle" className="bottle" />
                     <div className="subtitle-wrap">
-                        <h2 className="hero-subtitle">Не напиток,<br /> а образ<br /> жизни </h2>
+                        <h2 className="hero-subtitle">{/* Desktop версия */}
+        <span className="subtitle-desktop">
+            Не напиток,<br /> а образ<br /> жизни
+        </span>
+        {/* Mobile версия */}
+        <span className="subtitle-mobile">наш образ жизни</span></h2>
                         <img src={heartShine} alt="heart-shine" className='hero-heart' />
                     </div>
                 </div>
 
                 <SliderHome>
-
                     <div className="carousel-item">ЧИСТЫЙ НАТУРАЛЬНЫЙ СОСТАВ</div>
                     <div className="carousel-item"><img src={pinkHeart} alt="heart"/></div>
                     <div className="carousel-item">НАСТОЯЩИЙ ЖИВОЙ ПРОДУКТ</div>
                     <div className="carousel-item"><img src={greenHeart} alt="heart"/></div>
                     <div className="carousel-item">ИСКЛЮЧИТЕЛЬНО ВЫСОКОЕ КАЧЕСТВО</div>
-
+                    <div className="carousel-item">ЧИСТЫЙ НАТУРАЛЬНЫЙ СОСТАВ</div>
+                    <div className="carousel-item"><img src={pinkHeart} alt="heart"/></div>
+                    <div className="carousel-item">НАСТОЯЩИЙ ЖИВОЙ ПРОДУКТ</div>
+                    <div className="carousel-item"><img src={greenHeart} alt="heart"/></div>
+                    <div className="carousel-item">ИСКЛЮЧИТЕЛЬНО ВЫСОКОЕ КАЧЕСТВО</div>
                 </SliderHome>
             </section>
 
@@ -75,7 +84,7 @@ const HomePage = () => {
                     <h2 className="relive-subtitle">С любовью с Урала</h2>
                     <div className="boxes-wrap">
                         <div className="relive__box-item clock-box">
-                            <p className="relive__box-text ">длительная и естественная ферментация</p>
+                            <p className="relive__box-text">длительная и естественная ферментация</p>
                             <img src={clock} alt="clock" className="relive__icon" />
                         </div>
                         <div className="relive__box-item mountain">
@@ -104,34 +113,48 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
+
+            {/* 🔹 БЕСТСЕЛЛЕРЫ — обновлено под volumes */}
             <div className="home-hits">
                 <div className="hits-title">БЕСТСЕЛЛЕРЫ</div>
-                 <div className="hits">
-                    {hits.map(product => (
-                        <div key={product.id} className="hits-card">
-                            <Link
-                                to={`/product/${product.id}`}
-                                state={{ product }}
-                                style={{ textDecoration: 'none', color: 'inherit' }}
-                            >
-                                <img src={product.img} alt={product.name} />
-                                <h2>{product.name}</h2>
-                                <p>{product.taste}</p>
-                                <div className="hits-info">
-                                    <span>{product.volume} мл</span>
-                                    <span>{product.cost} руб.</span>
-                                </div>
-                            </Link>
-                            <AddToCart product={product} />
-                        </div>
-                    ))}
+                <div className="hits">
+                    {hits.map(product => {
+                        
+                        
+                        return (
+                            <div key={product.id} className="hits-card">
+                                <Link
+                                style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
+                                    to={`/product/${product.id}`}
+                                    state={{ 
+                                        product
+                                    }}
+                                    className="hits-card-link"
+                                >
+                                    <img src={product.img} alt={product.name} />
+                                    <h2>{product.name}</h2>
+                                    <p>{product.taste}</p>
+                                    <div className="hits-info">
+                                        <span>{product.volume} мл</span>
+                                        <span>
+                                            {product.cost} ₽
+                                        </span>
+                                    </div>
+                                </Link>
+                                <AddToCart 
+                                    product={product} 
+                                   
+                                />
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
 
             <section className="slider">
                 <div className="slider-wrap">
                     <div className="title-slider">
-                        <img src={flowersLeaves} alt="leaves" />
+                        <img src={flowersLeaves} alt="leaves" className='title-slide__img'/>
                         <div className="titles">
                             <h2 className="slider-title">Лучший пример - это мы сами</h2>
                             <div className="heart-wrap">
@@ -139,15 +162,16 @@ const HomePage = () => {
                                 <img src={greenHeart} alt="heart" />
                             </div>
                         </div>
-                        <img src={bee} alt="bee" />
+                        <img src={bee} alt="bee" className='title-slide__img'/>
                     </div>
                     <SliderHome>
-                    {images.map((img, idx) => (
-                        <img key={img.id} src={img.url} alt={`img-${idx}`} className="slider-images__img" />
-                    ))}</SliderHome>
+                        {images.map((img, idx) => (
+                            <img key={img.id} src={img.url} alt={`img-${idx}`} className="slider-images__img" />
+                        ))}
+                    </SliderHome>
                 </div>
             </section>
         </>
     )
 }
-export default HomePage
+export default HomePage;

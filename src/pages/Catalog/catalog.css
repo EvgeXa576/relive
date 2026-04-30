@@ -1,5 +1,4 @@
 /* --- ГЛОБАЛЬНЫЕ ПРАВКИ ДЛЯ 1920px --- */
-
 .catalog__hero,
 .catalog_products,
 .catalog__filters,
@@ -9,26 +8,25 @@
     margin-left: auto;
     margin-right: auto;
     box-sizing: border-box;
+    text-decoration: none;
 }
 
 /* --- ГЕРОЙСКАЯ СЕКЦИЯ КАТАЛОГА --- */
-
 .catalog__hero {
-    /* Чтобы фон не искажался на 1920px, используем cover */
     background-image: url('../../assets/img/catalog-hero-bg.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    aspect-ratio: 16 / 7; /* Слегка скорректировал для широких экранов */
-    padding: 8% 0 0 8%;
+    aspect-ratio: 13 / 7;
+    padding: 8% 0 0 10%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    border-radius: 0 0 100px 100px; /* Софт-скругление снизу */
+    border-radius: 0 0 100px 100px;
 }
 
 .catalog__hero-title {
-    font-size: clamp(48px, 5vw, 76px);
+    font-size: clamp(20px, 4vw, 76px); /* адаптировано: min 24px */
     color: #FA6C06;
     width: 60%;
     margin-bottom: 1rem;
@@ -36,13 +34,13 @@
 }
 
 .catalog__hero-subtitle {
-    font-size: clamp(28px, 3vw, 46px);
+    font-size: clamp(16px, 2vw, 46px); /* адаптировано: min 18px */
     color: #643E29;
     margin-bottom: 1rem;
 }
 
 .catalog__hero-cost {
-    font-size: clamp(24px, 2.5vw, 36px);
+    font-size: clamp(16px, 2.5vw, 36px); /* адаптировано: min 16px */
     color: #B1B1B1;
     font-weight: bold;
     margin-bottom: 1.5rem;
@@ -53,7 +51,7 @@
     padding: 15px 40px;
     color: white;
     font-weight: bold;
-    font-size: clamp(18px, 1.5vw, 22px);
+    font-size: clamp(14px, 1.5vw, 22px); /* адаптировано: min 14px */
     border-radius: 50px;
     border: none;
     cursor: pointer;
@@ -66,7 +64,6 @@
 }
 
 /* --- ФИЛЬТРЫ И ПОИСК --- */
-
 .custom-select {
     position: relative;
     min-width: 250px;
@@ -81,8 +78,8 @@
     display: flex;
     justify-content: space-between;
     cursor: pointer;
-    font-weight: bold;
     color: #432E2A;
+    font-size: clamp(14px, 1.5vw, 18px); /* добавлено адаптивное */
 }
 
 .select-btn:hover {
@@ -105,6 +102,7 @@
 .select-option {
     padding: 10px 20px;
     cursor: pointer;
+    font-size: clamp(14px, 1.5vw, 16px); /* добавлено адаптивное */
 }
 
 .select-option:hover {
@@ -114,9 +112,9 @@
 
 .catalog__filters {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 3vw;
     margin: 40px auto;
     padding: 0 40px;
     flex-wrap: wrap;
@@ -132,8 +130,8 @@
     width: 100%;
     padding: 15px 25px;
     border: 2px solid #F93B77;
-    border-radius: 50px; /* Фиксированный радиус вместо vw */
-    font-size: 18px;
+    border-radius: 50px;
+    font-size: clamp(14px, 1.5vw, 18px); /* было 18px */
     outline: none;
     background: white;
     box-sizing: border-box;
@@ -146,21 +144,20 @@
     border: 2px solid #F93B77;
     border-radius: 50px;
     padding: 15px 25px;
-    font-size: 18px;
+    font-size: clamp(14px, 1.5vw, 18px); /* было 18px */
     color: #432E2A;
     cursor: pointer;
     font-weight: bold;
 }
 
 /* --- СЕТКА ТОВАРОВ --- */
-
 .catalog_products-title {
-    font-size: clamp(32px, 4vw, 48px);
+    font-size: clamp(20px, 4vw, 48px); /* адаптировано: min 20px */
     font-weight: bold;
     color: #FF8E7D;
     text-align: center;
     text-transform: uppercase;
-    margin-bottom: 40px;
+    margin-top: 4%;
 }
 
 .catalog_products {
@@ -168,8 +165,6 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     padding: 0 40px 80px;
-    /* Убедимся, что карточки в ряду тянутся по высоте самой высокой */
-    align-items: stretch;
 }
 
 .product-card {
@@ -179,12 +174,10 @@
     text-align: center;
     box-shadow: 0 4px 15px rgba(94, 12, 12, 0.15);
     transition: transform 0.3s, box-shadow 0.3s;
-
-    /* Делаем карточку флекс-контейнером */
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%; /* Карточка занимает всю высоту ячейки сетки */
+    justify-content: center;
     box-sizing: border-box;
 }
 
@@ -193,39 +186,29 @@
     transform: translateY(-10px);
 }
 
-.product-card .img-wrapper {
-    width: 100%;
-    height: 250px; /* Фиксированная высота для всех "бутылочек" */
-    display: flex;
-    align-items: center;    /* Центровка по вертикали */
-    justify-content: center; /* Центровка по горизонтали */
-    margin-bottom: 20px;
-}
-
 .product-card img {
-    max-width: 200px;  /* Ваше ограничение по ширине */
-    max-height: 100%;  /* Чтобы высокая бутылка не вылезла из wrapper */
-    width: auto;
-    height: auto;
+    
+    height: 220px;
+    margin-bottom: 20px;
     object-fit: contain;
+    width: 100%;
+    max-width: 200px;
+    margin-bottom: 10px;
 }
 
 .product-card h2 {
-    font-size: clamp(20px, 2vw, 24px);
+    font-size: clamp(16px, 2vw, 24px); /* адаптировано: min 16px */
     margin-bottom: 10px;
     color: #F93B77;
-    /* Убираем min-height, так как flex-grow ниже справится лучше */
-    display: block;
+    min-height: 2.5em;
+    text-align: center;
 }
 
 .product-card p {
-    font-size: 18px;
+    font-size: clamp(14px, 1.8vw, 18px); /* было 18px */
     color: #432E2A;
     margin-bottom: 20px;
     line-height: 1.3;
-    /* Этот элемент будет "съедать" лишнее пространство,
-       прижимая блок product-info к самому низу */
-    flex-grow: 1;
 }
 
 .product-info {
@@ -233,19 +216,18 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-top: auto; /* Финальная страховка прижатия к низу */
+    margin-top: auto;
     padding-top: 20px;
     border-top: 1px solid rgba(0,0,0,0.05);
 }
 
 .product-info span:last-child {
-    font-size: 22px;
+    font-size: clamp(16px, 2vw, 22px); /* было 22px */
     font-weight: bold;
     color: #432E2A;
 }
 
 /* --- ОШИБКИ И ПУСТЫЕ СОСТОЯНИЯ --- */
-
 .no-products {
     grid-column: span 4;
     text-align: center;
@@ -253,4 +235,308 @@
     background: #fff;
     border-radius: 40px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.reset-filters {
+    background: transparent;
+    color: #F93B77;
+    border: 2px solid #F93B77;
+    border-radius: 50px;
+    padding: 10px 24px;
+    font-size: clamp(14px, 1.5vw, 16px);
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.quiz-bunner {
+    width: min(60%, 800px);
+    margin: clamp(1rem, 3vw, 2rem) auto;
+    padding: clamp(1.2rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem);
+    text-align: center;
+    background: linear-gradient(135deg, #FF8E7D 0%, #FF6B5A 100%);
+    border-radius: clamp(16px, 3vw, 24px);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(255, 110, 90, 0.25);
+    cursor: pointer;
+}
+
+.quiz-bunner:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(255, 110, 90, 0.35);
+}
+
+.quiz-bunner h2 {
+    font-size: clamp(1.1rem, 4vw, 2rem);
+    font-weight: 800;
+    color: white;
+    margin: 0 0 0.4rem 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+}
+
+.quiz-bunner h3 {
+    font-size: clamp(0.85rem, 2.5vw, 1.2rem);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0 0 3rem 0;
+    line-height: 1.3;
+}
+
+.quiz-bunner button {
+    background: white;
+    color: #FF6B5A;
+    border: none;
+    padding: clamp(0.5rem, 1.5vw, 1rem) clamp(1rem, 2.5vw, 2rem);
+    font-size: clamp(0.8rem, 2vw, 1.1rem);
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    line-height: 1.2;
+}
+
+.quiz-bunner button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.15);
+}
+
+.quiz-bunner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none; /* Чтобы градиент не мешал кликам */
+}
+
+.quiz-bunner:hover::before {
+    opacity: 1;
+}
+
+/* 📱 Планшет: компактно */
+@media (max-width: 1024px) {
+    .quiz-bunner {
+        width: 85%;
+        padding: 2rem 1rem;
+        margin: 1rem auto;
+    }
+    .quiz-bunner h2 { font-size: 1.3rem; }
+    .quiz-bunner h3 { font-size: 0.95rem; margin-bottom: 2rem; }
+    .quiz-bunner button { padding: 1rem 1.4rem; font-size: 0.9rem; }
+}
+
+/* 📱 Телефон: сильно сжато */
+@media (max-width: 768px) {
+    .quiz-bunner {
+        width: 92%;
+        padding: 2rem 2rem;
+        margin: 0.8rem auto;
+        border-radius: 16px;
+        box-shadow: 0 6px 16px rgba(255, 110, 90, 0.2);
+    }
+    .quiz-bunner h2 {
+        font-size: 1.15rem;
+        margin-bottom: 0.3rem;
+    }
+    .quiz-bunner h3 {
+        font-size: 0.85rem;
+        margin-bottom: 2rem;
+    }
+    .quiz-bunner button {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* 📱 Узкие экраны: минимализм */
+@media (max-width: 480px) {
+    .quiz-bunner {
+        width: 96%;
+        padding: 2rem 1rem;
+        margin: 0.6rem auto;
+        border-radius: 14px;
+    }
+    .quiz-bunner h2 {
+        font-size: 1rem;
+        line-height: 1.15;
+    }
+    .quiz-bunner h3 {
+        font-size: 0.78rem;
+        line-height: 1.35;
+        margin-bottom: 2rem;
+    }
+    .quiz-bunner button {
+        padding: 0.2rem 1rem;
+        font-size: 0.8rem;
+        width: 100%;
+        max-width: 240px;
+    }
+    /* Отключаем hover-эффекты на тач-устройствах, чтобы не "залипали" */
+    .quiz-bunner:hover { transform: none; }
+}
+/* Ноутбук: ≤1439px */
+@media (max-width: 1642px) {
+    .product-card {
+        padding: 32px 24px;
+    }
+    .product-card img {
+        max-width: 150px;
+        margin-bottom: 10px;
+        height: 200px;
+    }
+     .product-card {
+        padding: 24px 18px;
+    }
+    
+    .product-info {
+   
+    padding-top: 20px;
+}
+.product-card p {
+   
+    margin-bottom: 0px;
+    line-height: 0;
+}
+.catalog__hero,
+.catalog_products,
+.catalog__filters,
+.catalog_products-title,
+.search-results-info {
+    max-width: 1240px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+}
+
+/* Планшет: ≤1024px */
+@media (max-width: 1024px) {
+    .catalog_products {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        padding: 0 30px 60px;
+    }
+    .no-products {
+        grid-column: span 3;
+    }
+    .product-card {
+        padding: 24px 18px;
+        border-radius: 25px;
+    }
+    .product-card img {
+        max-width: 140px;
+        margin-bottom: 14px;
+        height: 180px;
+    }
+    .product-info {
+   
+    padding-top: 0px;
+}
+.product-card p {
+   
+    margin-bottom: 10px;
+    line-height: 0;
+}
+.catalog__hero {
+    border-radius: 0 0 30px 30px;
+}
+.catalog__hero-subtitle {
+
+    margin-bottom: 5px;
+}
+.catalog__hero-cost {
+    font-size: clamp(16px, 2.5vw, 36px);
+    margin-bottom: 5px;
+}
+
+.catalog__hero-btn {
+    background-color: #FA6C06;
+    padding: 5px 15px;
+    font-size: clamp(10px, 1.5vw, 18px); /* адаптировано: min 14px */
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+    transition: transform 0.2s;
+}
+}
+
+/* Телефон: ≤768px */
+@media (max-width: 768px) {
+    .catalog_products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        padding: 0 16px 40px;
+    }
+    .no-products {
+        grid-column: span 2;
+    }
+    .catalog__filters {
+        justify-content: center;
+    }
+    /* Уменьшаем карточку */
+    .product-card {
+        padding: 20px 12px;
+        border-radius: 20px;
+    }
+    .product-card img {
+        max-width: 90px;
+        margin-bottom: 2px;
+        height: 140px;
+    }
+    .product-info {
+   
+    padding-top: 0px;
+}
+.product-card p {
+   
+    margin-bottom: 10px;
+    line-height: 1;
+}
+.catalog__hero {
+    border-radius: 0 0 30px 30px;
+}
+.catalog__hero-subtitle {
+
+    margin-bottom: 5px;
+}
+.catalog__hero-cost {
+    font-size: clamp(16px, 2.5vw, 36px);
+    margin-bottom: 5px;
+}
+
+.catalog__hero-btn {
+    background-color: #FA6C06;
+    padding: 5px 15px;
+    font-size: clamp(10px, 1.5vw, 18px); /* адаптировано: min 14px */
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+    transition: transform 0.2s;
+}
+.catalog__filters {
+   
+    margin: 15px auto;
+
+}
+.search-input {
+    padding: 10px 20px;
+    
+}
+.select-btn {
+    
+    padding: 10px 20px;
+    
+}
+
 }

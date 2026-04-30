@@ -13,7 +13,7 @@ import './about.css'
 import { useState } from "react";
 const About = () => {
 
-    
+
 
     const [status, setStatus] = useState('');
     const [formData, setFormData] = useState({ name: '', tel: '+7 ' });
@@ -133,7 +133,7 @@ const About = () => {
         <>
             <section className="about__hero">
                 <div className="about__hero-wrap">
-                    <h1 className="about__hero-title">КОМБУЧА <br /><img src={heroStars} alt="stars" className='abot__hero-stars' />RELIVE</h1>
+                    <h1 className="about__hero-title">КОМБУЧА <br /><img src={heroStars} alt="stars" className='about__hero-stars' />RELIVE</h1>
                     <div className='about__hero-line'></div>
                     <h1 className="about__hero-subtitle">Иван <br /> Тюленев</h1>
                 </div>

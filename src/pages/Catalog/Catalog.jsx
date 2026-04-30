@@ -49,7 +49,13 @@ function Catalog() {
 
             <section className='catalog'>
                 <h1 className="catalog_products-title">Каталог</h1>
-
+                <Link to='/quiz'>
+                <div className="quiz-bunner">
+                    <h2>Не знаешь что выбрать?</h2>
+                    <h3>Пройди тест и подбери напиток идеально под себя</h3>
+                    <button>Пройти сейчас</button>
+                </div>
+</Link>
                 {/* Фильтры */}
                 <div className="catalog__filters">
                     {/* Поиск */}
@@ -100,6 +106,7 @@ function Catalog() {
                         <div key={product.id} className="product-card">
                             <Link
                                 to={`/product/${product.id}`}
+                                className="product-card-link"
                                 state={{ product }}
                                 style={{ textDecoration: 'none', color: 'inherit' }}
                             >   <div className="img-wrapper">
