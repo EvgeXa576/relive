@@ -112,7 +112,6 @@ function Catalog() {
                             >
                                 <img src={product.img} alt={product.name} />
                                 <h2>{product.name}</h2>
-                                <p>{product.taste}</p>
                                 <div className="product-info">
                                     <span>{product.volume} мл</span>
                                     <span>{product.cost} руб.</span>
