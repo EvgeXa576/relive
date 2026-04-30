@@ -3,11 +3,11 @@ import products from '../../assets/products';
 import { Link } from 'react-router-dom';
 import './cart.css';
 import QuantityControl from '../../components/QuantityControl/QuantityControl';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Cart() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { cart, clearCart, removeFromCart } = useCart();
+    const { cart, clearCart, removeFromCart} = useCart();
 
     // Состояния для формы
     const [formData, setFormData] = useState({ name: '', tel: '+7 ' });
@@ -27,10 +27,31 @@ export default function Cart() {
         );
     }
 
+    // useEffect(()=>{
+    //     productPrice;
+    // }, [cart])
+
+    
+const productPrice = (volume, count, cost) => {
+        const vol = parseInt(volume, 10);
+        if (count >= 6 && vol === 500) {
+            return 200;
+        } 
+
+        if (count >= 12 && vol === 700) {
+
+            return 699;
+        }
+        return cost
+    }
+
+
     const total = cart.reduce((sum, item) => {
-        const product = products.find(p => p.id === item.id);
-        return sum + (product?.cost || 0) * item.count;
-    }, 0);
+    const product = products.find(p => p.id === item.id);
+    if (!product) return sum;
+    const price = productPrice(product.volume, item.count, product.cost);
+    return sum + price * item.count;
+}, 0);
 
     // Маска телефона
     const formatPhone = (value) => {
@@ -91,9 +112,11 @@ export default function Cart() {
         setStatus('Отправка заказа...');
 
         const orderList = cart.map(item => {
-            const p = products.find(prod => prod.id === item.id);
-            return `${p.name} (${item.count} шт.) — ${p.cost * item.count} руб.`;
-        }).join('\n');
+    const p = products.find(prod => prod.id === item.id);
+    if (!p) return '';
+    const price = productPrice(p.volume, item.count, p.cost);
+    return `${p.name} (${p.volume} мл, ${item.count} шт.) — ${price * item.count} руб.`;
+}).filter(Boolean).join('\n');
 
         try {
             const data = new FormData();
@@ -146,7 +169,12 @@ export default function Cart() {
                         <div className="cart-item-info">
                             <h3>{product.name}</h3>
                             <p>{product.taste}</p>
-                            <p className="price">{product.cost} руб.</p>
+                            
+                            <p className="price">
+                                {productPrice(product.volume, item.count, product.cost)} руб.
+                                
+                            </p>
+                            
                         </div>
                         <div className="cart-item-controls">
                             <QuantityControl product={product} />

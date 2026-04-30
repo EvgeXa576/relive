@@ -117,6 +117,13 @@
     color: #432E2A;
     margin-top: clamp(6px, 1vw, 10px);
 }
+.old-price{
+    font-size: clamp(14px, 2.5vw, 20px);
+    font-weight: normal;
+    text-decoration: line-through;
+    color: #941901;
+    margin-top: clamp(6px, 1vw, 10px);
+}
 
 .cart-item-controls {
     display: flex;

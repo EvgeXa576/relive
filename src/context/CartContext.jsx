@@ -6,6 +6,8 @@ const CartContext = createContext();
 export function CartProvider({ children }) {
     const [cart, setCart] = useLocalStorage('cart', []);
 
+        
+
     const addToCart = useCallback((product) => {
         setCart(prevCart => {
             const existingItem = prevCart.find(item => item.id === product.id);
@@ -49,7 +51,7 @@ export function CartProvider({ children }) {
             addToCart, 
             removeFromCart, 
             updateCount, 
-            clearCart 
+            clearCart
         }}>
             {children}
         </CartContext.Provider>
