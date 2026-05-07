@@ -36,8 +36,9 @@ function Catalog() {
             <div className="catalog__hero">
                 <h1 className="catalog__hero-title">НАБОР ПЕРВООТКРЫВАТЕЛЯ</h1>
                 <h3 className="catalog__hero-subtitle">6 ВКУСОВ В ОДНОЙ КОРОБКЕ</h3>
-                <p className="catalog__hero-cost">1200 руб.</p>
-                <button type="submit" className="catalog__hero-btn">ДОБАВИТЬ</button>
+                <p className="catalog__hero-cost">2400 руб.</p>
+
+                <Link to="/set-n" className="catalog__hero-btn"> Собрать набор из 10</Link>
             </div>
             <SliderHome>
                 <div className="carousel-item">ЧИСТЫЙ НАТУРАЛЬНЫЙ СОСТАВ</div>
@@ -113,7 +114,6 @@ function Catalog() {
                                     <img src={product.img} alt={product.name} />
                                 </div>
                                 <h2>{product.name}</h2>
-                                <p>{product.taste}</p>
                                 <div className="product-info">
                                     <span>{product.volume} мл</span>
                                     <span>{product.cost} руб.</span>

@@ -117,6 +117,13 @@
     color: #432E2A;
     margin-top: clamp(6px, 1vw, 10px);
 }
+.old-price{
+    font-size: clamp(14px, 2.5vw, 20px);
+    font-weight: normal;
+    text-decoration: line-through;
+    color: #941901;
+    margin-top: clamp(6px, 1vw, 10px);
+}
 
 .cart-item-controls {
     display: flex;
@@ -431,3 +438,19 @@
     .form__order-img { max-width: 180px; }
     .error-message { max-width: 100%; }
 }
+
+/* Зачёркнутая старая цена */
+.old-price {
+    color: #999;
+    text-decoration: line-through;
+    font-size: 14px;
+    font-weight: normal;
+    margin-right: 4px;
+}
+
+/* Новая цена со скидкой — зелёная */
+.new-price {
+    color: #76a241;
+    font-weight: bold;
+}
+

@@ -133,7 +133,6 @@ const HomePage = () => {
                                 >
                                     <img src={product.img} alt={product.name} />
                                     <h2>{product.name}</h2>
-                                    <p>{product.taste}</p>
                                     <div className="hits-info">
                                         <span>{product.volume} мл</span>
                                         <span>

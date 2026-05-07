@@ -12,6 +12,8 @@ import ScrollToTop from "./hooks/ScrollToTop.jsx";
 import { useLocation, matchPath } from 'react-router-dom';
 import FAQ from './pages/FAQ/FAQ.jsx';
 import Quiz from "./pages/Quiz/quiz.jsx";
+import SetN from './pages/Set/Set.jsx';
+
 
 function AppContent() {
     const location = useLocation();
@@ -34,6 +36,7 @@ function AppContent() {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/quiz" element={<Quiz />} />
+                <Route path="/set-n" element={<SetN />} />
             </Routes>
 
             {/* Рендерим Footer только если мы НЕ на странице продукта */}
