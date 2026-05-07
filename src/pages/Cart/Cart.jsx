@@ -1,17 +1,27 @@
+import { useState } from 'react';
 import { useCart } from '../../context/CartContext';
 import products from '../../assets/products';
 import { Link } from 'react-router-dom';
 import './cart.css';
 import QuantityControl from '../../components/QuantityControl/QuantityControl';
-import { useEffect, useState } from 'react';
+
+// 🔹 ИМПОРТИРУЙ КАРТИНКУ ДЛЯ СЕТА (или замени на любую другую)
+import Pineapple from '../../assets/img/bottle/PINEAPPLE.jpg';
+
+// 🔹 Вынеси функцию расчёта цены в отдельный файл или оставь здесь
+const productPrice = (volume, count, cost) => {
+    const vol = parseInt(volume, 10);
+    if (count >= 12 && vol === 500) return 199;
+    if (count >= 6 && vol === 700) return 699;
+    return cost;
+};
 
 export default function Cart() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { cart, clearCart, removeFromCart} = useCart();
+    const { cart, clearCart, removeFromCart } = useCart();
 
-    // Состояния для формы
     const [formData, setFormData] = useState({ name: '', tel: '+7 ' });
-    const [errors, setErrors] = useState({}); // Состояние для хранения ошибок полей
+    const [errors, setErrors] = useState({});
     const [status, setStatus] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -27,31 +37,16 @@ export default function Cart() {
         );
     }
 
-    // useEffect(()=>{
-    //     productPrice;
-    // }, [cart])
-
-    
-const productPrice = (volume, count, cost) => {
-        const vol = parseInt(volume, 10);
-        if (count >= 6 && vol === 500) {
-            return 200;
-        } 
-
-        if (count >= 12 && vol === 700) {
-
-            return 699;
-        }
-        return cost
-    }
-
-
+    // 🔹 Подсчёт итоговой суммы с учётом скидок
     const total = cart.reduce((sum, item) => {
-    const product = products.find(p => p.id === item.id);
-    if (!product) return sum;
-    const price = productPrice(product.volume, item.count, product.cost);
-    return sum + price * item.count;
-}, 0);
+        // Для сетов берём цену напрямую, для обычных — считаем через productPrice
+        if (item.isSet) return sum + item.cost * item.count;
+        
+        const product = products.find(p => p.id === item.id);
+        if (!product) return sum;
+        const price = productPrice(product.volume, item.count, product.cost);
+        return sum + price * item.count;
+    }, 0);
 
     // Маска телефона
     const formatPhone = (value) => {
@@ -67,56 +62,46 @@ const productPrice = (volume, count, cost) => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         let newValue = value;
-
         if (name === 'tel') {
             newValue = formatPhone(value);
         } else if (name === 'name') {
-            // Разрешаем вводить только буквы и пробелы
             newValue = value.replace(/[^a-zA-Zа-яА-ЯёЁ\s]/g, '');
         }
-
         setFormData(prev => ({ ...prev, [name]: newValue }));
-
-        // Очищаем ошибку поля при вводе
-        if (errors[name]) {
-            setErrors(prev => ({ ...prev, [name]: null }));
-        }
+        if (errors[name]) setErrors(prev => ({ ...prev, [name]: null }));
     };
 
     const validate = () => {
         const newErrors = {};
-
-        // Проверка ФИО
         if (!formData.name.trim()) {
             newErrors.name = 'Поле ФИО не может быть пустым';
         } else if (formData.name.trim().length < 2) {
             newErrors.name = 'Введите корректное имя';
         }
-
-        // Проверка Телефона
         const phoneDigits = formData.tel.replace(/\D/g, '');
         if (phoneDigits.length < 11) {
             newErrors.tel = 'Введите полный номер телефона';
         }
-
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         if (!validate()) return;
 
         setIsSubmitting(true);
         setStatus('Отправка заказа...');
 
         const orderList = cart.map(item => {
-    const p = products.find(prod => prod.id === item.id);
-    if (!p) return '';
-    const price = productPrice(p.volume, item.count, p.cost);
-    return `${p.name} (${p.volume} мл, ${item.count} шт.) — ${price * item.count} руб.`;
-}).filter(Boolean).join('\n');
+            if (item.isSet) {
+                return `${item.name} [${item.selectedFlavors?.join(', ')}] — ${item.cost} ₽`;
+            }
+            const p = products.find(prod => prod.id === item.id);
+            if (!p) return '';
+            const price = productPrice(p.volume, item.count, p.cost);
+            return `${p.name} (${p.volume} мл, ${item.count} шт.) — ${price * item.count} ₽`;
+        }).filter(Boolean).join('\n');
 
         try {
             const data = new FormData();
@@ -125,7 +110,6 @@ const productPrice = (volume, count, cost) => {
             data.append('order', orderList);
             data.append('total', total);
 
-            console.log("Отправляемые данные (объект):", Object.fromEntries(data.entries()));
             const response = await fetch('http://localhost:8000/send_order.php', {
                 method: 'POST',
                 body: data,
@@ -153,7 +137,6 @@ const productPrice = (volume, count, cost) => {
 
     return (
         <div className="cart">
-            {/* ... (код списка товаров без изменений) ... */}
             <h1>Корзина</h1>
             <div className="cart-actions">
                 <button className="clear-cart" onClick={clearCart}>Очистить корзину</button>
@@ -161,38 +144,81 @@ const productPrice = (volume, count, cost) => {
             </div>
 
             {cart.map(item => {
+                // 🔹 Рендер КОНСТРУКТОРА СЕТА
+                if (item.isSet) {
+                    return (
+                        <div key={item.cartId || `set-${item.id}`} className="cart-item set-item">
+                            <img src={Pineapple} alt="Набор" className="set-img" />
+                            <div className="cart-item-info">
+                                <h3>{item.name}</h3>
+                                <p className="set-flavors">
+                                    <strong>Вкусы:</strong> {item.selectedFlavors?.join(', ') || 'не указаны'}
+                                </p>
+                                <p className="price">{item.cost} ₽ × {item.count}</p>
+                            </div>
+                            <div className="cart-item-controls">
+                                {/* 🔹 Для сетов не показываем QuantityControl, только удаление */}
+                                <button 
+                                    className="remove-btn" 
+                                    onClick={() => removeFromCart(item.id)} 
+                                >
+                                    Удалить
+                                </button>
+                            </div>
+                        </div>
+                    );
+                }
+
+                // 🔹 Рендер обычного товара
                 const product = products.find(p => p.id === item.id);
                 if (!product) return null;
+                
+                const currentPrice = productPrice(product.volume, item.count, product.cost);
+                const hasDiscount = currentPrice < product.cost;
+
                 return (
                     <div key={item.id} className="cart-item">
                         <img src={product.img} alt={product.name} />
                         <div className="cart-item-info">
                             <h3>{product.name}</h3>
-                            <p>{product.taste}</p>
-                            
+                            <p>{product.volume} мл</p>
                             <p className="price">
-                                {productPrice(product.volume, item.count, product.cost)} руб.
-                                
-                            </p>
-                            
+    {/* 🔹 Если есть скидка — показываем старую цену зачёркнутой */}
+    {hasDiscount && (
+        <span className="old-price">{product.cost} ₽ </span>
+    )}
+    
+    {/* 🔹 Новая цена — всегда зелёная, если есть скидка, иначе обычная */}
+    <span className={hasDiscount ? 'new-price' : ''}>
+        {currentPrice} ₽
+    </span>
+
+</p>
                         </div>
                         <div className="cart-item-controls">
                             <QuantityControl product={product} />
-                            <button className="remove-btn" onClick={() => removeFromCart(item.id)}>Удалить</button>
+                            <button 
+                                className="remove-btn" 
+                                onClick={() => removeFromCart(item.id)}
+                            >
+                                Удалить
+                            </button>
                         </div>
                     </div>
                 );
             })}
 
             <div className="cart-total">
-                <h3>Итого: {total} руб.</h3>
+                <h3>Итого: {total} ₽</h3>
             </div>
-            <button className='cart__order-btn' onClick={() => setIsModalOpen(true)}>Оформить заказ</button>
+            <button className='cart__order-btn' onClick={() => setIsModalOpen(true)}>
+                Оформить заказ
+            </button>
 
             {isModalOpen && (
                 <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <button className="modal-close" onClick={() => setIsModalOpen(false)}>x</button>
+                        <button className="modal-close" onClick={() => setIsModalOpen(false)}>×</button>
                         <form className="form__order" onSubmit={handleSubmit} noValidate>
                             <h2 className="form__order-title">Оформление заказа</h2>
 
